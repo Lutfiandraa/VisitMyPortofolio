@@ -35,6 +35,9 @@ const langAndFramework: SkillItem[] = [
   { name: 'Flutter',                   icon: I('https://cdn.simpleicons.org/flutter/02569B',     'Flutter'),                     color: '#02569B' },
   { name: 'Dart',                      icon: I('https://cdn.simpleicons.org/dart/0175C2',        'Dart'),                        color: '#0175C2' },
   { name: 'Python',                    icon: I('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg', 'Python'),                      color: '#3776AB' },
+  { name: 'Tensorflow',                icon: I('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg', 'Tensorflow'),    color: '#FF6F00' },
+  { name: 'Keras',                     icon: I('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/keras/keras-original.svg',           'Keras'),         color: '#D00000' },
+  { name: 'Scikit-learn',              icon: I('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/scikitlearn/scikitlearn-original.svg', 'Scikit-learn'),  color: '#F7931E' },
 ];
 
 const toolsList: SkillItem[] = [
@@ -46,9 +49,6 @@ const toolsList: SkillItem[] = [
   { name: 'Postman',              icon: I('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg',          'Postman'),        color: '#FF6C37' },
   { name: 'Unit Testing Jest',    icon: I('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jest/jest-plain.svg',                   'Jest'),           color: '#C21325' },
   { name: 'Git',                  icon: I('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg',                  'Git'),            color: '#F05032' },
-  { name: 'Tensorflow',           icon: I('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg',    'Tensorflow'),     color: '#FF6F00' },
-  { name: 'Keras',                icon: I('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/keras/keras-original.svg',              'Keras'),          color: '#D00000' },
-  { name: 'Scikit-learn',         icon: I('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/scikitlearn/scikitlearn-original.svg',  'Scikit-learn'),   color: '#F7931E' },
 ];
 
 export default function AboutSection() {
@@ -56,7 +56,7 @@ export default function AboutSection() {
   const items = activeTab === 'lang' ? langAndFramework : toolsList;
 
   return (
-    <section id="about" className="section-padding">
+    <section id="about" className="section-padding animate-section-in">
       <div className="container-max">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 
@@ -70,36 +70,17 @@ export default function AboutSection() {
               <span className="text-gradient">great things</span>
             </h2>
             <p className="text-[var(--color-text-muted)] leading-relaxed">
-              I&apos;m a frontend developer with a strong focus on creating
-              seamless, high-performance user interfaces. I love working at the
-              intersection of design and engineering to ship products that
-              people enjoy using.
+              I&apos;m a fullstack developer and data enthusiast with a strong focus on building scalable, high-performance applications from end to end. I enjoy working across both frontend and backend, while also leveraging data to drive smarter features and better user experiences.
             </p>
             <p className="text-[var(--color-text-muted)] leading-relaxed">
-              When I&apos;m not coding, you&apos;ll find me exploring new
-              technologies, contributing to open-source, or designing UI
-              concepts in Figma.
+              I’m particularly interested in data-driven systems, machine learning, and how insights can be transformed into real-world solutions. When I&apos;m not coding, you&apos;ll find me exploring new technologies, experimenting with data models, contributing to open-source, or designing system architectures.
             </p>
-
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-6 pt-4">
-              {[
-                { value: '2+',   label: 'Years Exp.' },
-                { value: '20+',  label: 'Projects' },
-                { value: '100%', label: 'Dedication' },
-              ].map((stat) => (
-                <div key={stat.label} className="text-center card p-4">
-                  <p className="text-2xl font-bold text-gradient">{stat.value}</p>
-                  <p className="text-xs text-[var(--color-text-muted)] mt-1">{stat.label}</p>
-                </div>
-              ))}
-            </div>
           </div>
 
           {/* Skills */}
           <div className="space-y-6">
             <p className="text-sm font-semibold uppercase tracking-widest text-brand-400">
-              Skills &amp; Stack
+              Capability
             </p>
 
             {/* Tab buttons */}
@@ -130,8 +111,8 @@ export default function AboutSection() {
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
               {items.map((item) => (
                 <div
-                  key={item.name}
-                  className="card p-4 flex flex-col items-center gap-2 hover:border-brand-500/50 transition-all duration-300"
+                  key={`${activeTab}-${item.name}`}
+                  className="card p-4 flex flex-col items-center gap-2 hover:border-brand-500/50 transition-all duration-300 animate-card-in transform"
                 >
                   <div
                     style={{ color: item.color }}

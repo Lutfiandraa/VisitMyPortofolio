@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import AboutSection from '@/sections/AboutSection';
+import ScrollAnimation from '@/components/ScrollAnimation';
 
 export const metadata: Metadata = {
   title: 'About — Lutfi Portfolio',
@@ -9,7 +10,9 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <div className="pt-20">
-      <AboutSection />
+      <ScrollAnimation>
+        <AboutSection />
+      </ScrollAnimation>
     </div>
   );
 }

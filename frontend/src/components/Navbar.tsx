@@ -7,19 +7,34 @@ import { cn } from '@/lib/cn';
 import type { NavLink } from '@/types';
 
 const navLinks: NavLink[] = [
-  { label: 'Home',     href: '/' },
-  { label: 'About',    href: '/about' },
-  { label: 'Projects', href: '/projects' },
-  { label: 'Contact',  href: '/contact' },
+  { label: 'Home',     href: '/#hero' },
+  { label: 'About',    href: '/#about' },
+  { label: 'Projects', href: '/#projects' },
+  { label: 'Contact',  href: '/#contact' },
 ];
 
 export default function Navbar() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setIsScrolled(window.scrollY > 20);
+    let lastScrollY = window.scrollY;
+
+    const onScroll = () => {
+      const currentScrollY = window.scrollY;
+      setIsScrolled(currentScrollY > 20);
+
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setIsVisible(false);
+      } else {
+        setIsVisible(true);
+      }
+
+      lastScrollY = currentScrollY;
+    };
+
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
@@ -27,21 +42,20 @@ export default function Navbar() {
   return (
     <header
       className={cn(
-        'fixed top-0 inset-x-0 z-50 transition-all duration-300',
+        'fixed top-0 inset-x-0 z-50 transition-all duration-300 transform',
         isScrolled
           ? 'glass border-b border-white/10 shadow-lg'
           : 'bg-transparent',
+        isVisible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
       )}
     >
       <nav className="container-max flex items-center justify-between px-6 h-16 md:h-18">
-        {/* Logo */}
         <Link
           href="/"
           className="text-xl font-bold tracking-tight hover:opacity-80 transition-opacity"
           aria-label="Home"
         >
-          <span className="text-gradient">Lutfi</span>
-          <span className="text-[var(--color-text-muted)]">.dev</span>
+          <span className="text-gradient">Lutfiandra</span>
         </Link>
 
         {/* Desktop links */}
@@ -70,9 +84,9 @@ export default function Navbar() {
         {/* CTA */}
         <a
           href="#contact"
-          className="hidden md:inline-flex btn-primary text-xs px-4 py-2"
+          className="hidden md:inline-flex items-center bg-gradient-to-r from-slate-300 via-slate-100 to-slate-400 hover:from-slate-200 hover:via-white hover:to-slate-300 text-slate-900 font-bold transition-all duration-300 shadow-md hover:shadow-lg border border-white/20 rounded-xl text-xs px-4 py-2"
         >
-          Hire Me
+          Get in Touch
         </a>
 
         {/* Mobile hamburger */}
@@ -113,8 +127,12 @@ export default function Navbar() {
             </li>
           ))}
           <li>
-            <a href="#contact" onClick={() => setMenuOpen(false)} className="btn-primary w-full justify-center mt-2 text-xs py-2">
-              Hire Me
+            <a
+              href="#contact"
+              onClick={() => setMenuOpen(false)}
+              className="inline-flex items-center bg-gradient-to-r from-slate-300 via-slate-100 to-slate-400 hover:from-slate-200 hover:via-white hover:to-slate-300 text-slate-900 font-bold transition-all duration-300 shadow-md hover:shadow-lg border border-white/20 rounded-xl text-xs px-4 py-2 w-full justify-center mt-2"
+            >
+              Get in Touch
             </a>
           </li>
         </ul>

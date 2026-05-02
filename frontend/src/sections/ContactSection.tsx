@@ -23,7 +23,7 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="section-padding">
+    <section id="contact" className="section-padding animate-section-in">
       <div className="container-max">
         <div className="text-center max-w-2xl mx-auto mb-16">
           <p className="text-sm font-semibold uppercase tracking-widest text-brand-400 mb-3">Contact</p>
