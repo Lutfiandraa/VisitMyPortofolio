@@ -15,7 +15,7 @@ export default function HeroSection() {
           Available for opportunities
         </div>
 
-        <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 animate-slide-up [animation-delay:100ms] bg-gradient-to-r from-slate-400 via-slate-100 to-slate-500 bg-clip-text text-transparent">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 animate-slide-up [animation-delay:100ms] bg-gradient-to-r from-slate-400 via-slate-100 to-slate-500 bg-clip-text text-transparent">
           <TypedText
             strings={[
               "Hi, I'am Lutfiandra Pohan",

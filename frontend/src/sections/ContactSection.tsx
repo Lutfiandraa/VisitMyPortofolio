@@ -11,24 +11,10 @@ interface ChatMessage {
 }
 
 const BOT_REPLIES: Record<string, string> = {
-  rental:
-    "Terima kasih atas minat Anda! Untuk rental equipment (articulated dump truck, loader, excavator, dll.) silakan kunjungi halaman Rent atau hubungi kami untuk penawaran khusus.",
-  spare:
-    "Untuk spare part dan layanan perawatan alat berat, Anda dapat mengunjungi halaman Service atau menghubungi tim kami. Kami siap membantu kebutuhan parts dan maintenance Anda.",
-  contact:
-    "Anda dapat menghubungi kami melalui email atau telepon. Tim customer service kami siap melayani pada jam kerja. Terima kasih!",
-  hubungi:
-    "Anda dapat menghubungi kami melalui email atau telepon. Tim customer service kami siap melayani pada jam kerja. Terima kasih!",
-  woy:
-    "Yes? What can i help u today maam//sir",
-  anjing:
-    "Well, you’re kinda rude and have no manners.",
-  collaborate:
-    "Sure! here's my personal email lutfiandrapohann@gmail.com",
-  business:
-    "Sure! here's my personal email lutfiandrapohann@gmail.com",
-  default:
-    "Thank you for reaching out to Lutfiandra Pohan. I am F.R.I.D.A.Y, Lutfiandra's assistant. If you do not receive a response within the expected time, please contact Lutfiandra directly at\nlutfiandrapohann@gmail.com",
+  rude: "Well, you’re kinda rude and have no manners.",
+  collaborate: "Sure! here's my personal email lutfiandrapohann@gmail.com",
+  default: "Thank you for reaching out to Lutfiandra Pohan. I am F.R.I.D.A.Y, Lutfiandra's assistant. If you do not receive a response within the expected time, please contact Lutfiandra directly at\nlutfiandrapohann@gmail.com",
+  woy: "Yes? What can i help u today maam//sir",
 };
 
 import { deobfuscateString } from "@/lib/security";
@@ -74,10 +60,26 @@ export default function ContactSection() {
     if (!trimmed) return;
     setMessages((prev) => [...prev, { role: "user", text: trimmed }]);
     setInputValue("");
-    const key = trimmed.toLowerCase().replace(/\s+/g, " ");
-    const replyKey =
-      Object.keys(BOT_REPLIES).find((k) => key.includes(k)) || "default";
-    const botText = BOT_REPLIES[replyKey] || BOT_REPLIES.default;
+
+    const lowerText = trimmed.toLowerCase();
+
+
+    const rudeWords = ["anjing", "babi", "tai", "bangsat"];
+
+    const contactWords = ["collaborate", "collab", "let's talk", "where to chat?", "contact person", "business"];
+
+    const woyWords = ["woy", "woi"];
+
+    let botText = BOT_REPLIES.default;
+
+    if (rudeWords.some((word) => lowerText.includes(word))) {
+      botText = BOT_REPLIES.rude;
+    } else if (contactWords.some((word) => lowerText.includes(word))) {
+      botText = BOT_REPLIES.collaborate;
+    } else if (woyWords.some((word) => lowerText.includes(word))) {
+      botText = BOT_REPLIES.woy;
+    }
+
     setTimeout(() => {
       setMessages((prev) => [...prev, { role: "bot", text: botText }]);
     }, 600);
@@ -97,19 +99,12 @@ export default function ContactSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-center max-w-5xl mx-auto">
           <motion.div
-            className="md:col-span-7 relative z-10 card p-6 md:p-8 backdrop-blur-lg flex flex-col gap-6 order-2 md:order-1"
+            className="md:col-span-7 relative z-10 flex flex-col gap-4 order-2 md:order-1"
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
             viewport={{ once: true, amount: 0.3 }}
           >
-            <div className="text-center md:text-left">
-              <h2 className="text-2xl md:text-3xl font-semibold bg-gradient-to-r from-slate-300 via-white to-slate-400 bg-clip-text text-transparent mb-2">Let's Collaborate!</h2>
-              <p className="text-slate-400 text-sm mb-6">
-                Get in touch via chatbot or social media below. Let's have a conversation!
-              </p>
-            </div>
-
             <motion.div
               className="text-left"
               initial={{ opacity: 0, y: 20 }}
@@ -117,7 +112,7 @@ export default function ContactSection() {
               transition={{ delay: 0.2, duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
               viewport={{ once: true, amount: 0.3 }}
             >
-              <div className="bg-slate-300/10 backdrop-blur-md rounded-2xl border border-slate-400/30 overflow-hidden flex flex-col min-h-[360px] max-h-[460px]">
+              <div className="bg-slate-300/10 backdrop-blur-md rounded-2xl border border-slate-400/30 overflow-hidden flex flex-col min-h-[420px] max-h-[500px] md:min-h-[460px] md:max-h-[540px]">
                 <div className="shrink-0 flex items-center justify-between gap-3 px-4 py-3 border-b border-slate-400/30 bg-slate-200/10">
                   <div className="flex items-center gap-3">
                     <IoPersonCircle className="w-10 h-10 text-slate-200 shrink-0" aria-hidden />
@@ -126,7 +121,7 @@ export default function ContactSection() {
                       <p className="text-xs text-slate-400 mt-0.5">Lutfiandra's Assistant</p>
                     </div>
                   </div>
-                  <button 
+                  <button
                     type="button"
                     onClick={() => setMessages([])}
                     className="p-2 text-slate-400 hover:text-slate-200 transition-colors duration-200 cursor-pointer flex items-center justify-center rounded-lg hover:bg-slate-400/10"
@@ -152,11 +147,10 @@ export default function ContactSection() {
                           className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
                         >
                           <div
-                            className={`max-w-[85%] rounded-2xl px-4 py-2.5 ${
-                              msg.role === "bot"
-                                ? "bg-slate-200/10 text-slate-100 rounded-bl-md border border-slate-400/20"
-                                : "bg-slate-500/80 text-white rounded-br-md border border-slate-400/30"
-                            }`}
+                            className={`max-w-[85%] rounded-2xl px-4 py-2.5 ${msg.role === "bot"
+                              ? "bg-slate-200/10 text-slate-100 rounded-bl-md border border-slate-400/20"
+                              : "bg-slate-500/80 text-white rounded-br-md border border-slate-400/30"
+                              }`}
                           >
                             {msg.role === "bot"
                               ? renderBotMessage(msg.text)
@@ -182,7 +176,7 @@ export default function ContactSection() {
                         e.key === "Enter" && !e.shiftKey && sendMessage(inputValue)
                       }
                       placeholder="Enter your message"
-                      className="flex-1 rounded-l-xl bg-transparent px-4 py-3 text-sm text-white placeholder:text-slate-400 focus:outline-none outline-none"
+                      className="flex-1 rounded-l-xl bg-transparent px-4 py-3 text-base text-white placeholder:text-slate-400 focus:outline-none outline-none"
                     />
                     <button
                       type="button"
@@ -198,7 +192,7 @@ export default function ContactSection() {
             </motion.div>
 
             <motion.div
-              className="flex justify-center md:justify-start gap-4 mt-2"
+              className="flex justify-center gap-4 mt-4"
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
@@ -232,9 +226,9 @@ export default function ContactSection() {
           >
             <div className="relative group max-w-[320px] md:max-w-full">
               <div className="absolute inset-[-40px] bg-gradient-to-r from-slate-400/35 via-slate-100/25 to-slate-500/35 rounded-full blur-3xl opacity-60 group-hover:opacity-90 transition-opacity duration-500 pointer-events-none" />
-              <img 
-                src="/profileportormv.png" 
-                alt="Profile" 
+              <img
+                src="/profileportormv.png"
+                alt="Profile"
                 className="w-full h-auto object-contain relative z-10 transform transition-all duration-500 group-hover:scale-[1.03]"
               />
             </div>

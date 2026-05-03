@@ -94,7 +94,7 @@ const competencies: CompetencyItem[] = [
     link: "https://royalmerchant.vercel.app/"
   },
   {
-    title: "Education & Report System for HSE",
+    title: "Software Testing on Education & Report System HSE",
     description: "Design Implementation and Software Quality Assurance",
     icons: [
       <SiNodedotjs key="node" style={{ color: "#339933", fontSize: "1.5rem" }} />,
@@ -106,11 +106,11 @@ const competencies: CompetencyItem[] = [
         style={{ width: "24px", height: "24px" }}
       />,
     ],
-    images: ["/SistemPelaporan.png", "/workplace-safety-priority.jpg"],
+    images: ["/dashboardk3.png", "/workplace-safety-priority.jpg"],
     link: "https://sistem-kesehatan-dan-kesalamatan-ke.vercel.app/"
   },
   {
-    title: "Start Up IT Consultant (Coming Soon)",
+    title: "(Coming Soon)",
     description: "Karta Jati Integrasi is an IT consulting firm committed to delivering digital transformation solutions for companies and micro businesses, helping them leverage technology to improve efficiency and sustainable growth.",
     icons: [
       <SiGatsby key="gatsby" style={{ color: "#663399", fontSize: "1.5rem" }} />,
@@ -421,15 +421,17 @@ function Card({ comp, index, onOpenCertificate }: { comp: CompetencyItem; index:
               <FaInstagram className="text-sm" />
             </a>
           )}
-          <a
-            href={comp.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 bg-gradient-to-r from-slate-300 via-slate-100 to-slate-400 hover:from-slate-200 hover:via-white hover:to-slate-300 text-slate-900 font-bold transition-all duration-300 shadow hover:shadow-md border border-white/20 rounded-xl text-xs px-3.5 py-1.5"
-          >
-            <FaPaperPlane className="text-xs" />
-            Visit
-          </a>
+          {comp.link && comp.link !== "#" && (
+            <a
+              href={comp.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 bg-gradient-to-r from-slate-300 via-slate-100 to-slate-400 hover:from-slate-200 hover:via-white hover:to-slate-300 text-slate-900 font-bold transition-all duration-300 shadow hover:shadow-md border border-white/20 rounded-xl text-xs px-3.5 py-1.5"
+            >
+              <FaPaperPlane className="text-xs" />
+              Visit
+            </a>
+          )}
         </div>
       </div>
     </div>

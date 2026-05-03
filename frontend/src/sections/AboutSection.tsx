@@ -78,10 +78,10 @@ export default function AboutSection() {
               Capability
             </p>
 
-            <div className="inline-flex rounded-full p-1 gap-1 bg-[var(--color-border)]">
+            <div className="flex sm:inline-flex rounded-full p-1 gap-1 bg-[var(--color-border)] w-full sm:w-auto">
               <button
                 onClick={() => setActiveTab('lang')}
-                className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                className={`flex-1 sm:flex-initial px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 ${
                   activeTab === 'lang'
                     ? 'bg-[var(--color-surface)] text-[var(--color-text)] shadow'
                     : 'text-[var(--color-text-muted)] hover:text-[var(--color-text)]'
@@ -91,7 +91,7 @@ export default function AboutSection() {
               </button>
               <button
                 onClick={() => setActiveTab('tools')}
-                className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                className={`flex-1 sm:flex-initial px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 ${
                   activeTab === 'tools'
                     ? 'bg-[var(--color-surface)] text-[var(--color-text)] shadow'
                     : 'text-[var(--color-text-muted)] hover:text-[var(--color-text)]'

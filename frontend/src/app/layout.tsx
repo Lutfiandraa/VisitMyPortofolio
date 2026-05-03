@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -21,10 +21,18 @@ export const metadata: Metadata = {
 
   openGraph: {
     title: 'Lutfiandra',
-    description: 'Personal portfolio showcasing projects and skills.',
+    description:
+      'Personal portfolio in Web Builder, AI engineering and Scalable Software solutions.',
     type: 'website',
   },
 };
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+};
+
 
 export default function RootLayout({
   children,
@@ -35,7 +43,7 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} dark scroll-smooth`} suppressHydrationWarning>
       <body className="min-h-screen flex flex-col bg-[var(--color-bg)] text-[var(--color-text)] antialiased relative">
         <StardustBackground />
-        <TargetCursor 
+        <TargetCursor
           spinDuration={2}
           hideDefaultCursor
           parallaxOn
