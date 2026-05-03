@@ -60,11 +60,7 @@ export default function AboutSection() {
       <div className="container-max">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 
-          {/* Text */}
           <div className="space-y-6">
-            <p className="text-sm font-semibold uppercase tracking-widest text-brand-400">
-              About Me
-            </p>
             <h2 className="section-title">
               Passionate about building{' '}
               <span className="text-gradient">great things</span>
@@ -77,13 +73,11 @@ export default function AboutSection() {
             </p>
           </div>
 
-          {/* Skills */}
           <div className="space-y-6">
             <p className="text-sm font-semibold uppercase tracking-widest text-brand-400">
               Capability
             </p>
 
-            {/* Tab buttons */}
             <div className="inline-flex rounded-full p-1 gap-1 bg-[var(--color-border)]">
               <button
                 onClick={() => setActiveTab('lang')}
@@ -107,7 +101,6 @@ export default function AboutSection() {
               </button>
             </div>
 
-            {/* Grid items */}
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
               {items.map((item) => (
                 <div

@@ -15,18 +15,16 @@ export default function StardustBackground() {
   const [stars, setStars] = useState<Star[]>([]);
 
   useEffect(() => {
-    // Generate stars on mount to avoid server-side/client-side mismatch
     const generatedStars: Star[] = Array.from({ length: 120 }).map((_, i) => {
       const top = Math.floor(Math.random() * 100) + '%';
       const left = Math.floor(Math.random() * 100) + '%';
-      // Pick sizes: mostly small, some medium, some slightly larger
       const sizeRandom = Math.random();
       let size = '1px';
       if (sizeRandom > 0.85) size = '3px';
       else if (sizeRandom > 0.5) size = '2px';
 
-      const delay = (Math.random() * 4).toFixed(2) + 's';
-      const duration = (2 + Math.random() * 4).toFixed(2) + 's';
+      const delay = (Math.random() * 2).toFixed(2) + 's';
+      const duration = (0.5 + Math.random() * 1.5).toFixed(2) + 's';
 
       return { id: i, top, left, size, delay, duration };
     });

@@ -10,27 +10,23 @@ export default function HeroSection() {
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
       <div className="container-max section-padding relative z-10 text-center">
-        {/* Badge */}
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-sm font-medium text-brand-400 mb-8 animate-fade-in">
           <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
           Available for opportunities
         </div>
 
-        {/* Headline */}
         <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 animate-slide-up [animation-delay:100ms] bg-gradient-to-r from-slate-400 via-slate-100 to-slate-500 bg-clip-text text-transparent">
           <TypedText
             strings={[
-              "Hi, I'm Lutfiandra Pohan",
+              "Hi, I'am Lutfiandra Pohan",
             ]}
           />
         </h1>
 
-        {/* Subheadline */}
         <p className="section-subtitle mx-auto mb-10 animate-slide-up [animation-delay:200ms]">
           Fullstack Developer & Data Scientist Enthusiast.
         </p>
 
-        {/* CTAs */}
         <div className="flex flex-row gap-4 justify-center items-center animate-slide-up [animation-delay:300ms]">
           <a
             href="https://www.linkedin.com/in/lutfiandra-pohan-6b7706289/"

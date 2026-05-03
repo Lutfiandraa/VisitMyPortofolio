@@ -74,12 +74,12 @@ const competencies: CompetencyItem[] = [
   },
   {
     title: "Key-In",
-    description: "an Pariwisata, Online Booking Destination website with framework Angular.js and Typescript library react for responsive ui",
+    description: "an Travelling web-based, Online Booking Destination website with framework Angular.js and Typescript library react for responsive ui",
     icons: [
       <SiAngular key="angular" style={{ color: "#DD0031", fontSize: "1.5rem" }} />,
       <SiTypescript key="ts" style={{ color: "#3178C6", fontSize: "1.5rem" }} />,
     ],
-    images: ["/kerinaiko.png", "/manhattan.png"],
+    images: ["/LandingKeyin.png", "/manhattan.png"],
     link: "https://keyin-pariwisata.vercel.app/"
   },
   {
@@ -206,7 +206,9 @@ export default function ProjectSection() {
     <section id="projects" className="section-padding animate-section-in bg-transparent">
       <div className="container-max">
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <h2 className="section-title mb-4">Project</h2>
+          <h2 className="section-title mb-4">
+            <span className="text-gradient">Project</span>
+          </h2>
           <div className="flex items-center justify-center flex-wrap gap-3">
             <button
               type="button"
@@ -253,7 +255,6 @@ export default function ProjectSection() {
         </div>
       </div>
 
-      {/* Modal Sertifikat Tingkat Atas (Viewport Center via Portal) */}
       {isMounted && activeCertificate && createPortal(
         <div
           className="fixed inset-0 z-[100] w-screen h-screen flex items-center justify-center bg-black/80 backdrop-blur-sm transition-opacity duration-300 select-none"
@@ -302,16 +303,18 @@ export default function ProjectSection() {
 
 function Card({ comp, index, onOpenCertificate }: { comp: CompetencyItem; index: number; onOpenCertificate: (image: string, desc: string) => void }) {
   const [current, setCurrent] = useState(0);
-  const hasImages = comp.images && comp.images.length > 0;
+  const images = comp.images;
+  const hasImages = images && images.length > 0;
 
   const nextImage = (e: React.MouseEvent) => {
     e.stopPropagation();
-    if (comp.images) setCurrent((prev) => (prev + 1) % comp.images.length);
+    if (images) setCurrent((prev) => (prev + 1) % images.length);
   };
   const prevImage = (e: React.MouseEvent) => {
     e.stopPropagation();
-    if (comp.images) setCurrent((prev) => (prev === 0 ? comp.images.length - 1 : prev - 1));
+    if (images) setCurrent((prev) => (prev === 0 ? images.length - 1 : prev - 1));
   };
+
 
   return (
     <div
