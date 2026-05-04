@@ -42,7 +42,7 @@ const competencies: CompetencyItem[] = [
       <SiReact key="react" style={{ color: "#61DAFB", fontSize: "1.5rem" }} />,
       <SiJavascript key="js" style={{ color: "#E7F527", fontSize: "1.5rem" }} />,
     ],
-    images: ["/Berita.png", "/Laptop.jpg"],
+    images: ["/HomeBerita.PNG", "/Homeberita2.PNG"],
     link: "https://portal-berita-px6z.vercel.app/",
     linkedin: "https://www.linkedin.com/company/winnicodegarudateknologi/posts/?feedView=all",
     certificateImage: "/sertifikatmagang.png",
