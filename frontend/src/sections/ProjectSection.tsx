@@ -4,11 +4,11 @@ import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import {
   SiDart, SiFlutter, SiJavascript, SiReact, SiVuedotjs,
-  SiAngular, SiTypescript, SiNextdotjs, SiNodedotjs, SiGatsby, SiAstro
+  SiAngular, SiTypescript, SiNextdotjs, SiNodedotjs, SiGatsby, SiAstro, SiFastapi
 } from "react-icons/si";
 import {
   FaPaperPlane, FaInstagram, FaLinkedin, FaCertificate,
-  FaChevronLeft, FaChevronRight, FaTimes
+  FaChevronLeft, FaChevronRight, FaTimes, FaGithub
 } from "react-icons/fa";
 
 interface CompetencyItem {
@@ -171,11 +171,30 @@ const competencies: CompetencyItem[] = [
     certificateImage: "/LLM Certified.PNG",
     certificateDescription: "IBM Skillbuild - AI Agent for Oil Rig Industry Analytics. · 2026\n\nImplementation of a Large Language Model (LLM) and Natural Language Processing (NLP) system to create an AI Agent for advanced analytics in the Oil Rig industry."
   },
+  {
+    title: "GeoSiaga",
+    description: "Fullstack frontend & backend with models Random Forest & XGBoost for predict floods in Jakarta",
+    icons: [
+      <SiNextdotjs key="next" style={{ color: "#ffffff", fontSize: "1.5rem" }} />,
+      <SiTypescript key="ts" style={{ color: "#3178C6", fontSize: "1.5rem" }} />,
+      <img
+        key="python"
+        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+        alt="Python"
+        style={{ width: "24px", height: "24px" }}
+      />,
+      <SiFastapi key="fastapi" style={{ color: "#009688", fontSize: "1.5rem" }} />
+    ],
+    images: ["/GeoSiagaMap.PNG", "/DashboardGeo.PNG"],
+    link: "",
+    category: "data-science"
+  },
 ];
 
 export default function ProjectSection() {
   const [activeCategory, setActiveCategory] = useState("web");
   const [activeCertificate, setActiveCertificate] = useState<{ image: string; description: string } | null>(null);
+  const [activeProject, setActiveProject] = useState<CompetencyItem | null>(null);
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -250,6 +269,7 @@ export default function ProjectSection() {
               comp={comp}
               index={index}
               onOpenCertificate={(image, description) => setActiveCertificate({ image, description })}
+              onOpenProject={(comp) => setActiveProject(comp)}
             />
           ))}
         </div>
@@ -297,11 +317,147 @@ export default function ProjectSection() {
         </div>,
         document.body
       )}
+
+      {isMounted && activeProject && createPortal(
+        <div
+          className="fixed inset-0 z-[100] w-screen h-screen flex items-center justify-center bg-black/80 backdrop-blur-sm transition-opacity duration-300 select-none p-4"
+          onClick={() => setActiveProject(null)}
+        >
+          <ProjectModalContent project={activeProject} onClose={() => setActiveProject(null)} />
+        </div>,
+        document.body
+      )}
     </section>
   );
 }
 
-function Card({ comp, index, onOpenCertificate }: { comp: CompetencyItem; index: number; onOpenCertificate: (image: string, desc: string) => void }) {
+function ProjectModalContent({ project, onClose }: { project: CompetencyItem; onClose: () => void }) {
+  const [current, setCurrent] = useState(0);
+  const images = project.images;
+  const hasImages = images && images.length > 0;
+
+  const nextImage = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (images) setCurrent((prev) => (prev + 1) % images.length);
+  };
+  const prevImage = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (images) setCurrent((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+  };
+
+  return (
+    <div
+      className="relative max-w-2xl w-full bg-black/90 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden shadow-2xl animate-page-in transform flex flex-col m-4 max-h-[90vh]"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          onClose();
+        }}
+        className="absolute top-4 right-4 p-2 bg-black/60 hover:bg-black/80 text-white rounded-full transition-colors z-[110] hover:scale-105 flex items-center justify-center cursor-pointer"
+      >
+        <FaTimes size={16} />
+      </button>
+
+      <div className="relative w-full aspect-video bg-black/40 flex items-center justify-center overflow-hidden border-b border-white/10">
+        {hasImages ? (
+          <>
+            <img
+              src={images![current]}
+              alt={project.title}
+              className="w-full h-full object-cover"
+              onError={(e) => {
+                (e.target as HTMLImageElement).style.display = 'none';
+              }}
+            />
+            {images!.length > 1 && (
+              <>
+                <button
+                  onClick={prevImage}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white p-3 rounded-full transition-all hover:scale-110 z-[105]"
+                >
+                  <FaChevronLeft size={18} />
+                </button>
+                <button
+                  onClick={nextImage}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white p-3 rounded-full transition-all hover:scale-110 z-[105]"
+                >
+                  <FaChevronRight size={18} />
+                </button>
+              </>
+            )}
+          </>
+        ) : (
+          <div className="flex items-center justify-center w-full h-full text-white/30">
+            No image available
+          </div>
+        )}
+      </div>
+
+      <div className="p-6 bg-gradient-to-b from-transparent to-slate-900/50 overflow-y-auto">
+        <h3 className="text-2xl font-bold bg-gradient-to-r from-slate-300 via-white to-slate-400 bg-clip-text text-transparent mb-4">
+          {project.title}
+        </h3>
+        <p className="text-slate-300 text-sm md:text-base whitespace-pre-wrap leading-relaxed mb-6">
+          {project.description}
+        </p>
+        
+        <div className="flex flex-wrap items-center gap-3">
+          {project.link && project.link !== "#" && project.link !== "" && (
+            project.link.includes("github.com") ? (
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold transition-all duration-300 border border-white/20 rounded-xl text-sm px-4 py-2"
+              >
+                <FaGithub className="text-lg" />
+                GitHub
+              </a>
+            ) : (
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-slate-300 via-slate-100 to-slate-400 hover:from-slate-200 hover:via-white hover:to-slate-300 text-slate-900 font-bold transition-all duration-300 shadow hover:shadow-md border border-white/20 rounded-xl text-sm px-4 py-2"
+              >
+                <FaPaperPlane className="text-lg" />
+                Direct Web
+              </a>
+            )
+          )}
+
+          {project.linkedin && (
+            <a
+              href={project.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-[#0A66C2]/80 hover:bg-[#0A66C2] text-white font-bold transition-all duration-300 border border-white/20 rounded-xl text-sm px-4 py-2"
+            >
+              <FaLinkedin className="text-lg" />
+              LinkedIn
+            </a>
+          )}
+
+          {project.instagram && (
+            <a
+              href={project.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-gradient-to-tr from-[#FD1D1D] to-[#833AB4] hover:opacity-90 text-white font-bold transition-all duration-300 border border-white/20 rounded-xl text-sm px-4 py-2"
+            >
+              <FaInstagram className="text-lg" />
+              Instagram
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Card({ comp, index, onOpenCertificate, onOpenProject }: { comp: CompetencyItem; index: number; onOpenCertificate: (image: string, desc: string) => void; onOpenProject: (comp: CompetencyItem) => void }) {
   const [current, setCurrent] = useState(0);
   const images = comp.images;
   const hasImages = images && images.length > 0;
@@ -399,39 +555,13 @@ function Card({ comp, index, onOpenCertificate }: { comp: CompetencyItem; index:
         </div>
 
         <div className="flex items-center gap-2">
-          {comp.linkedin && (
-            <a
-              href={comp.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center w-8 h-8 text-blue-400 hover:text-blue-300 bg-white/5 hover:bg-white/10 border border-white/20 rounded-lg transition-colors"
-              aria-label="LinkedIn"
-            >
-              <FaLinkedin className="text-sm" />
-            </a>
-          )}
-          {comp.instagram && (
-            <a
-              href={comp.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center w-8 h-8 text-pink-400 hover:text-pink-300 bg-white/5 hover:bg-white/10 border border-white/20 rounded-lg transition-colors"
-              aria-label="Instagram"
-            >
-              <FaInstagram className="text-sm" />
-            </a>
-          )}
-          {comp.link && comp.link !== "#" && (
-            <a
-              href={comp.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 bg-gradient-to-r from-slate-300 via-slate-100 to-slate-400 hover:from-slate-200 hover:via-white hover:to-slate-300 text-slate-900 font-bold transition-all duration-300 shadow hover:shadow-md border border-white/20 rounded-xl text-xs px-3.5 py-1.5"
-            >
-              <FaPaperPlane className="text-xs" />
-              Visit
-            </a>
-          )}
+          <button
+            onClick={() => onOpenProject(comp)}
+            className="inline-flex items-center gap-1.5 bg-gradient-to-r from-slate-300 via-slate-100 to-slate-400 hover:from-slate-200 hover:via-white hover:to-slate-300 text-slate-900 font-bold transition-all duration-300 shadow hover:shadow-md border border-white/20 rounded-xl text-xs px-3.5 py-1.5"
+          >
+            <FaPaperPlane className="text-xs" />
+            Visit
+          </button>
         </div>
       </div>
     </div>
