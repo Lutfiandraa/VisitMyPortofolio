@@ -403,53 +403,29 @@ function ProjectModalContent({ project, onClose }: { project: CompetencyItem; on
           {project.description}
         </p>
         
-        <div className="flex flex-wrap items-center gap-3">
+        <div className="w-full">
           {project.link && project.link !== "#" && project.link !== "" && (
             project.link.includes("github.com") ? (
               <a
                 href={project.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold transition-all duration-300 border border-white/20 rounded-xl text-sm px-4 py-2"
+                className="flex items-center justify-center w-full bg-white/10 hover:bg-white/20 text-white transition-all duration-300 border border-white/20 rounded-xl py-3 gap-2"
+                title="GitHub"
               >
                 <FaGithub className="text-lg" />
-                GitHub
               </a>
             ) : (
               <a
                 href={project.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-slate-300 via-slate-100 to-slate-400 hover:from-slate-200 hover:via-white hover:to-slate-300 text-slate-900 font-bold transition-all duration-300 shadow hover:shadow-md border border-white/20 rounded-xl text-sm px-4 py-2"
+                className="flex items-center justify-center w-full bg-gradient-to-r from-slate-300 via-slate-100 to-slate-400 hover:from-slate-200 hover:via-white hover:to-slate-300 text-slate-900 transition-all duration-300 shadow hover:shadow-md border border-white/20 rounded-xl py-3"
+                title="Direct Web"
               >
                 <FaPaperPlane className="text-lg" />
-                Direct Web
               </a>
             )
-          )}
-
-          {project.linkedin && (
-            <a
-              href={project.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-[#0A66C2]/80 hover:bg-[#0A66C2] text-white font-bold transition-all duration-300 border border-white/20 rounded-xl text-sm px-4 py-2"
-            >
-              <FaLinkedin className="text-lg" />
-              LinkedIn
-            </a>
-          )}
-
-          {project.instagram && (
-            <a
-              href={project.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-gradient-to-tr from-[#FD1D1D] to-[#833AB4] hover:opacity-90 text-white font-bold transition-all duration-300 border border-white/20 rounded-xl text-sm px-4 py-2"
-            >
-              <FaInstagram className="text-lg" />
-              Instagram
-            </a>
           )}
         </div>
       </div>
@@ -555,12 +531,48 @@ function Card({ comp, index, onOpenCertificate, onOpenProject }: { comp: Compete
         </div>
 
         <div className="flex items-center gap-2">
+          {comp.linkedin && (
+            <a
+              href={comp.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center text-[#0A66C2] hover:text-[#3B82F6] transition-all duration-300 px-2 py-1.5"
+              title="LinkedIn"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <FaLinkedin className="text-base" />
+            </a>
+          )}
+          {comp.instagram && (
+            <a
+              href={comp.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center text-[#E1306C] hover:text-[#F56040] transition-all duration-300 px-2 py-1.5"
+              title="Instagram"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <FaInstagram className="text-base" />
+            </a>
+          )}
+          {comp.link && comp.link.includes("github.com") && (
+            <a
+              href={comp.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center text-white/70 hover:text-white transition-all duration-300 px-2 py-1.5"
+              title="GitHub"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <FaGithub className="text-base" />
+            </a>
+          )}
           <button
             onClick={() => onOpenProject(comp)}
-            className="inline-flex items-center gap-1.5 bg-gradient-to-r from-slate-300 via-slate-100 to-slate-400 hover:from-slate-200 hover:via-white hover:to-slate-300 text-slate-900 font-bold transition-all duration-300 shadow hover:shadow-md border border-white/20 rounded-xl text-xs px-3.5 py-1.5"
+            className="inline-flex items-center justify-center bg-gradient-to-r from-slate-300 via-slate-100 to-slate-400 hover:from-slate-200 hover:via-white hover:to-slate-300 text-slate-900 transition-all duration-300 shadow hover:shadow-md border border-white/20 rounded-xl px-5 py-1.5"
+            title="Visit Project"
           >
             <FaPaperPlane className="text-xs" />
-            Visit
           </button>
         </div>
       </div>

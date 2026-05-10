@@ -38,6 +38,7 @@ const langAndFramework: SkillItem[] = [
   { name: 'Tensorflow',                icon: I('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg', 'Tensorflow'),    color: '#FF6F00' },
   { name: 'Keras',                     icon: I('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/keras/keras-original.svg',           'Keras'),         color: '#D00000' },
   { name: 'Scikit-learn',              icon: I('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/scikitlearn/scikitlearn-original.svg', 'Scikit-learn'),  color: '#F7931E' },
+  { name: 'FastAPI',                   icon: I('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg',           'FastAPI'),        color: '#009688' },
 ];
 
 const toolsList: SkillItem[] = [
@@ -49,6 +50,9 @@ const toolsList: SkillItem[] = [
   { name: 'Postman',              icon: I('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg',          'Postman'),        color: '#FF6C37' },
   { name: 'Unit Testing Jest',    icon: I('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jest/jest-plain.svg',                   'Jest'),           color: '#C21325' },
   { name: 'Git',                  icon: I('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg',                  'Git'),            color: '#F05032' },
+  { name: 'GitHub',               icon: I('https://cdn.simpleicons.org/github/FFFFFF',                                                'GitHub'),         color: '#FFFFFF' },
+  { name: 'GitLab',               icon: I('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gitlab/gitlab-original.svg',             'GitLab'),         color: '#FC6D26' },
+  { name: 'Swagger UI',           icon: I('https://cdn.simpleicons.org/swagger/85EA2D',                                               'Swagger UI'),     color: '#85EA2D' },
 ];
 
 export default function AboutSection() {
