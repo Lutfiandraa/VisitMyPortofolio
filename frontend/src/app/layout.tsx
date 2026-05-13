@@ -2,8 +2,9 @@ import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import StardustBackground from '@/components/StardustBackground';
 import TargetCursor from '@/components/TargetCursor';
+import Particle from '@/components/Particle';
+import Script from 'next/script';
 import '@/styles/globals.css';
 
 const inter = Inter({
@@ -42,7 +43,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} dark scroll-smooth`} suppressHydrationWarning>
       <body className="min-h-screen flex flex-col bg-[var(--color-bg)] text-[var(--color-text)] antialiased relative">
-        <StardustBackground />
+        <Script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" strategy="beforeInteractive" />
+        <Particle id="particles-js" />
         <TargetCursor
           spinDuration={2}
           hideDefaultCursor

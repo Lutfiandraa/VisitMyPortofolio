@@ -52,7 +52,6 @@ const toolsList: SkillItem[] = [
   { name: 'Git', icon: I('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg', 'Git'), color: '#F05032' },
   { name: 'GitHub', icon: I('https://cdn.simpleicons.org/github/FFFFFF', 'GitHub'), color: '#FFFFFF' },
   { name: 'GitLab', icon: I('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gitlab/gitlab-original.svg', 'GitLab'), color: '#FC6D26' },
-  { name: 'Swagger UI', icon: I('https://cdn.simpleicons.org/swagger/85EA2D', 'Swagger UI'), color: '#85EA2D' },
 ];
 
 export default function AboutSection() {

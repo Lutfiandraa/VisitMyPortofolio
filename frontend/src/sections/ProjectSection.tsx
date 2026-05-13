@@ -110,17 +110,6 @@ const competencies: CompetencyItem[] = [
     link: "https://sistem-kesehatan-dan-kesalamatan-ke.vercel.app/"
   },
   {
-    title: "(Coming Soon)",
-    description: "Karta Jati Integrasi is an IT consulting firm committed to delivering digital transformation solutions for companies and micro businesses, helping them leverage technology to improve efficiency and sustainable growth.",
-    icons: [
-      <SiGatsby key="gatsby" style={{ color: "#663399", fontSize: "1.5rem" }} />,
-      <SiTypescript key="ts" style={{ color: "#3178C6", fontSize: "1.5rem" }} />,
-      <SiReact key="react" style={{ color: "#61DAFB", fontSize: "1.5rem" }} />,
-    ],
-    images: ["/Kartajati.png", "/whatwedo.png"],
-    link: "https://karta-jati.vercel.app/"
-  },
-  {
     title: "Cakranegara supported by Hacktiv8",
     description: "Solve ur Business Equipment & Requirement with our AI Chatbot Integrated called 'Mas Cakra-bot'",
     icons: [
@@ -147,6 +136,21 @@ const competencies: CompetencyItem[] = [
     images: ["/workflow.png", "/defender.png", "/Collision.png"],
     link: "https://github.com/Lutfiandraa/CollisionWarning-YOLO",
     category: "computer-vision",
+  },
+  {
+    title: "Plotting Geothermal in Asia",
+    description: "Modelling international data Geothermal with Random Forest for Plot Geothermal in Asia",
+    icons: [
+      <img
+        key="python"
+        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+        alt="Python"
+        style={{ width: "24px", height: "24px" }}
+      />,
+    ],
+    images: ["/AsiaGeothermal.png"],
+    link: "",
+    category: "data-science",
   },
   {
     title: "Large Language Model (LLM, NLP)",
@@ -194,7 +198,6 @@ const competencies: CompetencyItem[] = [
 export default function ProjectSection() {
   const [activeCategory, setActiveCategory] = useState("web");
   const [activeCertificate, setActiveCertificate] = useState<{ image: string; description: string } | null>(null);
-  const [activeProject, setActiveProject] = useState<CompetencyItem | null>(null);
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -269,7 +272,6 @@ export default function ProjectSection() {
               comp={comp}
               index={index}
               onOpenCertificate={(image, description) => setActiveCertificate({ image, description })}
-              onOpenProject={(comp) => setActiveProject(comp)}
             />
           ))}
         </div>
@@ -317,123 +319,11 @@ export default function ProjectSection() {
         </div>,
         document.body
       )}
-
-      {isMounted && activeProject && createPortal(
-        <div
-          className="fixed inset-0 z-[100] w-screen h-screen flex items-center justify-center bg-black/80 backdrop-blur-sm transition-opacity duration-300 select-none p-4"
-          onClick={() => setActiveProject(null)}
-        >
-          <ProjectModalContent project={activeProject} onClose={() => setActiveProject(null)} />
-        </div>,
-        document.body
-      )}
     </section>
   );
 }
 
-function ProjectModalContent({ project, onClose }: { project: CompetencyItem; onClose: () => void }) {
-  const [current, setCurrent] = useState(0);
-  const images = project.images;
-  const hasImages = images && images.length > 0;
-
-  const nextImage = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (images) setCurrent((prev) => (prev + 1) % images.length);
-  };
-  const prevImage = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (images) setCurrent((prev) => (prev === 0 ? images.length - 1 : prev - 1));
-  };
-
-  return (
-    <div
-      className="relative max-w-2xl w-full bg-black/90 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden shadow-2xl animate-page-in transform flex flex-col m-4 max-h-[90vh]"
-      onClick={(e) => e.stopPropagation()}
-    >
-      <button
-        onClick={(e) => {
-          e.stopPropagation();
-          onClose();
-        }}
-        className="absolute top-4 right-4 p-2 bg-black/60 hover:bg-black/80 text-white rounded-full transition-colors z-[110] hover:scale-105 flex items-center justify-center cursor-pointer"
-      >
-        <FaTimes size={16} />
-      </button>
-
-      <div className="relative w-full aspect-video bg-black/40 flex items-center justify-center overflow-hidden border-b border-white/10">
-        {hasImages ? (
-          <>
-            <img
-              src={images![current]}
-              alt={project.title}
-              className="w-full h-full object-cover"
-              onError={(e) => {
-                (e.target as HTMLImageElement).style.display = 'none';
-              }}
-            />
-            {images!.length > 1 && (
-              <>
-                <button
-                  onClick={prevImage}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white p-3 rounded-full transition-all hover:scale-110 z-[105]"
-                >
-                  <FaChevronLeft size={18} />
-                </button>
-                <button
-                  onClick={nextImage}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white p-3 rounded-full transition-all hover:scale-110 z-[105]"
-                >
-                  <FaChevronRight size={18} />
-                </button>
-              </>
-            )}
-          </>
-        ) : (
-          <div className="flex items-center justify-center w-full h-full text-white/30">
-            No image available
-          </div>
-        )}
-      </div>
-
-      <div className="p-6 bg-gradient-to-b from-transparent to-slate-900/50 overflow-y-auto">
-        <h3 className="text-2xl font-bold bg-gradient-to-r from-slate-300 via-white to-slate-400 bg-clip-text text-transparent mb-4">
-          {project.title}
-        </h3>
-        <p className="text-slate-300 text-sm md:text-base whitespace-pre-wrap leading-relaxed mb-6">
-          {project.description}
-        </p>
-        
-        <div className="w-full">
-          {project.link && project.link !== "#" && project.link !== "" && (
-            project.link.includes("github.com") ? (
-              <a
-                href={project.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center w-full bg-white/10 hover:bg-white/20 text-white transition-all duration-300 border border-white/20 rounded-xl py-3 gap-2"
-                title="GitHub"
-              >
-                <FaGithub className="text-lg" />
-              </a>
-            ) : (
-              <a
-                href={project.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center w-full bg-gradient-to-r from-slate-300 via-slate-100 to-slate-400 hover:from-slate-200 hover:via-white hover:to-slate-300 text-slate-900 transition-all duration-300 shadow hover:shadow-md border border-white/20 rounded-xl py-3"
-                title="Direct Web"
-              >
-                <FaPaperPlane className="text-lg" />
-              </a>
-            )
-          )}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function Card({ comp, index, onOpenCertificate, onOpenProject }: { comp: CompetencyItem; index: number; onOpenCertificate: (image: string, desc: string) => void; onOpenProject: (comp: CompetencyItem) => void }) {
+function Card({ comp, index, onOpenCertificate }: { comp: CompetencyItem; index: number; onOpenCertificate: (image: string, desc: string) => void }) {
   const [current, setCurrent] = useState(0);
   const images = comp.images;
   const hasImages = images && images.length > 0;
@@ -493,7 +383,7 @@ function Card({ comp, index, onOpenCertificate, onOpenProject }: { comp: Compete
 
       {/* Judul + Certified */}
       <div className="flex items-center justify-between">
-        <h3 className="text-lg font-bold group-hover:text-brand-400 transition-colors">
+        <h3 className="text-lg font-bold bg-gradient-to-r from-slate-300 via-slate-100 to-slate-400 bg-clip-text text-transparent">
           {comp.title.includes("Hacktiv8") ? (
             <>
               {comp.title.split("Hacktiv8")[0]}
@@ -567,13 +457,18 @@ function Card({ comp, index, onOpenCertificate, onOpenProject }: { comp: Compete
               <FaGithub className="text-base" />
             </a>
           )}
-          <button
-            onClick={() => onOpenProject(comp)}
-            className="inline-flex items-center justify-center bg-gradient-to-r from-slate-300 via-slate-100 to-slate-400 hover:from-slate-200 hover:via-white hover:to-slate-300 text-slate-900 transition-all duration-300 shadow hover:shadow-md border border-white/20 rounded-xl px-5 py-1.5"
-            title="Visit Project"
-          >
-            <FaPaperPlane className="text-xs" />
-          </button>
+          {comp.link && comp.link !== "#" && (
+            <a
+              href={comp.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center bg-gradient-to-r from-slate-300 via-slate-100 to-slate-400 hover:from-slate-200 hover:via-white hover:to-slate-300 text-slate-900 transition-all duration-300 shadow hover:shadow-md border border-white/20 rounded-xl px-5 py-1.5"
+              title="Visit Project"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <FaPaperPlane className="text-xs" />
+            </a>
+          )}
         </div>
       </div>
     </div>
