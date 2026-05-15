@@ -22,6 +22,7 @@ interface CompetencyItem {
   certificateImage?: string;
   certificateDescription?: string;
   category?: string;
+  hideVisitButton?: boolean;
 }
 
 const competencies: CompetencyItem[] = [
@@ -136,6 +137,7 @@ const competencies: CompetencyItem[] = [
     images: ["/workflow.png", "/defender.png", "/Collision.png"],
     link: "https://github.com/Lutfiandraa/CollisionWarning-YOLO",
     category: "computer-vision",
+    hideVisitButton: true,
   },
   {
     title: "Plotting Geothermal in Asia",
@@ -457,7 +459,7 @@ function Card({ comp, index, onOpenCertificate }: { comp: CompetencyItem; index:
               <FaGithub className="text-base" />
             </a>
           )}
-          {comp.link && comp.link !== "#" && (
+          {comp.link && comp.link !== "#" && !comp.hideVisitButton && (
             <a
               href={comp.link}
               target="_blank"

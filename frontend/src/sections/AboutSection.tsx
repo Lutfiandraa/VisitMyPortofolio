@@ -8,6 +8,8 @@ import {
   SiJavascript, SiTypescript, SiNextdotjs,
 } from 'react-icons/si';
 
+import { motion } from 'framer-motion';
+
 type Tab = 'lang' | 'tools';
 
 interface SkillItem {
@@ -52,6 +54,7 @@ const toolsList: SkillItem[] = [
   { name: 'Git', icon: I('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg', 'Git'), color: '#F05032' },
   { name: 'GitHub', icon: I('https://cdn.simpleicons.org/github/FFFFFF', 'GitHub'), color: '#FFFFFF' },
   { name: 'GitLab', icon: I('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gitlab/gitlab-original.svg', 'GitLab'), color: '#FC6D26' },
+  { name: 'Docker', icon: I('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg', 'Docker'), color: '#2496ED' },
 ];
 
 export default function AboutSection() {
@@ -82,24 +85,38 @@ export default function AboutSection() {
               Capability
             </p>
 
-            <div className="flex sm:inline-flex rounded-full p-1 gap-1 bg-[var(--color-border)] w-full sm:w-auto">
+            <div className="relative flex sm:inline-flex rounded-full p-1.5 gap-1 bg-white/5 border border-white/10 w-full sm:w-auto overflow-hidden">
               <button
                 onClick={() => setActiveTab('lang')}
-                className={`flex-1 sm:flex-initial px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 ${activeTab === 'lang'
-                  ? 'bg-[var(--color-surface)] text-[var(--color-text)] shadow'
-                  : 'text-[var(--color-text-muted)] hover:text-[var(--color-text)]'
+                className={`relative flex-1 sm:flex-initial px-6 py-2.5 rounded-full text-xs sm:text-sm font-medium transition-colors duration-300 z-10 ${activeTab === 'lang'
+                  ? 'text-white'
+                  : 'text-slate-400 hover:text-slate-200'
                   }`}
               >
-                Language &amp; Framework
+                {activeTab === 'lang' && (
+                  <motion.div
+                    layoutId="active-tab-glow"
+                    className="absolute inset-0 rounded-full bg-white/10 border border-white/20 shadow-[0_0_20px_rgba(255,255,255,0.25)]"
+                    transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
+                  />
+                )}
+                <span className="relative z-20">Language &amp; Framework</span>
               </button>
               <button
                 onClick={() => setActiveTab('tools')}
-                className={`flex-1 sm:flex-initial px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 ${activeTab === 'tools'
-                  ? 'bg-[var(--color-surface)] text-[var(--color-text)] shadow'
-                  : 'text-[var(--color-text-muted)] hover:text-[var(--color-text)]'
+                className={`relative flex-1 sm:flex-initial px-6 py-2.5 rounded-full text-xs sm:text-sm font-medium transition-colors duration-300 z-10 ${activeTab === 'tools'
+                  ? 'text-white'
+                  : 'text-slate-400 hover:text-slate-200'
                   }`}
               >
-                Tools
+                {activeTab === 'tools' && (
+                  <motion.div
+                    layoutId="active-tab-glow"
+                    className="absolute inset-0 rounded-full bg-white/10 border border-white/20 shadow-[0_0_20px_rgba(255,255,255,0.25)]"
+                    transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
+                  />
+                )}
+                <span className="relative z-20">Tools</span>
               </button>
             </div>
 
