@@ -1,7 +1,7 @@
 'use client';
 
 import TypedText from '@/components/TypedText';
-import { FaLinkedin, FaGithub, FaDownload } from 'react-icons/fa';
+import { FaLinkedin, FaGithub } from 'react-icons/fa';
 
 export default function HeroSection() {
   return (
@@ -11,7 +11,7 @@ export default function HeroSection() {
     >
       <div className="container-max section-padding relative z-10 text-center">
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-sm font-medium text-brand-400 mb-8 animate-fade-in">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          <span className="w-2 h-2 rounded-full bg-emerald-300 animate-pulse-green" />
           Available for opportunities
         </div>
 
@@ -46,14 +46,7 @@ export default function HeroSection() {
           >
             <FaGithub />
           </a>
-          <a
-            href="#"
-            onClick={(e) => e.preventDefault()}
-            className="inline-flex items-center gap-2 h-12 px-6 rounded-xl bg-gradient-to-r from-slate-300 via-slate-100 to-slate-400 hover:from-slate-200 hover:via-white hover:to-slate-300 text-slate-900 font-semibold text-sm transition-all duration-300 active:scale-95 shadow-md hover:shadow-lg border border-white/20"
-          >
-            <FaDownload className="text-slate-900" />
-            Resume
-          </a>
+
         </div>
 
       </div>

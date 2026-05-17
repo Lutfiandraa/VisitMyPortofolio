@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import {
   SiDart, SiFlutter, SiJavascript, SiReact, SiVuedotjs,
-  SiAngular, SiTypescript, SiNextdotjs, SiNodedotjs, SiGatsby, SiAstro, SiFastapi
+  SiAngular, SiTypescript, SiNextdotjs, SiNodedotjs, SiGatsby, SiAstro, SiFastapi, SiSupabase
 } from "react-icons/si";
 import {
   FaPaperPlane, FaInstagram, FaLinkedin, FaCertificate,
@@ -32,9 +32,10 @@ const competencies: CompetencyItem[] = [
     icons: [
       <SiFlutter key="flutter" style={{ color: "#02569B", fontSize: "1.5rem" }} />,
       <SiDart key="dart" style={{ color: "#02569B", fontSize: "1.5rem" }} />,
+      <SiSupabase key="supabase" style={{ color: "#3ECF8E", fontSize: "1.5rem" }} />,
     ],
     images: ["/Iphone.jpg", "/Iphone2.jpg"],
-    link: "https://github.com/Lutfiandraa/Pawon-main"
+    link: ""
   },
   {
     title: "Garuda Tribune",
@@ -237,31 +238,34 @@ export default function ProjectSection() {
             <button
               type="button"
               onClick={() => setActiveCategory("web")}
-              className={`px-4 py-2 rounded-full border text-sm md:text-base transition-all ${activeCategory === "web"
+              className={`inline-flex items-center gap-2 px-4 py-2 rounded-full border text-sm md:text-base transition-all ${activeCategory === "web"
                 ? "bg-white/20 text-white border-white/40 shadow-[0_0_18px_rgba(255,255,255,0.22)]"
                 : "bg-transparent text-white/70 border-white/20 hover:bg-white/5"
                 }`}
             >
+              <span className="w-2 h-2 rounded-full bg-yellow-300 animate-pulse-yellow" />
               Web Development
             </button>
             <button
               type="button"
               onClick={() => setActiveCategory("data-science")}
-              className={`px-4 py-2 rounded-full border text-sm md:text-base transition-all ${activeCategory === "data-science"
+              className={`inline-flex items-center gap-2 px-4 py-2 rounded-full border text-sm md:text-base transition-all ${activeCategory === "data-science"
                 ? "bg-white/20 text-white border-white/40 shadow-[0_0_18px_rgba(255,255,255,0.22)]"
                 : "bg-transparent text-white/70 border-white/20 hover:bg-white/5"
                 }`}
             >
+              <span className="w-2 h-2 rounded-full bg-yellow-300 animate-pulse-yellow" />
               Data Science
             </button>
             <button
               type="button"
               onClick={() => setActiveCategory("computer-vision")}
-              className={`px-4 py-2 rounded-full border text-sm md:text-base transition-all ${activeCategory === "computer-vision"
+              className={`inline-flex items-center gap-2 px-4 py-2 rounded-full border text-sm md:text-base transition-all ${activeCategory === "computer-vision"
                 ? "bg-white/20 text-white border-white/40 shadow-[0_0_18px_rgba(255,255,255,0.22)]"
                 : "bg-transparent text-white/70 border-white/20 hover:bg-white/5"
                 }`}
             >
+              <span className="w-2 h-2 rounded-full bg-yellow-300 animate-pulse-yellow" />
               Computer Vision
             </button>
           </div>
