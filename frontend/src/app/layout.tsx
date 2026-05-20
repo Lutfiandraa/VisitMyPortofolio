@@ -42,7 +42,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} dark scroll-smooth`} suppressHydrationWarning>
-      <body className="min-h-screen flex flex-col bg-[var(--color-bg)] text-[var(--color-text)] antialiased relative">
+      <body className="min-h-[100dvh] flex flex-col bg-[var(--color-bg)] text-[var(--color-text)] antialiased relative">
         <Script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" strategy="beforeInteractive" />
         <Particle id="particles-js" />
         <TargetCursor
