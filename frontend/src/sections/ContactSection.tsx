@@ -93,7 +93,7 @@ export default function ContactSection() {
             Get in <span className="text-gradient">Touch</span>
           </h2>
           <p className="section-subtitle mx-auto">
-            Have a project in mind or just want to say hi? My inbox is always open.
+            Any Business? or Project Colaboration? you can direct to my LinkedIn or Instagram profile's!
           </p>
         </div>
 
@@ -204,7 +204,7 @@ export default function ContactSection() {
                 rel="noopener noreferrer"
                 className="px-4 py-2 bg-slate-800/50 backdrop-blur-sm rounded-full text-slate-300 hover:text-white hover:bg-slate-700/80 text-lg transition-all flex items-center gap-2 border border-slate-700/30 hover:border-slate-600/50"
               >
-                <FaLinkedin /> <span className="text-xs font-medium">LinkedIn</span>
+                <FaLinkedin className="text-[#0A66C2]" /> <span className="text-xs font-medium">LinkedIn</span>
               </a>
               <a
                 href="https://www.instagram.com/lutfiandrra/"
@@ -212,7 +212,7 @@ export default function ContactSection() {
                 rel="noopener noreferrer"
                 className="px-4 py-2 bg-slate-800/50 backdrop-blur-sm rounded-full text-slate-300 hover:text-white hover:bg-slate-700/80 text-lg transition-all flex items-center gap-2 border border-slate-700/30 hover:border-slate-600/50"
               >
-                <FaInstagram /> <span className="text-xs font-medium">Instagram</span>
+                <FaInstagram className="text-[#E1306C]" /> <span className="text-xs font-medium">Instagram</span>
               </a>
             </motion.div>
           </motion.div>

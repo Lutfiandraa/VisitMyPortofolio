@@ -32,10 +32,10 @@ export default function HeroSection() {
             href="https://www.linkedin.com/in/lutfiandra-pohan-6b7706289/"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-12 h-12 flex items-center justify-center rounded-full glass border border-white/10 hover:bg-brand-500/20 hover:border-brand-500/40 hover:text-brand-400 transition-all duration-300 text-xl shadow-lg"
+            className="w-12 h-12 flex items-center justify-center rounded-full glass border border-white/10 hover:bg-brand-500/20 hover:border-brand-500/40 hover:text-[#0A66C2] transition-all duration-300 text-xl shadow-lg"
             title="LinkedIn"
           >
-            <FaLinkedin />
+            <FaLinkedin className="text-[#0A66C2]" />
           </a>
           <a
             href="https://github.com/Lutfiandraa"
