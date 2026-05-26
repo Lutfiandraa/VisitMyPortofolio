@@ -135,7 +135,7 @@ const competencies: CompetencyItem[] = [
         style={{ width: "24px", height: "24px" }}
       />,
     ],
-    images: ["/workflow.png", "/defender.png", "/Collision.png"],
+    images: ["/defendercollision (compressed).mp4", "/workflow.png", "/Collision.png"],
     link: "https://github.com/Lutfiandraa/CollisionWarning-YOLO",
     category: "computer-vision",
     hideVisitButton: true,
@@ -352,14 +352,25 @@ function Card({ comp, index, onOpenCertificate }: { comp: CompetencyItem; index:
       <div className="relative mb-2 overflow-hidden rounded-xl bg-black/20 h-40">
         {hasImages ? (
           <>
-            <img
-              src={comp.images![current]}
-              alt={comp.title}
-              className="h-full w-full object-cover opacity-80"
-              onError={(e) => {
-                (e.target as HTMLImageElement).style.display = 'none';
-              }}
-            />
+            {comp.images![current].endsWith('.mp4') ? (
+              <video
+                src={comp.images![current]}
+                className="h-full w-full object-cover opacity-80"
+                autoPlay
+                loop
+                muted
+                playsInline
+              />
+            ) : (
+              <img
+                src={comp.images![current]}
+                alt={comp.title}
+                className="h-full w-full object-cover opacity-80"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).style.display = 'none';
+                }}
+              />
+            )}
             <div className="absolute inset-0 bg-black/10"></div>
           </>
         ) : (
