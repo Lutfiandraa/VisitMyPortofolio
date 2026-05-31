@@ -1,21 +1,13 @@
 'use client';
 
-import React, { useState, useRef, useEffect } from "react";
+import React from "react";
 import { FaLinkedin, FaInstagram } from "react-icons/fa";
 import { IoPaperPlaneOutline, IoPersonCircle, IoArrowForward } from "react-icons/io5";
 import { motion } from "framer-motion";
-
-interface ChatMessage {
-  role: 'user' | 'bot';
-  text: string;
-}
-
-const BOT_REPLIES: Record<string, string> = {
-  rude: "Well, you’re kinda rude and have no manners.",
-  collaborate: "Sure! here's my personal email lutfiandrapohann@gmail.com",
-  default: "Thank you for reaching out to Lutfiandra Pohan. I am F.R.I.D.A.Y, Lutfiandra's assistant. If you do not receive a response within the expected time, please contact Lutfiandra directly at\nlutfiandrapohann@gmail.com",
-  woy: "Yes? What can i help u today maam//sir",
-};
+import { FadeUp, FadeIn, SlideInLeft, StaggerContainer, StaggerItem, ParallaxSection } from '@/components/animations/MotionWrapper';
+import SectionHeader from '@/components/SectionHeader';
+import SocialLink from '@/components/SocialLink';
+import { useChatbot } from "@/lib/useChatbot";
 
 import { deobfuscateString } from "@/lib/security";
 
@@ -47,71 +39,25 @@ function renderBotMessage(text: string) {
 }
 
 export default function ContactSection() {
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
-  const [inputValue, setInputValue] = useState("");
-  const chatEndRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
-
-  const sendMessage = (text: string) => {
-    const trimmed = text.trim();
-    if (!trimmed) return;
-    setMessages((prev) => [...prev, { role: "user", text: trimmed }]);
-    setInputValue("");
-
-    const lowerText = trimmed.toLowerCase();
-
-
-    const rudeWords = ["anjing", "babi", "tai", "bangsat"];
-
-    const contactWords = ["collaborate", "collab", "let's talk", "where to chat?", "contact person", "business"];
-
-    const woyWords = ["woy", "woi"];
-
-    let botText = BOT_REPLIES.default;
-
-    if (rudeWords.some((word) => lowerText.includes(word))) {
-      botText = BOT_REPLIES.rude;
-    } else if (contactWords.some((word) => lowerText.includes(word))) {
-      botText = BOT_REPLIES.collaborate;
-    } else if (woyWords.some((word) => lowerText.includes(word))) {
-      botText = BOT_REPLIES.woy;
-    }
-
-    setTimeout(() => {
-      setMessages((prev) => [...prev, { role: "bot", text: botText }]);
-    }, 600);
-  };
+  const { messages, inputValue, setInputValue, chatEndRef, sendMessage, clearMessages } = useChatbot();
 
   return (
     <section id="contact" className="section-padding animate-section-in">
       <div className="container-max">
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <h2 className="section-title mb-4">
-            Get in <span className="text-gradient">Touch</span>
-          </h2>
-          <p className="section-subtitle mx-auto">
-            Any Business? or Project Colaboration? you can direct to my LinkedIn or Instagram profile's!
-          </p>
+          <SectionHeader className="mb-4">
+              Get in <span className="text-gradient">Touch</span>
+          </SectionHeader>
+          <FadeUp delay={0.15}>
+            <p className="section-subtitle mx-auto">
+              Any Business? or Project Colaboration? you can direct to my LinkedIn or Instagram profile's!
+            </p>
+          </FadeUp>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-center max-w-5xl mx-auto">
-          <motion.div
-            className="md:col-span-7 relative z-10 flex flex-col gap-4 order-2 md:order-1"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
-            viewport={{ once: true, amount: 0.3 }}
-          >
-            <motion.div
-              className="text-left"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
-              viewport={{ once: true, amount: 0.3 }}
-            >
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-end max-w-5xl mx-auto">
+          <SlideInLeft className="md:col-span-7 relative z-10 flex flex-col gap-4 order-2 md:order-1">
+            <FadeUp delay={0.2} className="text-left">
               <div className="bg-slate-300/10 backdrop-blur-md rounded-2xl border border-slate-400/30 overflow-hidden flex flex-col min-h-[420px] max-h-[500px] md:min-h-[460px] md:max-h-[540px]">
                 <div className="shrink-0 flex items-center justify-between gap-3 px-4 py-3 border-b border-slate-400/30 bg-slate-200/10">
                   <div className="flex items-center gap-3">
@@ -123,7 +69,7 @@ export default function ContactSection() {
                   </div>
                   <button
                     type="button"
-                    onClick={() => setMessages([])}
+                    onClick={clearMessages}
                     className="p-2 text-slate-400 hover:text-slate-200 transition-colors duration-200 cursor-pointer flex items-center justify-center rounded-lg hover:bg-slate-400/10"
                     title="Clear Chat"
                   >
@@ -189,50 +135,35 @@ export default function ContactSection() {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </FadeUp>
 
-            <motion.div
-              className="flex justify-center gap-4 mt-4"
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
-              viewport={{ once: true, amount: 0.3 }}
-            >
-              <a
-                href="https://www.linkedin.com/in/lutfiandra-pohan-6b7706289/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-4 py-2 bg-slate-800/50 backdrop-blur-sm rounded-full text-slate-300 hover:text-white hover:bg-slate-700/80 text-lg transition-all flex items-center gap-2 border border-slate-700/30 hover:border-slate-600/50"
-              >
-                <FaLinkedin className="text-[#0A66C2]" /> <span className="text-xs font-medium">LinkedIn</span>
-              </a>
-              <a
-                href="https://www.instagram.com/lutfiandrra/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-4 py-2 bg-slate-800/50 backdrop-blur-sm rounded-full text-slate-300 hover:text-white hover:bg-slate-700/80 text-lg transition-all flex items-center gap-2 border border-slate-700/30 hover:border-slate-600/50"
-              >
-                <FaInstagram className="text-[#E1306C]" /> <span className="text-xs font-medium">Instagram</span>
-              </a>
-            </motion.div>
-          </motion.div>
-
-          <motion.div
-            className="md:col-span-5 flex justify-center md:justify-end relative mb-0 md:pl-10 md:translate-x-6 order-1 md:order-2"
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
-            viewport={{ once: true, amount: 0.3 }}
-          >
-            <div className="relative group max-w-[320px] md:max-w-full">
-              <div className="absolute inset-[-40px] bg-gradient-to-r from-slate-400/35 via-slate-100/25 to-slate-500/35 rounded-full blur-3xl opacity-60 group-hover:opacity-90 transition-opacity duration-500 pointer-events-none" />
-              <img
-                src="/profileportormv.png"
-                alt="Profile"
-                className="w-full h-auto object-contain relative z-10 transform transition-all duration-500 group-hover:scale-[1.03]"
+            <div className="absolute -bottom-16 left-0 right-0 flex justify-center md:justify-start gap-4">
+              <SocialLink 
+                href="https://www.linkedin.com/in/lutfiandra-pohan-6b7706289/" 
+                icon={<FaLinkedin className="text-[#0A66C2]" />} 
+                label="LinkedIn" 
+                variant="with-text" 
               />
-            </div>
-          </motion.div>
+              <SocialLink 
+                href="https://www.instagram.com/lutfiandrra/" 
+                icon={<FaInstagram className="text-[#E1306C]" />} 
+                label="Instagram" 
+                variant="with-text" 
+              />
+              </div>
+          </SlideInLeft>
+
+          <FadeUp delay={0.3} className="md:col-span-5 flex justify-center relative mb-0 order-1 md:order-2">
+              <div className="relative group max-w-[280px] md:max-w-[340px] lg:max-w-[380px] mx-auto">
+                <div className="absolute inset-[-40px] bg-gradient-to-r from-slate-400/35 via-slate-100/25 to-slate-500/35 rounded-full blur-3xl opacity-60 group-hover:opacity-90 transition-opacity duration-500 pointer-events-none" />
+                <img
+                  loading="lazy" decoding="async"
+                  src="/profileportormv.png"
+                  alt="Profile"
+                  className="w-full h-auto object-contain relative z-10 transform transition-all duration-500 group-hover:scale-[1.03]"
+                />
+              </div>
+          </FadeUp>
         </div>
       </div>
     </section>

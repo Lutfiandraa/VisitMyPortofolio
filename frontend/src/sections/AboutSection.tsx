@@ -9,17 +9,17 @@ import {
 } from 'react-icons/si';
 
 import { motion } from 'framer-motion';
+import { FadeUp, FadeIn, SlideInLeft, StaggerContainer, StaggerItem, ParallaxSection } from '@/components/animations/MotionWrapper';
+import SectionHeader from '@/components/SectionHeader';
+
+import { SkillItem } from '@/types';
 
 type Tab = 'lang' | 'tools';
 
-interface SkillItem {
-  name: string;
-  icon: React.ReactNode;
-  color: string;
-}
+
 
 const I = (src: string, alt: string) => (
-  <img src={src} alt={alt} className="w-8 h-8 object-contain" />
+  <img src={src} alt={alt} className="w-8 h-8 object-contain" loading="lazy" decoding="async" />
 );
 
 const langAndFramework: SkillItem[] = [
@@ -66,80 +66,79 @@ export default function AboutSection() {
       <div className="container-max">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 
-          <div className="space-y-6">
-            <h2 className="section-title">
-              Passionate about building{' '}
-              <span className="text-gradient">great things</span>
-            </h2>
-            <p className="text-[var(--color-text-muted)] leading-relaxed">
-              I&apos;m a Fullstack Developer and Data Enthusiast
-              focused on building scalable, high-performance systems.
-              I integrate data into applications to deliver more intelligent and efficient solutions.
-              I continuously expand my knowledge in Artificial Intelligence and data.
-            </p>
-
-          </div>
-
-          <div className="space-y-6">
-            <p className="text-sm font-semibold uppercase tracking-widest text-brand-400">
-              Capability
-            </p>
-
-            <div className="relative flex sm:inline-flex rounded-full p-1.5 gap-1 bg-white/5 border border-white/10 w-full sm:w-auto overflow-hidden">
-              <button
-                onClick={() => setActiveTab('lang')}
-                className={`relative flex-1 sm:flex-initial px-6 py-2.5 rounded-full text-xs sm:text-sm font-medium transition-colors duration-300 z-10 ${activeTab === 'lang'
-                  ? 'text-white'
-                  : 'text-slate-400 hover:text-slate-200'
-                  }`}
-              >
-                {activeTab === 'lang' && (
-                  <motion.div
-                    layoutId="active-tab-glow"
-                    className="absolute inset-0 rounded-full bg-white/10 border border-white/20 shadow-[0_0_20px_rgba(255,255,255,0.25)]"
-                    transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
-                  />
-                )}
-                <span className="relative z-20">Language &amp; Framework</span>
-              </button>
-              <button
-                onClick={() => setActiveTab('tools')}
-                className={`relative flex-1 sm:flex-initial px-6 py-2.5 rounded-full text-xs sm:text-sm font-medium transition-colors duration-300 z-10 ${activeTab === 'tools'
-                  ? 'text-white'
-                  : 'text-slate-400 hover:text-slate-200'
-                  }`}
-              >
-                {activeTab === 'tools' && (
-                  <motion.div
-                    layoutId="active-tab-glow"
-                    className="absolute inset-0 rounded-full bg-white/10 border border-white/20 shadow-[0_0_20px_rgba(255,255,255,0.25)]"
-                    transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
-                  />
-                )}
-                <span className="relative z-20">Tools</span>
-              </button>
+          <SlideInLeft>
+            <div className="space-y-6">
+              <SectionHeader>
+                  Passionate about building{' '}
+                  <span className="text-gradient">great things</span>
+              </SectionHeader>
+              <FadeUp delay={0.15}>
+                <p className="text-[var(--color-text-muted)] leading-relaxed">
+                  I&apos;m a Fullstack Developer and Data Enthusiast
+                  focused on building scalable, high-performance systems.
+                  I integrate data into applications to deliver more intelligent and efficient solutions.
+                  I continuously expand my knowledge in Artificial Intelligence and data.
+                </p>
+              </FadeUp>
             </div>
+          </SlideInLeft>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-              {items.map((item) => (
-                <div
-                  key={`${activeTab}-${item.name}`}
-                  className="card p-4 flex flex-col items-center gap-2 hover:border-brand-500/50 transition-all duration-300 animate-card-in transform"
-                >
-                  <div
-                    style={{ color: item.color }}
-                    className="w-8 h-8 flex items-center justify-center text-3xl [&>img]:w-8 [&>img]:h-8"
-                  >
-                    {item.icon}
-                  </div>
-                  <span className="text-sm font-medium text-center">{item.name}</span>
-                </div>
-              ))}
-            </div>
+          <div className="space-y-6">
+            <FadeUp delay={0.15}>
+              <p className="text-sm font-semibold uppercase tracking-widest text-brand-400">
+                Capability
+              </p>
+            </FadeUp>
+
+            <FadeUp delay={0.2}>
+              <div className="relative flex sm:inline-flex rounded-full p-1.5 gap-1 bg-white/5 border border-white/10 w-full sm:w-auto overflow-hidden">
+              <TabButton tab="lang" label="Language & Framework" activeTab={activeTab} setActiveTab={setActiveTab} />
+              <TabButton tab="tools" label="Tools" activeTab={activeTab} setActiveTab={setActiveTab} />
+              </div>
+            </FadeUp>
+
+            <StaggerContainer>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                {items.map((item) => (
+                  <StaggerItem key={`${activeTab}-${item.name}`}>
+                    <div className="card p-4 flex flex-col items-center gap-2 hover:border-brand-500/50 transition-all duration-300 animate-card-in transform">
+                      <div
+                        style={{ color: item.color }}
+                        className="w-8 h-8 flex items-center justify-center text-3xl [&>img]:w-8 [&>img]:h-8"
+                      >
+                        {item.icon}
+                      </div>
+                      <span className="text-sm font-medium text-center">{item.name}</span>
+                    </div>
+                  </StaggerItem>
+                ))}
+              </div>
+            </StaggerContainer>
           </div>
 
         </div>
       </div>
     </section>
+  );
+}
+
+function TabButton({ tab, label, activeTab, setActiveTab }: { tab: Tab, label: string, activeTab: Tab, setActiveTab: (t: Tab) => void }) {
+  return (
+    <button
+      onClick={() => setActiveTab(tab)}
+      className={`relative flex-1 sm:flex-initial px-6 py-2.5 rounded-full text-xs sm:text-sm font-medium transition-colors duration-300 z-10 ${activeTab === tab
+        ? 'text-white'
+        : 'text-slate-400 hover:text-slate-200'
+        }`}
+    >
+      {activeTab === tab && (
+        <motion.div
+          layoutId="active-tab-glow"
+          className="absolute inset-0 rounded-full bg-white/10 border border-white/20 shadow-[0_0_20px_rgba(255,255,255,0.25)]"
+          transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
+        />
+      )}
+      <span className="relative z-20">{label}</span>
+    </button>
   );
 }

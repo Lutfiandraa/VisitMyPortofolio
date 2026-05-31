@@ -84,7 +84,7 @@ export default function Navbar() {
         {/* CTA */}
         <a
           href="#contact"
-          className="hidden md:inline-flex items-center bg-gradient-to-r from-slate-300 via-slate-100 to-slate-400 hover:from-slate-200 hover:via-white hover:to-slate-300 text-slate-900 font-bold transition-all duration-300 shadow-md hover:shadow-lg border border-white/20 rounded-xl text-xs px-4 py-2"
+          className="hidden md:inline-flex items-center bg-gradient-to-r from-slate-300 via-slate-100 to-slate-400 hover:from-slate-200 hover:via-white hover:to-slate-300 text-slate-900 font-bold transition-all duration-300 shadow-md hover:shadow-lg border border-white/20 rounded-xl text-[11px] px-3 py-1.5"
         >
           Get in Touch
         </a>
@@ -109,14 +109,14 @@ export default function Navbar() {
           menuOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0',
         )}
       >
-        <ul className="glass border-t border-white/10 px-6 py-4 flex flex-col gap-2">
+        <ul className="glass border-t border-white/10 px-6 py-3 flex flex-col gap-1">
           {navLinks.map((link) => (
             <li key={link.href}>
               <Link
                 href={link.href}
                 onClick={() => setMenuOpen(false)}
                 className={cn(
-                  'block px-4 py-2.5 rounded-lg text-sm font-medium transition-colors',
+                  'block px-4 py-1.5 rounded-lg text-sm font-medium transition-colors',
                   pathname === link.href
                     ? 'bg-brand-600/20 text-brand-400'
                     : 'text-[var(--color-text-muted)] hover:text-brand-400 hover:bg-white/5',
@@ -130,7 +130,7 @@ export default function Navbar() {
             <a
               href="#contact"
               onClick={() => setMenuOpen(false)}
-              className="inline-flex items-center bg-gradient-to-r from-slate-300 via-slate-100 to-slate-400 hover:from-slate-200 hover:via-white hover:to-slate-300 text-slate-900 font-bold transition-all duration-300 shadow-md hover:shadow-lg border border-white/20 rounded-xl text-xs px-4 py-2 w-full justify-center mt-2"
+              className="inline-flex items-center bg-gradient-to-r from-slate-300 via-slate-100 to-slate-400 hover:from-slate-200 hover:via-white hover:to-slate-300 text-slate-900 font-bold transition-all duration-300 shadow-md hover:shadow-lg border border-white/20 rounded-xl text-[11px] px-3 py-1.5 w-full justify-center mt-2"
             >
               Get in Touch
             </a>

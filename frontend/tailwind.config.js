@@ -14,6 +14,8 @@ module.exports = {
         mono: ['var(--font-mono)', 'monospace'],
       },
       colors: {
+        background: 'var(--background)',
+        foreground: 'var(--foreground)',
         brand: {
           50:  '#f8fafc',
           100: '#f1f5f9',

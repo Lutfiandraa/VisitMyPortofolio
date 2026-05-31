@@ -1,17 +1,18 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter } from 'next/font/google';
+import { Geist } from 'next/font/google';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import TargetCursor from '@/components/TargetCursor';
-import Particle from '@/components/Particle';
+import LightRaysBackground from '@/components/LightRaysBackground';
+import PageTransition from '@/components/animations/PageTransition';
+
+
+
 import Script from 'next/script';
 import '@/styles/globals.css';
+import { cn } from "@/lib/utils";
 
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
-});
+const geist = Geist({subsets:['latin'],variable:'--font-sans',display:'swap'});
 
 export const metadata: Metadata = {
   title: 'Lutfiandra',
@@ -41,10 +42,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} dark scroll-smooth`} suppressHydrationWarning>
-      <body className="min-h-[100dvh] flex flex-col bg-[var(--color-bg)] text-[var(--color-text)] antialiased relative">
-        <Script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" strategy="beforeInteractive" />
-        <Particle id="particles-js" />
+    <html lang="en" className={cn("dark", "scroll-smooth", "font-sans", geist.variable)} suppressHydrationWarning>
+      <body className="min-h-[100dvh] flex flex-col text-[var(--color-text)] antialiased relative">
+        <LightRaysBackground />
         <TargetCursor
           spinDuration={2}
           hideDefaultCursor
@@ -53,7 +53,7 @@ export default function RootLayout({
           targetSelector=".cursor-target, a, button, .hover-target"
         />
         <Navbar />
-        <main className="flex-1 relative z-10">{children}</main>
+        <PageTransition>{children}</PageTransition>
         <Footer />
       </body>
     </html>

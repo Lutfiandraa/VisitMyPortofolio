@@ -1,3 +1,5 @@
+import React from 'react';
+
 // ── Navigation ─────────────────────────────────────────────────────────────
 export interface NavLink {
   label: string;
@@ -5,22 +7,25 @@ export interface NavLink {
 }
 
 // ── Projects ───────────────────────────────────────────────────────────────
-export interface Project {
-  id: string;
+export interface CompetencyItem {
   title: string;
   description: string;
-  tags: string[];
-  imageUrl?: string;
-  liveUrl?: string;
-  githubUrl?: string;
-  featured?: boolean;
+  icons: React.ReactNode[];
+  images?: string[];
+  link: string;
+  linkedin?: string;
+  instagram?: string;
+  certificateImage?: string;
+  certificateDescription?: string;
+  category?: string;
+  hideVisitButton?: boolean;
 }
 
 // ── Skills / Competencies ──────────────────────────────────────────────────
-export interface Skill {
+export interface SkillItem {
   name: string;
-  level: number; // 0–100
-  category: 'frontend' | 'backend' | 'tooling' | 'design';
+  icon: React.ReactNode;
+  color: string;
 }
 
 // ── Contact Form ───────────────────────────────────────────────────────────

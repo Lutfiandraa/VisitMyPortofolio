@@ -10,20 +10,11 @@ import {
   FaPaperPlane, FaInstagram, FaLinkedin, FaCertificate,
   FaChevronLeft, FaChevronRight, FaTimes, FaGithub
 } from "react-icons/fa";
+import { FadeUp, FadeIn, SlideInLeft, StaggerContainer, StaggerItem, ParallaxSection } from '@/components/animations/MotionWrapper';
+import SectionHeader from '@/components/SectionHeader';
+import ProjectCard from '@/components/ProjectCard';
 
-interface CompetencyItem {
-  title: string;
-  description: string;
-  icons: React.ReactNode[];
-  images?: string[];
-  link: string;
-  linkedin?: string;
-  instagram?: string;
-  certificateImage?: string;
-  certificateDescription?: string;
-  category?: string;
-  hideVisitButton?: boolean;
-}
+import { CompetencyItem } from '@/types';
 
 const competencies: CompetencyItem[] = [
   {
@@ -54,7 +45,7 @@ const competencies: CompetencyItem[] = [
     title: "Deep Learning",
     description: "Brebes Regency temperature forecasting with Long Short-Term Memory model & GUI Tkinter.",
     icons: [
-      <img
+      <img loading="lazy" decoding="async"
         key="python"
         src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
         alt="Python"
@@ -101,7 +92,7 @@ const competencies: CompetencyItem[] = [
     icons: [
       <SiNodedotjs key="node" style={{ color: "#339933", fontSize: "1.5rem" }} />,
       <SiReact key="react" style={{ color: "#61DAFB", fontSize: "1.5rem" }} />,
-      <img
+      <img loading="lazy" decoding="async"
         key="jest"
         src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jest/jest-plain.svg"
         alt="Jest"
@@ -128,7 +119,7 @@ const competencies: CompetencyItem[] = [
     title: "YOLOv8",
     description: "Computer Vision for Car Adaptive Collision Warning System",
     icons: [
-      <img
+      <img loading="lazy" decoding="async"
         key="python"
         src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
         alt="Python"
@@ -144,7 +135,7 @@ const competencies: CompetencyItem[] = [
     title: "Plotting Geothermal in Asia",
     description: "Modelling international data Geothermal with Random Forest for Plot Geothermal in Asia",
     icons: [
-      <img
+      <img loading="lazy" decoding="async"
         key="python"
         src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
         alt="Python"
@@ -159,13 +150,13 @@ const competencies: CompetencyItem[] = [
     title: "Large Language Model (LLM, NLP)",
     description: "AI Agent for Oil Rig Industry Analytics",
     icons: [
-      <img
+      <img loading="lazy" decoding="async"
         key="python"
         src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
         alt="Python"
         style={{ width: "24px", height: "24px" }}
       />,
-      <img
+      <img loading="lazy" decoding="async"
         key="langflow"
         src="https://cdn.simpleicons.org/langflow/FFFFFF"
         alt="Langflow"
@@ -184,7 +175,7 @@ const competencies: CompetencyItem[] = [
     icons: [
       <SiNextdotjs key="next" style={{ color: "#ffffff", fontSize: "1.5rem" }} />,
       <SiTypescript key="ts" style={{ color: "#3178C6", fontSize: "1.5rem" }} />,
-      <img
+      <img loading="lazy" decoding="async"
         key="python"
         src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
         alt="Python"
@@ -231,56 +222,29 @@ export default function ProjectSection() {
     <section id="projects" className="section-padding animate-section-in bg-transparent">
       <div className="container-max">
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <h2 className="section-title mb-4">
-            <span className="text-gradient">Project</span>
-          </h2>
-          <div className="flex items-center justify-center flex-wrap gap-3">
-            <button
-              type="button"
-              onClick={() => setActiveCategory("web")}
-              className={`inline-flex items-center gap-2 px-4 py-2 rounded-full border text-sm md:text-base transition-all ${activeCategory === "web"
-                ? "bg-white/20 text-white border-white/40 shadow-[0_0_18px_rgba(255,255,255,0.22)]"
-                : "bg-transparent text-white/70 border-white/20 hover:bg-white/5"
-                }`}
-            >
-              <span className="w-2 h-2 rounded-full bg-yellow-300 animate-pulse-yellow" />
-              Web Development
-            </button>
-            <button
-              type="button"
-              onClick={() => setActiveCategory("data-science")}
-              className={`inline-flex items-center gap-2 px-4 py-2 rounded-full border text-sm md:text-base transition-all ${activeCategory === "data-science"
-                ? "bg-white/20 text-white border-white/40 shadow-[0_0_18px_rgba(255,255,255,0.22)]"
-                : "bg-transparent text-white/70 border-white/20 hover:bg-white/5"
-                }`}
-            >
-              <span className="w-2 h-2 rounded-full bg-yellow-300 animate-pulse-yellow" />
-              Data Science
-            </button>
-            <button
-              type="button"
-              onClick={() => setActiveCategory("computer-vision")}
-              className={`inline-flex items-center gap-2 px-4 py-2 rounded-full border text-sm md:text-base transition-all ${activeCategory === "computer-vision"
-                ? "bg-white/20 text-white border-white/40 shadow-[0_0_18px_rgba(255,255,255,0.22)]"
-                : "bg-transparent text-white/70 border-white/20 hover:bg-white/5"
-                }`}
-            >
-              <span className="w-2 h-2 rounded-full bg-yellow-300 animate-pulse-yellow" />
-              Computer Vision
-            </button>
-          </div>
+          <SectionHeader className="mb-4">
+              <span className="text-gradient">Project</span>
+          </SectionHeader>
+          <FadeUp delay={0.15}>
+            <div className="flex items-center justify-center flex-wrap gap-3">
+              <CategoryButton category="web" label="Web Development" activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
+              <CategoryButton category="data-science" label="Data Science" activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
+              <CategoryButton category="computer-vision" label="Computer Vision" activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
+            </div>
+          </FadeUp>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredCompetencies.map((comp, index) => (
-            <Card
-              key={`${activeCategory}-${comp.title}`}
-              comp={comp}
-              index={index}
-              onOpenCertificate={(image, description) => setActiveCertificate({ image, description })}
-            />
+            <StaggerItem key={`${activeCategory}-${comp.title}`}>
+              <ProjectCard
+                comp={comp}
+                index={index}
+                onOpenCertificate={(image, description) => setActiveCertificate({ image, description })}
+              />
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       </div>
 
       {isMounted && activeCertificate && createPortal(
@@ -303,7 +267,7 @@ export default function ProjectSection() {
             </button>
 
             <div className="p-1 overflow-hidden flex justify-center items-center">
-              <img
+              <img loading="lazy" decoding="async"
                 src={activeCertificate.image}
                 alt="Certificate"
                 className="max-w-full max-h-[55vh] object-contain rounded-t-xl opacity-95"
@@ -329,165 +293,20 @@ export default function ProjectSection() {
   );
 }
 
-function Card({ comp, index, onOpenCertificate }: { comp: CompetencyItem; index: number; onOpenCertificate: (image: string, desc: string) => void }) {
-  const [current, setCurrent] = useState(0);
-  const images = comp.images;
-  const hasImages = images && images.length > 0;
-
-  const nextImage = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (images) setCurrent((prev) => (prev + 1) % images.length);
-  };
-  const prevImage = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (images) setCurrent((prev) => (prev === 0 ? images.length - 1 : prev - 1));
-  };
-
-
+function CategoryButton({ category, label, activeCategory, setActiveCategory }: { category: string, label: string, activeCategory: string, setActiveCategory: (c: string) => void }) {
   return (
-    <div
-      className="card p-6 group flex flex-col gap-4 animate-card-in transform transition-all duration-300 hover:border-brand-500/50 hover:scale-[1.02]"
+    <button
+      type="button"
+      onClick={() => setActiveCategory(category)}
+      className={`inline-flex items-center gap-2 px-4 py-2 rounded-full border text-sm md:text-base transition-all ${activeCategory === category
+        ? "bg-white/20 text-white border-white/40 shadow-[0_0_18px_rgba(255,255,255,0.22)]"
+        : "bg-transparent text-white/70 border-white/20 hover:bg-white/5"
+        }`}
     >
-      {/* Slider Gambar / Placeholder */}
-      <div className="relative mb-2 overflow-hidden rounded-xl bg-black/20 h-40">
-        {hasImages ? (
-          <>
-            {comp.images![current].endsWith('.mp4') ? (
-              <video
-                src={comp.images![current]}
-                className="h-full w-full object-cover opacity-80"
-                autoPlay
-                loop
-                muted
-                playsInline
-              />
-            ) : (
-              <img
-                src={comp.images![current]}
-                alt={comp.title}
-                className="h-full w-full object-cover opacity-80"
-                onError={(e) => {
-                  (e.target as HTMLImageElement).style.display = 'none';
-                }}
-              />
-            )}
-            <div className="absolute inset-0 bg-black/10"></div>
-          </>
-        ) : (
-          <div className="h-full w-full bg-white/10 rounded-xl flex items-center justify-center border border-white/10">
-            <span className="text-white/30 text-xs">No image</span>
-          </div>
-        )}
-
-        {/* Navigasi Kiri/Kanan */}
-        {hasImages && comp.images!.length > 1 && (
-          <>
-            <button
-              onClick={prevImage}
-              className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
-            >
-              <FaChevronLeft size={14} />
-            </button>
-            <button
-              onClick={nextImage}
-              className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
-            >
-              <FaChevronRight size={14} />
-            </button>
-          </>
-        )}
-      </div>
-
-      {/* Judul + Certified */}
-      <div className="flex items-center justify-between">
-        <h3 className="text-lg font-bold bg-gradient-to-r from-slate-300 via-slate-100 to-slate-400 bg-clip-text text-transparent">
-          {comp.title.includes("Hacktiv8") ? (
-            <>
-              {comp.title.split("Hacktiv8")[0]}
-              <span className="text-orange-500">Hacktiv8</span>
-              {comp.title.split("Hacktiv8")[1]}
-            </>
-          ) : (
-            comp.title
-          )}
-        </h3>
-        {comp.certificateImage && (
-          <button
-            onClick={() => onOpenCertificate(comp.certificateImage!, comp.certificateDescription!)}
-            className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium text-slate-300 hover:text-slate-200 bg-white/5 hover:bg-white/10 border border-slate-500/50 rounded-lg transition-colors"
-          >
-            <FaCertificate className="text-xs" />
-            Certified
-          </button>
-        )}
-      </div>
-
-      {/* Deskripsi */}
-      <p className="text-sm text-[var(--color-text-muted)] leading-relaxed flex-1">
-        {comp.description}
-      </p>
-
-      {/* Ikon + Tautan */}
-      <div className="flex items-center justify-between text-xl text-white/90 border-t border-[var(--color-border)] pt-3">
-        <div className="flex space-x-3 items-center">
-          {comp.icons.map((icon, i) => (
-            <span key={i} className="flex items-center justify-center">
-              {icon}
-            </span>
-          ))}
-        </div>
-
-        <div className="flex items-center gap-2">
-          {comp.linkedin && (
-            <a
-              href={comp.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center text-[#0A66C2] hover:text-[#3B82F6] transition-all duration-300 px-2 py-1.5"
-              title="LinkedIn"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <FaLinkedin className="text-base" />
-            </a>
-          )}
-          {comp.instagram && (
-            <a
-              href={comp.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center text-[#E1306C] hover:text-[#F56040] transition-all duration-300 px-2 py-1.5"
-              title="Instagram"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <FaInstagram className="text-base" />
-            </a>
-          )}
-          {comp.link && comp.link.includes("github.com") && (
-            <a
-              href={comp.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center text-white/70 hover:text-white transition-all duration-300 px-2 py-1.5"
-              title="GitHub"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <FaGithub className="text-base" />
-            </a>
-          )}
-          {comp.link && comp.link !== "#" && !comp.hideVisitButton && (
-            <a
-              href={comp.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center bg-gradient-to-r from-slate-300 via-slate-100 to-slate-400 hover:from-slate-200 hover:via-white hover:to-slate-300 text-slate-900 transition-all duration-300 shadow hover:shadow-md border border-white/20 rounded-xl px-5 py-1.5"
-              title="Visit Project"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <FaPaperPlane className="text-xs" />
-            </a>
-          )}
-        </div>
-      </div>
-    </div>
+      <span className="w-2 h-2 rounded-full bg-yellow-300 animate-pulse-yellow" />
+      {label}
+    </button>
   );
 }
+
+
