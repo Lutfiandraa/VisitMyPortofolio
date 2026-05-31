@@ -1,6 +1,7 @@
 'use client';
 
 import React from "react";
+import Image from 'next/image';
 import { FaLinkedin, FaInstagram } from "react-icons/fa";
 import { IoPaperPlaneOutline, IoPersonCircle, IoArrowForward } from "react-icons/io5";
 import { motion } from "framer-motion";
@@ -156,11 +157,13 @@ export default function ContactSection() {
           <FadeUp delay={0.3} className="md:col-span-5 flex justify-center relative mb-0 order-1 md:order-2">
               <div className="relative group max-w-[280px] md:max-w-[340px] lg:max-w-[380px] mx-auto">
                 <div className="absolute inset-[-40px] bg-gradient-to-r from-slate-400/35 via-slate-100/25 to-slate-500/35 rounded-full blur-3xl opacity-60 group-hover:opacity-90 transition-opacity duration-500 pointer-events-none" />
-                <img
-                  loading="lazy" decoding="async"
+                <Image
                   src="/profileportormv.png"
                   alt="Profile"
+                  width={380}
+                  height={500}
                   className="w-full h-auto object-contain relative z-10 transform transition-all duration-500 group-hover:scale-[1.03]"
+                  priority={false}
                 />
               </div>
           </FadeUp>

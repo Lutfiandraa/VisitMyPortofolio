@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
+import Image from 'next/image';
 import {
   SiDart, SiFlutter, SiJavascript, SiReact, SiVuedotjs,
   SiAngular, SiTypescript, SiNextdotjs, SiNodedotjs, SiGatsby, SiAstro, SiFastapi, SiSupabase
@@ -45,10 +46,12 @@ const competencies: CompetencyItem[] = [
     title: "Deep Learning",
     description: "Brebes Regency temperature forecasting with Long Short-Term Memory model & GUI Tkinter.",
     icons: [
-      <img loading="lazy" decoding="async"
+      <Image
         key="python"
         src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
         alt="Python"
+        width={24}
+        height={24}
         style={{ width: "24px", height: "24px" }}
       />
     ],
@@ -92,10 +95,12 @@ const competencies: CompetencyItem[] = [
     icons: [
       <SiNodedotjs key="node" style={{ color: "#339933", fontSize: "1.5rem" }} />,
       <SiReact key="react" style={{ color: "#61DAFB", fontSize: "1.5rem" }} />,
-      <img loading="lazy" decoding="async"
+      <Image
         key="jest"
         src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jest/jest-plain.svg"
         alt="Jest"
+        width={24}
+        height={24}
         style={{ width: "24px", height: "24px" }}
       />,
     ],
@@ -119,10 +124,12 @@ const competencies: CompetencyItem[] = [
     title: "YOLOv8",
     description: "Computer Vision for Car Adaptive Collision Warning System",
     icons: [
-      <img loading="lazy" decoding="async"
+      <Image
         key="python"
         src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
         alt="Python"
+        width={24}
+        height={24}
         style={{ width: "24px", height: "24px" }}
       />,
     ],
@@ -150,16 +157,20 @@ const competencies: CompetencyItem[] = [
     title: "Large Language Model (LLM, NLP)",
     description: "AI Agent for Oil Rig Industry Analytics",
     icons: [
-      <img loading="lazy" decoding="async"
+      <Image
         key="python"
         src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
         alt="Python"
+        width={24}
+        height={24}
         style={{ width: "24px", height: "24px" }}
       />,
-      <img loading="lazy" decoding="async"
+      <Image
         key="langflow"
         src="https://cdn.simpleicons.org/langflow/FFFFFF"
         alt="Langflow"
+        width={24}
+        height={24}
         style={{ width: "24px", height: "24px" }}
       />,
     ],
@@ -175,10 +186,12 @@ const competencies: CompetencyItem[] = [
     icons: [
       <SiNextdotjs key="next" style={{ color: "#ffffff", fontSize: "1.5rem" }} />,
       <SiTypescript key="ts" style={{ color: "#3178C6", fontSize: "1.5rem" }} />,
-      <img loading="lazy" decoding="async"
+      <Image
         key="python"
         src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
         alt="Python"
+        width={24}
+        height={24}
         style={{ width: "24px", height: "24px" }}
       />,
       <SiFastapi key="fastapi" style={{ color: "#009688", fontSize: "1.5rem" }} />
@@ -267,9 +280,11 @@ export default function ProjectSection() {
             </button>
 
             <div className="p-1 overflow-hidden flex justify-center items-center">
-              <img loading="lazy" decoding="async"
+              <Image
                 src={activeCertificate.image}
                 alt="Certificate"
+                width={600}
+                height={400}
                 className="max-w-full max-h-[55vh] object-contain rounded-t-xl opacity-95"
                 onError={(e) => {
                   (e.target as HTMLImageElement).style.display = 'none';
