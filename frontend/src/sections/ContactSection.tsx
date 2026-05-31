@@ -94,8 +94,8 @@ export default function ContactSection() {
                         >
                           <div
                             className={`max-w-[85%] rounded-2xl px-4 py-2.5 ${msg.role === "bot"
-                              ? "bg-slate-200/10 text-slate-100 rounded-bl-md border border-slate-400/20"
-                              : "bg-slate-500/80 text-white rounded-br-md border border-slate-400/30"
+                              ? "bg-zinc-900 text-slate-100 rounded-bl-md border border-white/10"
+                              : "bg-zinc-800 text-white rounded-br-md"
                               }`}
                           >
                             {msg.role === "bot"
