@@ -17,7 +17,7 @@ export default function HeroSection() {
           <FadeIn delay={0.1}>
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-sm font-medium text-brand-400 mb-8">
               <span className="w-2 h-2 rounded-full bg-emerald-300 animate-pulse-green" />
-              Available for opportunities
+              Available for any opportunities
             </div>
           </FadeIn>
 
