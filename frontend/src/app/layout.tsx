@@ -3,28 +3,21 @@ import { Geist } from 'next/font/google';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import TargetCursor from '@/components/TargetCursor';
-import LightRaysBackground from '@/components/LightRaysBackground';
 import PageTransition from '@/components/animations/PageTransition';
-
-
-
-import Script from 'next/script';
+import PlasmaClient from '@/components/PlasmaClient';
 import '@/styles/globals.css';
 import { cn } from "@/lib/utils";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans',display:'swap'});
+const geist = Geist({ subsets: ['latin'], variable: '--font-sans', display: 'swap' });
 
 export const metadata: Metadata = {
   title: 'Lutfiandra',
-  description:
-    'Personal portfolio of Lutfi — a passionate frontend developer crafting modern, responsive web experiences.',
+  description: 'Personal portfolio of Lutfi — a passionate frontend developer crafting modern, responsive web experiences.',
   keywords: ['portfolio', 'frontend', 'developer', 'react', 'nextjs', 'typescript'],
   authors: [{ name: 'Lutfi' }],
-
   openGraph: {
     title: 'Lutfiandra',
-    description:
-      'Personal portfolio in Web Builder, AI engineering and Scalable Software solutions.',
+    description: 'Personal portfolio in Web Builder, AI engineering and Scalable Software solutions.',
     type: 'website',
   },
 };
@@ -35,20 +28,19 @@ export const viewport: Viewport = {
   maximumScale: 5,
 };
 
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={cn("dark", "scroll-smooth", "font-sans", geist.variable)} suppressHydrationWarning>
-      <body className="min-h-[100dvh] flex flex-col text-[var(--color-text)] antialiased relative">
-        <LightRaysBackground />
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      </head>
+      <body className="min-h-[100dvh] flex flex-col text-[var(--color-text)] antialiased relative bg-black">
+        <PlasmaClient />
         <TargetCursor
           spinDuration={2}
           hideDefaultCursor
-          parallaxOn
+          parallaxOn={false}
           hoverDuration={0.2}
           targetSelector=".cursor-target, a, button, .hover-target"
         />

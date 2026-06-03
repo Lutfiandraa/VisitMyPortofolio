@@ -71,6 +71,7 @@ export default function ContactSection() {
                   <button
                     type="button"
                     onClick={clearMessages}
+                    suppressHydrationWarning
                     className="p-2 text-slate-400 hover:text-slate-200 transition-colors duration-200 cursor-pointer flex items-center justify-center rounded-lg hover:bg-slate-400/10"
                     title="Clear Chat"
                   >
@@ -123,11 +124,13 @@ export default function ContactSection() {
                         e.key === "Enter" && !e.shiftKey && sendMessage(inputValue)
                       }
                       placeholder="Enter your message"
+                      suppressHydrationWarning
                       className="flex-1 rounded-l-xl bg-transparent px-4 py-3 text-base text-white placeholder:text-slate-400 focus:outline-none outline-none"
                     />
                     <button
                       type="button"
                       onClick={() => sendMessage(inputValue)}
+                      suppressHydrationWarning
                       className="shrink-0 rounded-r-xl px-4 py-2 text-slate-400 hover:text-slate-200 transition-colors disabled:opacity-50"
                       aria-label="Kirim"
                     >
@@ -154,15 +157,15 @@ export default function ContactSection() {
               </div>
           </SlideInLeft>
 
-          <FadeUp delay={0.3} className="md:col-span-5 flex justify-center relative mb-0 order-1 md:order-2">
-              <div className="relative group max-w-[280px] md:max-w-[340px] lg:max-w-[380px] mx-auto">
+          <FadeUp delay={0.3} className="md:col-span-5 flex justify-center items-center relative mb-0 order-1 md:order-2">
+              <div className="relative group w-full mx-auto">
                 <div className="absolute inset-[-40px] bg-gradient-to-r from-slate-400/35 via-slate-100/25 to-slate-500/35 rounded-full blur-3xl opacity-60 group-hover:opacity-90 transition-opacity duration-500 pointer-events-none" />
                 <Image
                   src="/profileportormv.png"
                   alt="Profile"
-                  width={380}
-                  height={500}
-                  className="w-full h-auto object-contain relative z-10 transform transition-all duration-500 group-hover:scale-[1.03]"
+                  width={800}
+                  height={1000}
+                  className="w-full h-auto max-h-[300px] md:max-h-[380px] object-contain object-bottom relative z-10 transform transition-all duration-500 group-hover:scale-[1.03]"
                   priority={false}
                 />
               </div>

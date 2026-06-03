@@ -1,18 +1,13 @@
-import type { Metadata } from 'next';
-import AboutSection from '@/sections/AboutSection';
-import ScrollAnimation from '@/components/ScrollAnimation';
+'use client';
 
-export const metadata: Metadata = {
-  title: 'About — Lutfi Portfolio',
-  description: 'Learn more about Lutfi — skills, background, and philosophy.',
-};
+import dynamic from 'next/dynamic';
+
+const AboutSection = dynamic(() => import('@/sections/AboutSection'), { ssr: false });
 
 export default function AboutPage() {
   return (
     <div className="pt-20">
-      <ScrollAnimation>
-        <AboutSection />
-      </ScrollAnimation>
+      <AboutSection />
     </div>
   );
 }

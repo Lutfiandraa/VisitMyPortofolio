@@ -9,15 +9,16 @@ export const FadeUp = ({ children, delay = 0, className = '' }: {
   className?: string;
 }) => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-80px' });
+  const isInView = useInView(ref, { once: true, margin: '-60px' });
 
   return (
     <motion.div
+      layout={false}
       ref={ref}
       className={className}
-      initial={{ opacity: 0, y: 32 }}
+      initial={{ opacity: 0, y: 20 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, delay, ease: [0.21, 0.47, 0.32, 0.98] }}
+      transition={{ duration: 0.4, delay, ease: [0.21, 0.47, 0.32, 0.98] }}
     >
       {children}
     </motion.div>
@@ -34,11 +35,12 @@ export const FadeIn = ({ children, delay = 0, className = '' }: {
 
   return (
     <motion.div
+      layout={false}
       ref={ref}
       className={className}
       initial={{ opacity: 0 }}
       animate={isInView ? { opacity: 1 } : {}}
-      transition={{ duration: 0.7, delay, ease: 'easeOut' }}
+      transition={{ duration: 0.4, delay, ease: 'easeOut' }}
     >
       {children}
     </motion.div>
@@ -55,11 +57,12 @@ export const SlideInLeft = ({ children, delay = 0, className = '' }: {
 
   return (
     <motion.div
+      layout={false}
       ref={ref}
       className={className}
-      initial={{ opacity: 0, x: -40 }}
+      initial={{ opacity: 0, x: -24 }}
       animate={isInView ? { opacity: 1, x: 0 } : {}}
-      transition={{ duration: 0.6, delay, ease: [0.21, 0.47, 0.32, 0.98] }}
+      transition={{ duration: 0.4, delay, ease: [0.21, 0.47, 0.32, 0.98] }}
     >
       {children}
     </motion.div>
@@ -75,13 +78,14 @@ export const StaggerContainer = ({ children, className = '' }: {
 
   return (
     <motion.div
+      layout={false}
       ref={ref}
       className={className}
       initial="hidden"
       animate={isInView ? 'visible' : 'hidden'}
       variants={{
         hidden: {},
-        visible: { transition: { staggerChildren: 0.1 } },
+        visible: { transition: { staggerChildren: 0.08 } },
       }}
     >
       {children}
@@ -94,10 +98,11 @@ export const StaggerItem = ({ children, className = '' }: {
   className?: string;
 }) => (
   <motion.div
+    layout={false}
     className={className}
     variants={{
-      hidden: { opacity: 0, y: 24 },
-      visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.21, 0.47, 0.32, 0.98] } },
+      hidden: { opacity: 0, y: 16 },
+      visible: { opacity: 1, y: 0, transition: { duration: 0.35, ease: [0.21, 0.47, 0.32, 0.98] } },
     }}
   >
     {children}
@@ -109,11 +114,20 @@ export const ParallaxSection = ({ children, speed = 0.3, className = '' }: {
   speed?: number;
   className?: string;
 }) => {
-  const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 600], ['0px', `${speed * 300}px`]);
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'end start'],
+  });
+  const y = useTransform(scrollYProgress, [0, 1], ['0px', `${speed * 120}px`]);
 
   return (
-    <motion.div style={{ y }} className={className}>
+    <motion.div
+      layout={false}
+      ref={ref}
+      style={{ y, willChange: 'transform' }}
+      className={className}
+    >
       {children}
     </motion.div>
   );

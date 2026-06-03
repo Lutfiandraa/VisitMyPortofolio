@@ -1,18 +1,19 @@
+'use client';
+
 import HeroSection from '@/sections/HeroSection';
-import ScrollAnimation from '@/components/ScrollAnimation';
 import dynamic from 'next/dynamic';
 
-const AboutSection = dynamic(() => import('@/sections/AboutSection'));
-const ProjectSection = dynamic(() => import('@/sections/ProjectSection'));
-const ContactSection = dynamic(() => import('@/sections/ContactSection'));
+const AboutSection = dynamic(() => import('@/sections/AboutSection'), { ssr: false });
+const ProjectSection = dynamic(() => import('@/sections/ProjectSection'), { ssr: false });
+const ContactSection = dynamic(() => import('@/sections/ContactSection'), { ssr: false });
 
 export default function HomePage() {
   return (
     <>
       <HeroSection />
-      <ScrollAnimation><AboutSection /></ScrollAnimation>
-      <ScrollAnimation><ProjectSection /></ScrollAnimation>
-      <ScrollAnimation><ContactSection /></ScrollAnimation>
+      <AboutSection />
+      <ProjectSection />
+      <ContactSection />
     </>
   );
 }

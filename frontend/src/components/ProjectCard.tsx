@@ -105,9 +105,9 @@ export default function ProjectCard({ comp, index, onOpenCertificate }: ProjectC
 
       {/* Ikon + Tautan */}
       <div className="flex items-center justify-between text-xl text-white/90 border-t border-[var(--color-border)] pt-3">
-        <div className="flex space-x-3 items-center">
+        <div className="flex space-x-3 items-center" suppressHydrationWarning>
           {comp.icons.map((icon, i) => (
-            <span key={i} className="flex items-center justify-center">
+            <span key={i} className="flex items-center justify-center" suppressHydrationWarning>
               {icon}
             </span>
           ))}

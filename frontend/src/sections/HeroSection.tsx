@@ -21,15 +21,13 @@ export default function HeroSection() {
             </div>
           </FadeIn>
 
-          <FadeUp delay={0.2}>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 bg-gradient-to-r from-slate-400 via-slate-100 to-slate-500 bg-clip-text text-transparent min-h-[80px] sm:min-h-0">
-              <TypedText strings={["Hi, I'am Lutfiandra Pohan"]} />
-            </h1>
-          </FadeUp>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 bg-gradient-to-r from-slate-400 via-slate-100 to-slate-500 bg-clip-text text-transparent min-h-[80px] sm:min-h-0">
+            <TypedText strings={["Hi, I'am Lutfiandra Pohan"]} />
+          </h1>
 
           <FadeUp delay={0}>
             <p className="section-subtitle mx-auto mb-10">
-              Fullstack Developer & Data Scientist Enthusiast.
+              Fullstack Developer & AI Engineer Enthusiast.
             </p>
           </FadeUp>
 

@@ -5,7 +5,7 @@ import { createPortal } from "react-dom";
 import Image from 'next/image';
 import {
   SiDart, SiFlutter, SiJavascript, SiReact, SiVuedotjs,
-  SiAngular, SiTypescript, SiNextdotjs, SiNodedotjs, SiGatsby, SiAstro, SiFastapi, SiSupabase
+  SiAngular, SiTypescript, SiNextdotjs, SiGatsby, SiAstro, SiFastapi, SiSupabase
 } from "react-icons/si";
 import {
   FaPaperPlane, FaInstagram, FaLinkedin, FaCertificate,
@@ -31,13 +31,13 @@ const competencies: CompetencyItem[] = [
   },
   {
     title: "Garuda Tribune",
-    description: "New's Letter Web based integrated with NewsAPI for PT. Winnicode Garuda. (Maintenance API control)",
+    description: "New's Letter Web based integrated with NewsAPI for PT. Winnicode Garuda Technology.",
     icons: [
       <SiReact key="react" style={{ color: "#61DAFB", fontSize: "1.5rem" }} />,
       <SiJavascript key="js" style={{ color: "#E7F527", fontSize: "1.5rem" }} />,
     ],
     images: ["/HomeBerita.PNG", "/Homeberita2.PNG"],
-    link: "https://portal-berita-px6z.vercel.app/",
+    link: "",
     linkedin: "https://www.linkedin.com/company/winnicodegarudateknologi/posts/?feedView=all",
     certificateImage: "/sertifikatmagang.png",
     certificateDescription: "Fullstack Developer Winnicode Garuda Tech (Internship). · May 2025 - August 2025\n\nArchitectural Design and Implementation of a Web-Based News Portal System with Integrated News API Services."
@@ -93,7 +93,14 @@ const competencies: CompetencyItem[] = [
     title: "Software Testing on Education & Report System HSE",
     description: "Design Implementation and Software Quality Assurance",
     icons: [
-      <SiNodedotjs key="node" style={{ color: "#339933", fontSize: "1.5rem" }} />,
+      <img
+        key="postman"
+        loading="lazy"
+        decoding="async"
+        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg"
+        alt="Postman"
+        style={{ width: "24px", height: "24px" }}
+      />,
       <SiReact key="react" style={{ color: "#61DAFB", fontSize: "1.5rem" }} />,
       <Image
         key="jest"
@@ -105,7 +112,7 @@ const competencies: CompetencyItem[] = [
       />,
     ],
     images: ["/dashboardk3.png", "/workplace-safety-priority.jpg"],
-    link: "https://sistem-kesehatan-dan-kesalamatan-ke.vercel.app/"
+    link: ""
   },
   {
     title: "Cakranegara supported by Hacktiv8",
@@ -157,20 +164,20 @@ const competencies: CompetencyItem[] = [
     title: "Large Language Model (LLM, NLP)",
     description: "AI Agent for Oil Rig Industry Analytics",
     icons: [
-      <Image
+      <img
         key="python"
+        loading="lazy"
+        decoding="async"
         src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
         alt="Python"
-        width={24}
-        height={24}
         style={{ width: "24px", height: "24px" }}
       />,
-      <Image
+      <img
         key="langflow"
+        loading="lazy"
+        decoding="async"
         src="https://cdn.simpleicons.org/langflow/FFFFFF"
         alt="Langflow"
-        width={24}
-        height={24}
         style={{ width: "24px", height: "24px" }}
       />,
     ],
@@ -184,7 +191,14 @@ const competencies: CompetencyItem[] = [
     title: "GeoSiaga",
     description: "Fullstack frontend & backend with models Random Forest & XGBoost for predict floods in Jakarta",
     icons: [
-      <SiNextdotjs key="next" style={{ color: "#ffffff", fontSize: "1.5rem" }} />,
+      <img
+        key="docker"
+        loading="lazy"
+        decoding="async"
+        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg"
+        alt="Docker"
+        style={{ width: "24px", height: "24px" }}
+      />,
       <SiTypescript key="ts" style={{ color: "#3178C6", fontSize: "1.5rem" }} />,
       <Image
         key="python"
