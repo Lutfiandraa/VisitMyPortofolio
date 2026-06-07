@@ -1,7 +1,7 @@
 'use client';
 
 import TypedText from '@/components/TypedText';
-import { FaLinkedin, FaGithub } from 'react-icons/fa';
+import { FaLinkedin, FaGithub, FaInstagram } from 'react-icons/fa';
 import { FadeUp, FadeIn, SlideInLeft, StaggerContainer, StaggerItem, ParallaxSection } from '@/components/animations/MotionWrapper';
 import SocialLink from '@/components/SocialLink';
 
@@ -31,23 +31,7 @@ export default function HeroSection() {
             </p>
           </FadeUp>
 
-          <FadeUp delay={0.5}>
-            <div className="flex flex-row gap-4 justify-center items-center">
-              
-              <SocialLink 
-                href="https://www.linkedin.com/in/lutfiandra-pohan-6b7706289/" 
-                icon={<FaLinkedin className="text-[#0A66C2]" />} 
-                label="LinkedIn" 
-                hoverColorClass="hover:text-[#0A66C2]" 
-              />
-              <SocialLink 
-                href="https://github.com/Lutfiandraa" 
-                icon={<FaGithub />} 
-                label="GitHub" 
-                hoverColorClass="hover:text-brand-400" 
-              />
-            </div>
-          </FadeUp>
+
 
         </div>
       </ParallaxSection>

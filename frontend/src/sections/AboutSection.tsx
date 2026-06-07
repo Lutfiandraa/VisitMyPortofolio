@@ -74,10 +74,10 @@ export default function AboutSection() {
               </SectionHeader>
               <FadeUp delay={0.15}>
                 <p className="text-[var(--color-text-muted)] leading-relaxed">
-                  I&apos;m a Fullstack Developer and Data Enthusiast
+                  I&apos;m a Fullstack Developer and AI Engineer Enthusiast
                   focused on building scalable, high-performance systems.
                   I integrate data into applications to deliver more intelligent and efficient solutions.
-                  I continuously expand my knowledge in Artificial Intelligence and data.
+                  I continuously expand my knowledge in Data and Intelligence.
                 </p>
               </FadeUp>
             </div>

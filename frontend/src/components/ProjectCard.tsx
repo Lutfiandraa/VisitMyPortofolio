@@ -126,6 +126,7 @@ export default function ProjectCard({ comp, index, onOpenCertificate }: ProjectC
               <FaLinkedin className="text-base" />
             </a>
           )}
+
           {comp.instagram && (
             <a
               href={comp.instagram}
@@ -138,18 +139,7 @@ export default function ProjectCard({ comp, index, onOpenCertificate }: ProjectC
               <FaInstagram className="text-base" />
             </a>
           )}
-          {comp.link && comp.link.includes("github.com") && (
-            <a
-              href={comp.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center text-white/70 hover:text-white transition-all duration-300 px-2 py-1.5"
-              title="GitHub"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <FaGithub className="text-base" />
-            </a>
-          )}
+
           {comp.link && comp.link !== "#" && !comp.hideVisitButton && (
             <a
               href={comp.link}

@@ -53,10 +53,26 @@ const competencies: CompetencyItem[] = [
         width={24}
         height={24}
         style={{ width: "24px", height: "24px" }}
+      />,
+      <img
+        key="tensorflow"
+        loading="lazy"
+        decoding="async"
+        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg"
+        alt="Tensorflow"
+        style={{ width: "24px", height: "24px" }}
+      />,
+      <img
+        key="keras"
+        loading="lazy"
+        decoding="async"
+        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/keras/keras-original.svg"
+        alt="Keras"
+        style={{ width: "24px", height: "24px" }}
       />
     ],
     images: ["/suhu.png", "/architecturelstm.png"],
-    link: "https://github.com/Lutfiandraa/LongShort-TermMemory"
+    link: ""
   },
   {
     title: "Gerobar",
@@ -87,7 +103,8 @@ const competencies: CompetencyItem[] = [
       <SiReact key="react" style={{ color: "#61DAFB", fontSize: "1.5rem" }} />,
     ],
     images: ["/Royalmerchant.png", "/OOCLshipping.jpg"],
-    link: "https://royalmerchant.vercel.app/"
+    link: "https://royalmerchant.vercel.app/",
+    hideVisitButton: true
   },
   {
     title: "Software Testing on Education & Report System HSE",
@@ -129,7 +146,7 @@ const competencies: CompetencyItem[] = [
   },
   {
     title: "YOLOv8",
-    description: "Computer Vision for Car Adaptive Collision Warning System",
+    description: "Computer Vision for Car Adaptive Collision Warning System with OpenCV and You Only Look Once (YOLO) ",
     icons: [
       <Image
         key="python"
@@ -153,6 +170,14 @@ const competencies: CompetencyItem[] = [
         key="python"
         src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
         alt="Python"
+        style={{ width: "24px", height: "24px" }}
+      />,
+      <img
+        key="keras"
+        loading="lazy"
+        decoding="async"
+        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/keras/keras-original.svg"
+        alt="Keras"
         style={{ width: "24px", height: "24px" }}
       />,
     ],
@@ -276,7 +301,7 @@ export default function ProjectSection() {
 
       {isMounted && activeCertificate && createPortal(
         <div
-          className="fixed inset-0 z-[100] w-screen h-screen flex items-center justify-center bg-black/80 backdrop-blur-sm transition-opacity duration-300 select-none"
+          className="fixed inset-0 z-[100] w-screen h-screen flex items-center justify-center bg-black/80 backdrop-blur-sm transition-opacity duration-300 select-none cursor-auto"
           onClick={() => setActiveCertificate(null)}
         >
           <div

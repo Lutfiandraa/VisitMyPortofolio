@@ -10,26 +10,24 @@ import SectionHeader from '@/components/SectionHeader';
 import SocialLink from '@/components/SocialLink';
 import { useChatbot } from "@/lib/useChatbot";
 
-import { deobfuscateString } from "@/lib/security";
-
-const EMAIL = typeof window !== "undefined" ? deobfuscateString("bHV0ZmlhbmRyYXBvaGFubkBnbWFpbC5jb20=") : "lutfiandrapohann@gmail.com";
+const INSTAGRAM = "@lutfiandrra";
 
 function renderBotMessage(text: string) {
-  if (!text.includes(EMAIL)) {
+  if (!text.includes(INSTAGRAM)) {
     return <p className="font-cousine text-white text-sm leading-relaxed whitespace-pre-wrap break-words">{text}</p>;
   }
-  const [before, after] = text.split(EMAIL);
+  const [before, after] = text.split(INSTAGRAM);
   return (
     <p className="font-cousine text-white text-sm leading-relaxed whitespace-pre-wrap break-words">
       {before}
       <span className="inline-flex max-w-full flex-wrap items-center gap-1 align-middle">
-        <span className="break-all">{EMAIL}</span>
+        <span className="break-all">{INSTAGRAM}</span>
         <a
-          href={`https://mail.google.com/mail/?view=cm&to=${EMAIL}`}
+          href="https://www.instagram.com/lutfiandrra/"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex shrink-0 text-blue-400 hover:text-blue-300 transition-colors"
-          aria-label="Open Gmail to send email"
+          aria-label="Open Instagram"
         >
           <IoArrowForward className="w-4 h-4" />
         </a>
@@ -40,7 +38,7 @@ function renderBotMessage(text: string) {
 }
 
 export default function ContactSection() {
-  const { messages, inputValue, setInputValue, chatEndRef, sendMessage, clearMessages } = useChatbot();
+  const { messages, inputValue, setInputValue, isTyping, chatEndRef, sendMessage, clearMessages } = useChatbot();
 
   return (
     <section id="contact" className="section-padding animate-section-in">
@@ -110,6 +108,15 @@ export default function ContactSection() {
                           </div>
                         </div>
                       ))}
+                      {isTyping && (
+                        <div className="flex justify-start">
+                          <div className="max-w-[85%] rounded-2xl px-4 py-2.5 bg-zinc-900 text-slate-100 rounded-bl-md border border-white/10">
+                            <p className="font-cousine text-sm leading-relaxed whitespace-pre-wrap text-slate-300 italic animate-pulse">
+                              F.R.I.D.A.Y is typing
+                            </p>
+                          </div>
+                        </div>
+                      )}
                       <div ref={chatEndRef} />
                     </div>
                   )}
@@ -141,20 +148,7 @@ export default function ContactSection() {
               </div>
             </FadeUp>
 
-            <div className="absolute -bottom-16 left-0 right-0 flex justify-center md:justify-start gap-4">
-              <SocialLink 
-                href="https://www.linkedin.com/in/lutfiandra-pohan-6b7706289/" 
-                icon={<FaLinkedin className="text-[#0A66C2]" />} 
-                label="LinkedIn" 
-                variant="with-text" 
-              />
-              <SocialLink 
-                href="https://www.instagram.com/lutfiandrra/" 
-                icon={<FaInstagram className="text-[#E1306C]" />} 
-                label="Instagram" 
-                variant="with-text" 
-              />
-              </div>
+
           </SlideInLeft>
 
           <FadeUp delay={0.3} className="md:col-span-5 flex justify-center items-center relative mb-0 order-1 md:order-2">
