@@ -184,7 +184,7 @@ const competencies: CompetencyItem[] = [
     images: ["/AIAgentLLM.PNG"],
     link: "#",
     category: "data-science",
-    certificateImage: "/LLM Certified.PNG",
+    certificateImage: "/IBMCompleted.png",
     certificateDescription: "IBM Skillbuild - AI Agent for Oil Rig Industry Analytics. · 2026\n\nImplementation of a Large Language Model (LLM) and Natural Language Processing (NLP) system to create an AI Agent for advanced analytics in the Oil Rig industry."
   },
   {

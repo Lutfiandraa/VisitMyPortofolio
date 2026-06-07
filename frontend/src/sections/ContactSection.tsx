@@ -16,11 +16,11 @@ const EMAIL = typeof window !== "undefined" ? deobfuscateString("bHV0ZmlhbmRyYXB
 
 function renderBotMessage(text: string) {
   if (!text.includes(EMAIL)) {
-    return <p className="text-sm leading-relaxed whitespace-pre-wrap break-words">{text}</p>;
+    return <p className="font-cousine text-white text-sm leading-relaxed whitespace-pre-wrap break-words">{text}</p>;
   }
   const [before, after] = text.split(EMAIL);
   return (
-    <p className="text-sm leading-relaxed whitespace-pre-wrap break-words">
+    <p className="font-cousine text-white text-sm leading-relaxed whitespace-pre-wrap break-words">
       {before}
       <span className="inline-flex max-w-full flex-wrap items-center gap-1 align-middle">
         <span className="break-all">{EMAIL}</span>
@@ -64,7 +64,7 @@ export default function ContactSection() {
                   <div className="flex items-center gap-3">
                     <IoPersonCircle className="w-10 h-10 text-slate-200 shrink-0" aria-hidden />
                     <div className="min-w-0">
-                      <p className="font-semibold text-white truncate">F.R.I.D.A.Y</p>
+                      <p className="font-cousine font-semibold text-white truncate">F.R.I.D.A.Y</p>
                       <p className="text-xs text-slate-400 mt-0.5">Lutfiandra's Assistant</p>
                     </div>
                   </div>
@@ -103,7 +103,7 @@ export default function ContactSection() {
                             {msg.role === "bot"
                               ? renderBotMessage(msg.text)
                               : (
-                                <p className="text-sm leading-relaxed whitespace-pre-wrap">
+                                <p className="font-cousine text-sm leading-relaxed whitespace-pre-wrap text-white">
                                   {msg.text}
                                 </p>
                               )}

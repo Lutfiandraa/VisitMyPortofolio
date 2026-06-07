@@ -21,7 +21,7 @@ export default function HeroSection() {
             </div>
           </FadeIn>
 
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 bg-gradient-to-r from-slate-400 via-slate-100 to-slate-500 bg-clip-text text-transparent min-h-[80px] sm:min-h-0">
+          <h1 className="font-cousine text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 bg-gradient-to-r from-slate-400 via-slate-100 to-slate-500 bg-clip-text text-transparent min-h-[80px] sm:min-h-0">
             <TypedText strings={["Hi, I'am Lutfiandra Pohan"]} />
           </h1>
 

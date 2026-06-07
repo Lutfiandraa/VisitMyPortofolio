@@ -6,6 +6,8 @@
 
 :root {
   --font-inter: 'Inter', system-ui, sans-serif;
+  --font-serif: 'DM Serif Text', serif;
+  --font-cousine: 'Cousine', monospace;
   --color-bg:         #000000;
   --color-surface:    #0b0b0f;
   --color-surface-2:  #121217;
@@ -99,6 +101,11 @@ body {
   html {
     font-family: var(--font-inter), system-ui, sans-serif;
   }
+  h1,
+  .heading-display,
+  .section-title {
+    font-family: 'DM Serif Text', serif;
+  }
   h1 {
     font-size: clamp(1.6rem, 3.5vw, 2.4rem);
     font-weight: 500;
@@ -130,6 +137,10 @@ body {
 }
 
 @layer utilities {
+  .font-cousine {
+    font-family: var(--font-cousine) !important;
+  }
+
   .text-gradient {
     background: linear-gradient(135deg, #f8fafc 0%, #cbd5e1 50%, #64748b 100%);
     -webkit-background-clip: text;

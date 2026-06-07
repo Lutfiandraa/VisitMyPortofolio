@@ -1,10 +1,13 @@
 import type { Metadata, Viewport } from 'next';
 import { Geist } from 'next/font/google';
+import '@fontsource/dm-serif-text';
+import '@fontsource/cousine';
+import '@fontsource/cousine/700.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import TargetCursor from '@/components/TargetCursor';
 import PageTransition from '@/components/animations/PageTransition';
-import PlasmaClient from '@/components/PlasmaClient';
+import BeamsTheme from '@/components/background/BeamsTheme';
 import '@/styles/globals.css';
 import { cn } from "@/lib/utils";
 
@@ -35,18 +38,34 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body className="min-h-[100dvh] flex flex-col text-[var(--color-text)] antialiased relative bg-black">
-        <PlasmaClient />
-        <TargetCursor
-          spinDuration={2}
-          hideDefaultCursor
-          parallaxOn={false}
-          hoverDuration={0.2}
-          targetSelector=".cursor-target, a, button, .hover-target"
-        />
-        <Navbar />
-        <PageTransition>{children}</PageTransition>
-        <Footer />
+      <body className="relative min-h-[100dvh] flex flex-col text-[var(--color-text)] antialiased bg-black">
+        {/* Background layer */}
+        <div style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
+          <BeamsTheme
+            beamWidth={3}
+            beamHeight={30}
+            beamNumber={20}
+            lightColor="#ffffff"
+            speed={2}
+            noiseIntensity={1.75}
+            scale={0.2}
+            rotation={30}
+          />
+        </div>
+
+        {/* Content layer — must sit above beams */}
+        <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', minHeight: '100dvh' }}>
+          <TargetCursor
+            spinDuration={2}
+            hideDefaultCursor
+            parallaxOn={false}
+            hoverDuration={0.2}
+            targetSelector=".cursor-target, a, button, .hover-target"
+          />
+          <Navbar />
+          <PageTransition>{children}</PageTransition>
+          <Footer />
+        </div>
       </body>
     </html>
   );
