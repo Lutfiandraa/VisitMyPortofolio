@@ -186,8 +186,8 @@ const competencies: CompetencyItem[] = [
     category: "data-science",
   },
   {
-    title: "Large Language Model (LLM, NLP)",
-    description: "AI Agent for Oil Rig Industry Analytics",
+    title: "Naive RAG & LLM",
+    description: "AI Agent for Oil Rig Indicator Analytics using Retrieval-Augmented Generation & Langflow",
     icons: [
       <img
         key="python"
@@ -210,7 +210,7 @@ const competencies: CompetencyItem[] = [
     link: "#",
     category: "data-science",
     certificateImage: "/IBMCompleted.png",
-    certificateDescription: "IBM Skillbuild - AI Agent for Oil Rig Industry Analytics. · 2026\n\nImplementation of a Large Language Model (LLM) and Natural Language Processing (NLP) system to create an AI Agent for advanced analytics in the Oil Rig industry."
+    certificateDescription: "IBM Skillbuild - AI Agent for Oil Rig Indicator Analytics using Retrieval-Augmented Generation & Langflow. · 2026\n\nImplementation of a Naive RAG & LLM system to create an AI Agent for advanced analytics in the Oil Rig industry."
   },
   {
     title: "GeoSiaga",
@@ -280,7 +280,7 @@ export default function ProjectSection() {
           <FadeUp delay={0.15}>
             <div className="flex items-center justify-center flex-wrap gap-3">
               <CategoryButton category="web" label="Web Development" activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
-              <CategoryButton category="data-science" label="Data Science" activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
+              <CategoryButton category="data-science" label="Artificial Intelligence" activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
               <CategoryButton category="computer-vision" label="Computer Vision" activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
             </div>
           </FadeUp>
@@ -357,7 +357,11 @@ function CategoryButton({ category, label, activeCategory, setActiveCategory }: 
         : "bg-transparent text-white/70 border-white/20 hover:bg-white/5"
         }`}
     >
-      <span className="w-2 h-2 rounded-full bg-yellow-300 animate-pulse-yellow" />
+      <span className={`w-2 h-2 rounded-full ${
+        category === 'data-science' ? 'bg-green-400 animate-pulse-green' :
+        category === 'computer-vision' ? 'bg-red-400 animate-pulse-red' :
+        'bg-yellow-300 animate-pulse-yellow'
+      }`} />
       {label}
     </button>
   );

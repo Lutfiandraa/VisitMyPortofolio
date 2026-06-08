@@ -71,6 +71,12 @@ export default function TargetCursor({
 
     const tickerFn = () => {
       if (!targetCornerPositionsRef.current || !cursorRef.current || !cornersRef.current) return;
+      
+      if (activeTarget && !document.body.contains(activeTarget)) {
+        if (currentLeaveHandler) currentLeaveHandler();
+        return;
+      }
+
       const strength = activeStrengthRef.current.current;
       if (strength === 0) return;
 

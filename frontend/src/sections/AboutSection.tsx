@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import {
-  FaHtml5, FaCss3Alt, FaReact, FaNodeJs,
+  FaHtml5, FaCss3Alt, FaReact, FaNodeJs, FaChevronUp
 } from 'react-icons/fa';
 import {
   SiJavascript, SiTypescript, SiNextdotjs,
@@ -11,6 +11,7 @@ import {
 import { motion } from 'framer-motion';
 import { FadeUp, FadeIn, SlideInLeft, StaggerContainer, StaggerItem, ParallaxSection } from '@/components/animations/MotionWrapper';
 import SectionHeader from '@/components/SectionHeader';
+import BorderGlow from '@/components/BorderGlow';
 
 import { SkillItem } from '@/types';
 
@@ -28,7 +29,7 @@ const langAndFramework: SkillItem[] = [
   { name: 'Java Script', icon: <SiJavascript />, color: '#F7DF1E' },
   { name: 'React Js', icon: <FaReact />, color: '#61DAFB' },
   { name: 'Type Script', icon: <SiTypescript />, color: '#3178C6' },
-  { name: 'Vue Js', icon: I('https://cdn.simpleicons.org/vuedotjs/4FC08D', 'Vue Js'), color: '#4FC08D' },
+  { name: 'Python', icon: I('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg', 'Python'), color: '#3776AB' },
   { name: 'Node Js', icon: <FaNodeJs />, color: '#339933' },
   { name: 'Express Js', icon: I('https://cdn.simpleicons.org/express/FFFFFF', 'Express Js'), color: '#FFFFFF' },
   { name: 'Next Js', icon: <SiNextdotjs />, color: '#FFFFFF' },
@@ -36,7 +37,7 @@ const langAndFramework: SkillItem[] = [
   { name: 'Angular Js', icon: I('https://cdn.simpleicons.org/angular/DD0031', 'Angular Js'), color: '#DD0031' },
   { name: 'Flutter', icon: I('https://cdn.simpleicons.org/flutter/02569B', 'Flutter'), color: '#02569B' },
   { name: 'Dart', icon: I('https://cdn.simpleicons.org/dart/0175C2', 'Dart'), color: '#0175C2' },
-  { name: 'Python', icon: I('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg', 'Python'), color: '#3776AB' },
+  { name: 'Vue Js', icon: I('https://cdn.simpleicons.org/vuedotjs/4FC08D', 'Vue Js'), color: '#4FC08D' },
   { name: 'Tensorflow', icon: I('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg', 'Tensorflow'), color: '#FF6F00' },
   { name: 'Keras', icon: I('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/keras/keras-original.svg', 'Keras'), color: '#D00000' },
   { name: 'Scikit-learn', icon: I('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/scikitlearn/scikitlearn-original.svg', 'Scikit-learn'), color: '#F7931E' },
@@ -59,6 +60,13 @@ const toolsList: SkillItem[] = [
 
 export default function AboutSection() {
   const [activeTab, setActiveTab] = useState<Tab>('lang');
+  const [showAll, setShowAll] = useState(false);
+
+  const handleTabChange = (t: Tab) => {
+    setActiveTab(t);
+    setShowAll(false);
+  };
+
   const items = activeTab === 'lang' ? langAndFramework : toolsList;
 
   return (
@@ -92,14 +100,14 @@ export default function AboutSection() {
 
             <FadeUp delay={0.2}>
               <div className="relative flex sm:inline-flex rounded-full p-1.5 gap-1 bg-white/5 border border-white/10 w-full sm:w-auto overflow-hidden">
-              <TabButton tab="lang" label="Language & Framework" activeTab={activeTab} setActiveTab={setActiveTab} />
-              <TabButton tab="tools" label="Tools" activeTab={activeTab} setActiveTab={setActiveTab} />
+              <TabButton tab="lang" label="Language & Framework" activeTab={activeTab} setActiveTab={handleTabChange} />
+              <TabButton tab="tools" label="Tools" activeTab={activeTab} setActiveTab={handleTabChange} />
               </div>
             </FadeUp>
 
             <StaggerContainer>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                {items.map((item) => (
+                {(showAll ? items : items.slice(0, 6)).map((item) => (
                   <StaggerItem key={`${activeTab}-${item.name}`}>
                     <div className="card p-4 flex flex-col items-center gap-2 hover:border-brand-500/50 transition-all duration-300 animate-card-in transform">
                       <div
@@ -114,6 +122,62 @@ export default function AboutSection() {
                 ))}
               </div>
             </StaggerContainer>
+
+            {!showAll && items.length > 6 && (
+              <FadeUp delay={0.3}>
+                <div className="flex justify-center mt-6">
+                  <button
+                    onClick={() => setShowAll(true)}
+                    className="rounded-full cursor-pointer focus:outline-none group"
+                  >
+                    <BorderGlow
+                      edgeSensitivity={30}
+                      glowColor="40 80 80"
+                      backgroundColor="transparent"
+                      borderRadius={9999}
+                      glowRadius={40}
+                      glowIntensity={1}
+                      coneSpread={25}
+                      animated={false}
+                      colors={['#c084fc', '#f472b6', '#38bdf8']}
+                      className="transition-all duration-300 group-hover:bg-white/5"
+                    >
+                      <div className="px-6 py-2 rounded-full text-sm font-medium text-slate-300 group-hover:text-white transition-all duration-300 bg-transparent flex items-center justify-center">
+                        See more
+                      </div>
+                    </BorderGlow>
+                  </button>
+                </div>
+              </FadeUp>
+            )}
+
+            {showAll && items.length > 6 && (
+              <FadeUp delay={0.3}>
+                <div className="flex justify-center mt-6">
+                  <button
+                    onClick={() => setShowAll(false)}
+                    className="rounded-full cursor-pointer focus:outline-none group"
+                    aria-label="Hide"
+                  >
+                    <BorderGlow
+                      edgeSensitivity={30}
+                      glowColor="40 80 80"
+                      backgroundColor="transparent"
+                      borderRadius={9999}
+                      glowRadius={40}
+                      glowIntensity={1}
+                      coneSpread={25}
+                      animated={false}
+                      colors={['#c084fc', '#f472b6', '#38bdf8']}
+                    >
+                      <div className="p-2 text-slate-400 group-hover:text-white transition-colors duration-300 bg-transparent flex items-center justify-center">
+                        <FaChevronUp className="w-5 h-5" />
+                      </div>
+                    </BorderGlow>
+                  </button>
+                </div>
+              </FadeUp>
+            )}
           </div>
 
         </div>

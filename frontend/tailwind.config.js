@@ -36,8 +36,9 @@ module.exports = {
         'page-in':      'pageIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards',
         'section-in':   'sectionIn 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards',
         'card-in':      'cardIn 0.4s ease-out forwards',
-        'pulse-green':  'pulseGreen 1.2s ease-in-out infinite',
+        'pulse-green':  'pulseGreen 3s ease-in-out infinite',
         'pulse-yellow': 'pulseYellow 2s ease-in-out infinite',
+        'pulse-red':    'pulseRed 2s ease-in-out infinite',
       },
       keyframes: {
         fadeIn: {
@@ -71,6 +72,10 @@ module.exports = {
         pulseYellow: {
           '0%, 100%': { opacity: '0.85', boxShadow: '0 0 4px 2px #fde04799, 0 0 8px 3px #eab30844' },
           '50%':      { opacity: '0.35', boxShadow: '0 0 1px 1px #fde04733' },
+        },
+        pulseRed: {
+          '0%, 100%': { opacity: '0.85', boxShadow: '0 0 4px 2px #f8717199, 0 0 8px 3px #ef444444' },
+          '50%':      { opacity: '0.35', boxShadow: '0 0 1px 1px #f8717133' },
         },
       },
     },
