@@ -95,18 +95,6 @@ const competencies: CompetencyItem[] = [
     link: "https://keyin-pariwisata.vercel.app/"
   },
   {
-    title: "Royal Merchant",
-    description: "Website to aim a trusted global partner by delivering reliable supply, exceptional service, and charcoal products",
-    icons: [
-      <SiNextdotjs key="next" style={{ color: "#ffffff", fontSize: "1.5rem" }} />,
-      <SiTypescript key="ts" style={{ color: "#3178C6", fontSize: "1.5rem" }} />,
-      <SiReact key="react" style={{ color: "#61DAFB", fontSize: "1.5rem" }} />,
-    ],
-    images: ["/Royalmerchant.png", "/OOCLshipping.jpg"],
-    link: "https://royalmerchant.vercel.app/",
-    hideVisitButton: true
-  },
-  {
     title: "Software Testing on Education & Report System HSE",
     description: "Design Implementation and Software Quality Assurance",
     icons: [
@@ -280,7 +268,7 @@ export default function ProjectSection() {
           <FadeUp delay={0.15}>
             <div className="flex items-center justify-center flex-wrap gap-3">
               <CategoryButton category="web" label="Web Development" activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
-              <CategoryButton category="data-science" label="Artificial Intelligence" activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
+              <CategoryButton category="data-science" label="Neural Network (AI)" activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
               <CategoryButton category="computer-vision" label="Computer Vision" activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
             </div>
           </FadeUp>
