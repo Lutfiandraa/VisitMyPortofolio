@@ -60,13 +60,13 @@ export default function ProjectCard({ comp, index, onOpenCertificate }: ProjectC
           <>
             <button
               onClick={prevImage}
-              className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+              className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white p-2 rounded-full transition-opacity"
             >
               <FaChevronLeft size={14} />
             </button>
             <button
               onClick={nextImage}
-              className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+              className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white p-2 rounded-full transition-opacity"
             >
               <FaChevronRight size={14} />
             </button>

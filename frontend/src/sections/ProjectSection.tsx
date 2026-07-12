@@ -202,7 +202,7 @@ const competencies: CompetencyItem[] = [
   },
   {
     title: "GeoSiaga",
-    description: "Fullstack frontend & backend with models Random Forest & XGBoost for predict floods in Jakarta",
+    description: "Fullstack Dashboard web-based with models Random Forest & XGBoost for predict floods in Jakarta",
     icons: [
       <img
         key="docker"
@@ -238,24 +238,17 @@ export default function ProjectSection() {
     setIsMounted(true);
   }, []);
 
-  const isDataScienceProject = (project: CompetencyItem) =>
+  const isDataScienceOrVisionProject = (project: CompetencyItem) =>
     project.category === "data-science" ||
-    /deep learning|lstm|informer|prediction|python|data scientist|llm|nlp/i.test(
-      `${project.title} ${project.description}`
-    );
-
-  const isComputerVisionProject = (project: CompetencyItem) =>
     project.category === "computer-vision" ||
-    /computer vision|yolo|collision/i.test(
+    /deep learning|lstm|informer|prediction|python|data scientist|llm|nlp|computer vision|yolo|collision/i.test(
       `${project.title} ${project.description}`
     );
 
   const filteredCompetencies = competencies.filter((project) =>
     activeCategory === "data-science"
-      ? isDataScienceProject(project) && !isComputerVisionProject(project)
-      : activeCategory === "computer-vision"
-        ? isComputerVisionProject(project)
-        : !isDataScienceProject(project) && !isComputerVisionProject(project)
+      ? isDataScienceOrVisionProject(project)
+      : !isDataScienceOrVisionProject(project)
   );
 
   return (
@@ -268,8 +261,7 @@ export default function ProjectSection() {
           <FadeUp delay={0.15}>
             <div className="flex items-center justify-center flex-wrap gap-3">
               <CategoryButton category="web" label="Web Development" activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
-              <CategoryButton category="data-science" label="Neural Network (AI)" activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
-              <CategoryButton category="computer-vision" label="Computer Vision" activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
+              <CategoryButton category="data-science" label="Data & Computer Vision" activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
             </div>
           </FadeUp>
         </div>
