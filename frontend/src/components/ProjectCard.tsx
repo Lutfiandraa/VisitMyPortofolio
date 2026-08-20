@@ -23,9 +23,9 @@ export default function ProjectCard({ comp, index, onOpenCertificate }: ProjectC
   };
 
   return (
-    <div className="card p-6 group flex flex-col gap-4 animate-card-in transform transition-all duration-300 hover:border-brand-500/50 hover:scale-[1.02]">
+    <div className="card p-6 group flex flex-col gap-4 animate-card-in transform transition-all duration-300 hover:border-brand-500/50 hover:scale-[1.02] rounded-xl h-full">
       {/* Slider Gambar / Placeholder */}
-      <div className="relative mb-2 overflow-hidden rounded-xl bg-black/20 h-40">
+      <div className="relative mb-2 overflow-hidden rounded-xl bg-black/20 h-48">
         {hasImages ? (
           <>
             {comp.images![current].endsWith('.mp4') ? (
@@ -83,6 +83,14 @@ export default function ProjectCard({ comp, index, onOpenCertificate }: ProjectC
               <span className="text-orange-500">Hacktiv8</span>
               {comp.title.split("Hacktiv8")[1]}
             </>
+          ) : comp.title.includes("Winnicode Garuda Teknologi") ? (
+            <>
+              {comp.title.split("Winnicode Garuda Teknologi")[0]}
+              <span className="bg-gradient-to-r from-[#DA70D6] via-slate-200 to-[#FF00FF] bg-clip-text text-transparent drop-shadow-sm">
+                Winnicode Garuda Teknologi
+              </span>
+              {comp.title.split("Winnicode Garuda Teknologi")[1]}
+            </>
           ) : (
             comp.title
           )}
@@ -99,7 +107,7 @@ export default function ProjectCard({ comp, index, onOpenCertificate }: ProjectC
       </div>
 
       {/* Deskripsi */}
-      <p className="text-sm text-[var(--color-text-muted)] leading-relaxed flex-1">
+      <p className="text-sm text-[var(--color-text-muted)] leading-relaxed flex-1 line-clamp-3">
         {comp.description}
       </p>
 

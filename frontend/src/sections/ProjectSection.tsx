@@ -30,8 +30,8 @@ const competencies: CompetencyItem[] = [
     link: ""
   },
   {
-    title: "Garuda Tribune",
-    description: "New's Letter Web based integrated with NewsAPI for PT. Winnicode Garuda Technology.",
+    title: "Internship at Winnicode Garuda Teknologi",
+    description: "Jl. Asia Afrika No.158, Kb. Pisang, Kec. Sumur Bandung, Kota Bandung, Jawa Barat 40261",
     icons: [
       <SiReact key="react" style={{ color: "#61DAFB", fontSize: "1.5rem" }} />,
       <SiJavascript key="js" style={{ color: "#E7F527", fontSize: "1.5rem" }} />,
@@ -230,9 +230,10 @@ const competencies: CompetencyItem[] = [
 ];
 
 export default function ProjectSection() {
-  const [activeCategory, setActiveCategory] = useState("web");
   const [activeCertificate, setActiveCertificate] = useState<{ image: string; description: string } | null>(null);
   const [isMounted, setIsMounted] = useState(false);
+  const webSliderRef = React.useRef<HTMLDivElement>(null);
+  const dsSliderRef = React.useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setIsMounted(true);
@@ -245,38 +246,163 @@ export default function ProjectSection() {
       `${project.title} ${project.description}`
     );
 
-  const filteredCompetencies = competencies.filter((project) =>
-    activeCategory === "data-science"
-      ? isDataScienceOrVisionProject(project)
-      : !isDataScienceOrVisionProject(project)
-  );
+  const webProjects = competencies.filter((p) => !isDataScienceOrVisionProject(p));
+  const dataScienceProjects = competencies.filter((p) => isDataScienceOrVisionProject(p));
+
+  const CARD_WIDTH = 392; // 360px card + 32px gap
+
+  const handleScroll = (ref: React.RefObject<HTMLDivElement>, direction: "left" | "right") => {
+    if (!ref.current) return;
+    const { scrollLeft, scrollWidth, clientWidth } = ref.current;
+    
+    // Use a large tolerance (half a card width) to detect if we are at the ends.
+    // This handles smooth scrolling delays and fast consecutive clicks.
+    const maxScroll = scrollWidth - clientWidth;
+    const isAtEnd = scrollLeft >= maxScroll - (CARD_WIDTH / 2);
+    const isAtStart = scrollLeft <= (CARD_WIDTH / 2);
+
+    if (direction === "right") {
+      if (isAtEnd) {
+        ref.current.scrollTo({ left: 0, behavior: "smooth" });
+      } else {
+        ref.current.scrollBy({ left: CARD_WIDTH, behavior: "smooth" });
+      }
+    } else {
+      if (isAtStart) {
+        ref.current.scrollTo({ left: maxScroll, behavior: "smooth" });
+      } else {
+        ref.current.scrollBy({ left: -CARD_WIDTH, behavior: "smooth" });
+      }
+    }
+  };
+
+  const scrollWebLeft  = () => handleScroll(webSliderRef, "left");
+  const scrollWebRight = () => handleScroll(webSliderRef, "right");
+  const scrollDsLeft   = () => handleScroll(dsSliderRef, "left");
+  const scrollDsRight  = () => handleScroll(dsSliderRef, "right");
 
   return (
     <section id="projects" className="section-padding animate-section-in bg-transparent">
       <div className="container-max">
+
         <div className="text-center max-w-2xl mx-auto mb-12">
           <SectionHeader className="mb-4">
-              <span className="text-gradient">Project</span>
+            <span className="text-gradient">Project</span>
           </SectionHeader>
-          <FadeUp delay={0.15}>
-            <div className="flex items-center justify-center flex-wrap gap-3">
-              <CategoryButton category="web" label="Web Development" activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
-              <CategoryButton category="data-science" label="Data & Computer Vision" activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
-            </div>
-          </FadeUp>
         </div>
 
-        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredCompetencies.map((comp, index) => (
-            <StaggerItem key={`${activeCategory}-${comp.title}`}>
-              <ProjectCard
-                comp={comp}
-                index={index}
-                onOpenCertificate={(image, description) => setActiveCertificate({ image, description })}
-              />
-            </StaggerItem>
-          ))}
-        </StaggerContainer>
+        <div className="mb-16">
+          <FadeUp delay={0.1}>
+            <div className="mb-6">
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border text-sm md:text-base bg-white/20 text-white border-white/40 shadow-[0_0_18px_rgba(255,255,255,0.22)]">
+                <span className="w-2 h-2 rounded-full bg-yellow-300 animate-pulse-yellow" />
+                Web Development
+              </span>
+            </div>
+          </FadeUp>
+
+          <div className="relative">
+            <button
+              type="button"
+              onClick={scrollWebLeft}
+              aria-label="Web projects scroll left"
+              className="flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-5 z-10 bg-black/40 hover:bg-black/60 text-white p-2 rounded-full transition-opacity items-center justify-center"
+            >
+              <FaChevronLeft size={14} />
+            </button>
+            <button
+              type="button"
+              onClick={scrollWebRight}
+              aria-label="Web projects scroll right"
+              className="flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-5 z-10 bg-black/40 hover:bg-black/60 text-white p-2 rounded-full transition-opacity items-center justify-center"
+            >
+              <FaChevronRight size={14} />
+            </button>
+
+            <div
+              ref={webSliderRef}
+              className="overflow-x-auto pb-4"
+              style={{
+                scrollSnapType: "x mandatory",
+                WebkitOverflowScrolling: "touch",
+                scrollbarWidth: "none",
+                msOverflowStyle: "none",
+              }}
+            >
+              <StaggerContainer className="flex flex-row gap-8" style={{ width: "max-content" }}>
+                {webProjects.map((comp, index) => (
+                  <StaggerItem
+                    key={comp.title}
+                    className="w-[360px] snap-start shrink-0"
+                  >
+                    <ProjectCard
+                      comp={comp}
+                      index={index}
+                      onOpenCertificate={(image, description) => setActiveCertificate({ image, description })}
+                    />
+                  </StaggerItem>
+                ))}
+              </StaggerContainer>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <FadeUp delay={0.1}>
+            <div className="mb-6">
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border text-sm md:text-base bg-white/20 text-white border-white/40 shadow-[0_0_18px_rgba(255,255,255,0.22)]">
+                <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse-green" />
+                Data Transformation
+              </span>
+            </div>
+          </FadeUp>
+
+          <div className="relative">
+            <button
+              type="button"
+              onClick={scrollDsLeft}
+              aria-label="Data science projects scroll left"
+              className="flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-5 z-10 bg-black/40 hover:bg-black/60 text-white p-2 rounded-full transition-opacity items-center justify-center"
+            >
+              <FaChevronLeft size={14} />
+            </button>
+            <button
+              type="button"
+              onClick={scrollDsRight}
+              aria-label="Data science projects scroll right"
+              className="flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-5 z-10 bg-black/40 hover:bg-black/60 text-white p-2 rounded-full transition-opacity items-center justify-center"
+            >
+              <FaChevronRight size={14} />
+            </button>
+
+            <div
+              ref={dsSliderRef}
+              className="overflow-x-auto pb-4"
+              style={{
+                scrollSnapType: "x mandatory",
+                WebkitOverflowScrolling: "touch",
+                scrollbarWidth: "none",
+                msOverflowStyle: "none",
+              }}
+            >
+              <StaggerContainer className="flex flex-row gap-8" style={{ width: "max-content" }}>
+                {dataScienceProjects.map((comp, index) => (
+                  <StaggerItem
+                    key={comp.title}
+                    className="w-[360px] snap-start shrink-0"
+                  >
+                    <ProjectCard
+                      comp={comp}
+                      index={index}
+                      onOpenCertificate={(image, description) => setActiveCertificate({ image, description })}
+                    />
+                  </StaggerItem>
+                ))}
+              </StaggerContainer>
+            </div>
+          </div>
+        </div>
+
       </div>
 
       {isMounted && activeCertificate && createPortal(
@@ -346,5 +472,3 @@ function CategoryButton({ category, label, activeCategory, setActiveCategory }: 
     </button>
   );
 }
-
-
