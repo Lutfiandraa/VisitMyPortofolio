@@ -101,7 +101,7 @@ export default function Navbar() {
           menuOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0',
         )}
       >
-        <ul className="glass border-t border-white/10 px-6 py-3 flex flex-col gap-1">
+        <ul className="glass border-t border-white/10 px-6 py-4 flex flex-col gap-2 rounded-b-2xl shadow-2xl">
           {navLinks.map((link) => (
             <li key={link.href}>
               <Link

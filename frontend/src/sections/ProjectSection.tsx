@@ -229,8 +229,57 @@ const competencies: CompetencyItem[] = [
   },
 ];
 
+function ThesisDescription() {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  return (
+    <span>
+      This research demonstrates that the architectural differences between LSTM and Informer influence how both models learn the volatile price movement patterns of NIKL.JK stock.
+      {!isExpanded ? (
+        <>
+          <span className="text-[var(--color-text-muted)]">... </span>
+          <button 
+            onClick={(e) => { e.stopPropagation(); setIsExpanded(true); }} 
+            className="text-brand-400 font-semibold hover:underline cursor-pointer"
+          >
+            See more
+          </button>
+        </>
+      ) : (
+        <>
+          {" "}The memory gate mechanism in LSTM consistently yields predictions close to actual values across all evaluation metrics, whereas Informer remains capable of capturing long-term trend directions albeit with varying levels of precision. Furthermore, Taguchi optimization confirms that the effectiveness of hyperparameter tuning depends on the distinct architectural characteristics of each model.
+          <button 
+            onClick={(e) => { e.stopPropagation(); setIsExpanded(false); }} 
+            className="ml-1 text-brand-400 font-semibold hover:underline cursor-pointer inline-block"
+          >
+            See less
+          </button>
+        </>
+      )}
+    </span>
+  );
+}
+
+const thesisProject: CompetencyItem = {
+  title: "Comparison Performance of Long Short-Term Memory & Informer (Transformer-based) for Stock Prediction",
+  description: <ThesisDescription />,
+  icons: [
+    <Image
+      key="python"
+      src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+      alt="Python"
+      width={24}
+      height={24}
+      style={{ width: "24px", height: "24px" }}
+    />,
+  ],
+  images: ["/StockPredDashboard.PNG"],
+  posterImage: "/PosterTALutfiandra.png",
+  link: "",
+};
+
 export default function ProjectSection() {
-  const [activeCertificate, setActiveCertificate] = useState<{ image: string; description: string } | null>(null);
+  const [activeCertificate, setActiveCertificate] = useState<{ image: string; description: string; title?: string } | null>(null);
   const [isMounted, setIsMounted] = useState(false);
   const webSliderRef = React.useRef<HTMLDivElement>(null);
   const dsSliderRef = React.useRef<HTMLDivElement>(null);
@@ -251,7 +300,7 @@ export default function ProjectSection() {
 
   const CARD_WIDTH = 392; // 360px card + 32px gap
 
-  const handleScroll = (ref: React.RefObject<HTMLDivElement>, direction: "left" | "right") => {
+  const handleScroll = (ref: React.RefObject<HTMLDivElement | null>, direction: "left" | "right") => {
     if (!ref.current) return;
     const { scrollLeft, scrollWidth, clientWidth } = ref.current;
     
@@ -329,7 +378,7 @@ export default function ProjectSection() {
                 msOverflowStyle: "none",
               }}
             >
-              <StaggerContainer className="flex flex-row gap-8" style={{ width: "max-content" }}>
+              <StaggerContainer className="flex flex-row gap-8 w-max">
                 {webProjects.map((comp, index) => (
                   <StaggerItem
                     key={comp.title}
@@ -338,7 +387,7 @@ export default function ProjectSection() {
                     <ProjectCard
                       comp={comp}
                       index={index}
-                      onOpenCertificate={(image, description) => setActiveCertificate({ image, description })}
+                      onOpenCertificate={(image, description, title) => setActiveCertificate({ image, description, title })}
                     />
                   </StaggerItem>
                 ))}
@@ -385,7 +434,7 @@ export default function ProjectSection() {
                 msOverflowStyle: "none",
               }}
             >
-              <StaggerContainer className="flex flex-row gap-8" style={{ width: "max-content" }}>
+              <StaggerContainer className="flex flex-row gap-8 w-max">
                 {dataScienceProjects.map((comp, index) => (
                   <StaggerItem
                     key={comp.title}
@@ -394,12 +443,36 @@ export default function ProjectSection() {
                     <ProjectCard
                       comp={comp}
                       index={index}
-                      onOpenCertificate={(image, description) => setActiveCertificate({ image, description })}
+                      onOpenCertificate={(image, description, title) => setActiveCertificate({ image, description, title })}
                     />
                   </StaggerItem>
                 ))}
               </StaggerContainer>
             </div>
+          </div>
+        </div>
+
+        <div className="mt-16">
+          <FadeUp delay={0.1}>
+            <div className="mb-6">
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border text-sm md:text-base bg-white/20 text-white border-white/40 shadow-[0_0_18px_rgba(255,255,255,0.22)]">
+                <span className="w-2 h-2 rounded-full bg-red-400 animate-pulse-red" />
+                Final-Year Project (Bachelor Thesis)
+              </span>
+            </div>
+          </FadeUp>
+
+          <div className="relative">
+            <FadeUp delay={0.2}>
+              <div className="w-[400px]">
+                <ProjectCard
+                  comp={thesisProject}
+                  index={0}
+                  containImage={true}
+                  onOpenCertificate={(image, description, title) => setActiveCertificate({ image, description, title })}
+                />
+              </div>
+            </FadeUp>
           </div>
         </div>
 
@@ -410,42 +483,63 @@ export default function ProjectSection() {
           className="fixed inset-0 z-[100] w-screen h-screen flex items-center justify-center bg-black/80 backdrop-blur-sm transition-opacity duration-300 select-none cursor-auto"
           onClick={() => setActiveCertificate(null)}
         >
-          <div
-            className="relative max-w-lg w-full bg-black/90 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden shadow-2xl animate-page-in transform flex flex-col justify-center m-4 max-h-[90vh]"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                setActiveCertificate(null);
-              }}
-              className="absolute top-4 right-4 p-2 bg-black/60 hover:bg-black/80 text-white rounded-full transition-colors z-[110] hover:scale-105 flex items-center justify-center cursor-pointer"
-            >
-              <FaTimes size={16} />
-            </button>
-
-            <div className="p-1 overflow-hidden flex justify-center items-center">
+          {activeCertificate.title === "Poster Details" ? (
+            <div className="relative w-full h-full flex items-center justify-center p-4 md:p-12 animate-page-in" onClick={(e) => e.stopPropagation()}>
+              <button
+                onClick={() => setActiveCertificate(null)}
+                className="absolute top-4 right-4 md:top-8 md:right-8 p-3 bg-black/60 hover:bg-black/90 border border-white/20 text-white rounded-full transition-colors z-[110] hover:scale-105 flex items-center justify-center cursor-pointer shadow-xl"
+              >
+                <FaTimes size={20} />
+              </button>
               <Image
                 src={activeCertificate.image}
-                alt="Certificate"
-                width={600}
-                height={400}
-                className="max-w-full max-h-[55vh] object-contain rounded-t-xl opacity-95"
+                alt="Poster"
+                width={1200}
+                height={1600}
+                className="max-w-full max-h-full object-contain rounded-xl shadow-2xl"
                 onError={(e) => {
                   (e.target as HTMLImageElement).style.display = 'none';
                 }}
               />
             </div>
+          ) : (
+            <div
+              className="relative max-w-2xl w-full bg-black/90 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden shadow-2xl animate-page-in transform flex flex-col justify-center m-4 max-h-[95vh]"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setActiveCertificate(null);
+                }}
+                className="absolute top-4 right-4 p-2 bg-black/60 hover:bg-black/80 text-white rounded-full transition-colors z-[110] hover:scale-105 flex items-center justify-center cursor-pointer"
+              >
+                <FaTimes size={16} />
+              </button>
 
-            <div className="p-5 bg-gradient-to-b from-transparent to-slate-900/50 overflow-y-auto">
-              <h4 className="text-lg font-bold bg-gradient-to-r from-slate-300 via-white to-slate-400 bg-clip-text text-transparent mb-2">
-                Certificate Details
-              </h4>
-              <p className="text-slate-300 text-[13px] whitespace-pre-wrap leading-relaxed">
-                {activeCertificate.description}
-              </p>
+              <div className="p-1 overflow-hidden flex justify-center items-center bg-black/50">
+                <Image
+                  src={activeCertificate.image}
+                  alt={activeCertificate.title || "Certificate"}
+                  width={800}
+                  height={1000}
+                  className="max-w-full max-h-[75vh] object-contain rounded-t-xl opacity-100"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).style.display = 'none';
+                  }}
+                />
+              </div>
+
+              <div className="p-5 bg-gradient-to-b from-transparent to-slate-900/50 overflow-y-auto">
+                <h4 className="text-lg font-bold bg-gradient-to-r from-slate-300 via-white to-slate-400 bg-clip-text text-transparent mb-2">
+                  {activeCertificate.title || "Certificate Details"}
+                </h4>
+                <p className="text-slate-300 text-[13px] whitespace-pre-wrap leading-relaxed">
+                  {activeCertificate.description}
+                </p>
+              </div>
             </div>
-          </div>
+          )}
         </div>,
         document.body
       )}

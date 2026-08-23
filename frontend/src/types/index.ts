@@ -9,7 +9,7 @@ export interface NavLink {
 // ── Projects ───────────────────────────────────────────────────────────────
 export interface CompetencyItem {
   title: string;
-  description: string;
+  description: string | React.ReactNode;
   icons: React.ReactNode[];
   images?: string[];
   link: string;
@@ -17,6 +17,7 @@ export interface CompetencyItem {
   instagram?: string;
   certificateImage?: string;
   certificateDescription?: string;
+  posterImage?: string;
   category?: string;
   hideVisitButton?: boolean;
 }

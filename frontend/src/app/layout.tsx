@@ -5,7 +5,6 @@ import '@fontsource/cousine';
 import '@fontsource/cousine/700.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import TargetCursor from '@/components/TargetCursor';
 import PageTransition from '@/components/animations/PageTransition';
 import BeamsTheme from '@/components/background/BeamsTheme';
 import FloatingSocials from '@/components/FloatingSocials';
@@ -53,15 +52,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             rotation={30}
           />
         </div>
-
-        {/* Global custom cursor outside zIndex constraint */}
-        <TargetCursor
-          spinDuration={2}
-          hideDefaultCursor
-          parallaxOn={false}
-          hoverDuration={0.2}
-          targetSelector=".cursor-target, a, button, .hover-target"
-        />
 
         {/* Content layer — must sit above beams */}
         <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', minHeight: '100dvh' }}>

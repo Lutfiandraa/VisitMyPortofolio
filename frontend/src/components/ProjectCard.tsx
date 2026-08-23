@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import { FaChevronLeft, FaChevronRight, FaCertificate, FaLinkedin, FaInstagram, FaGithub, FaPaperPlane } from "react-icons/fa";
+import { FaChevronLeft, FaChevronRight, FaCertificate, FaLinkedin, FaInstagram, FaGithub, FaPaperPlane, FaImage } from "react-icons/fa";
 import { CompetencyItem } from "@/types";
 
 interface ProjectCardProps {
   comp: CompetencyItem;
   index: number;
-  onOpenCertificate: (image: string, desc: string) => void;
+  onOpenCertificate: (image: string, desc: string, title?: string) => void;
+  containImage?: boolean;
 }
 
-export default function ProjectCard({ comp, index, onOpenCertificate }: ProjectCardProps) {
+export default function ProjectCard({ comp, index, onOpenCertificate, containImage }: ProjectCardProps) {
   const [current, setCurrent] = useState(0);
   const images = comp.images;
   const hasImages = images && images.length > 0;
@@ -31,7 +32,7 @@ export default function ProjectCard({ comp, index, onOpenCertificate }: ProjectC
             {comp.images![current].endsWith('.mp4') ? (
               <video
                 src={comp.images![current]}
-                className="h-full w-full object-cover opacity-80"
+                className={`h-full w-full opacity-80 ${containImage ? 'object-contain' : 'object-cover'}`}
                 autoPlay
                 loop
                 muted
@@ -41,7 +42,7 @@ export default function ProjectCard({ comp, index, onOpenCertificate }: ProjectC
               <img loading="lazy" decoding="async"
                 src={comp.images![current]}
                 alt={comp.title}
-                className="h-full w-full object-cover opacity-80"
+                className={`h-full w-full opacity-80 ${containImage ? 'object-contain' : 'object-cover'}`}
                 onError={(e) => {
                   (e.target as HTMLImageElement).style.display = 'none';
                 }}
@@ -95,21 +96,35 @@ export default function ProjectCard({ comp, index, onOpenCertificate }: ProjectC
             comp.title
           )}
         </h3>
-        {comp.certificateImage && (
-          <button
-            onClick={() => onOpenCertificate(comp.certificateImage!, comp.certificateDescription!)}
-            className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium text-slate-300 hover:text-slate-200 bg-white/5 hover:bg-white/10 border border-slate-500/50 rounded-lg transition-colors"
-          >
-            <FaCertificate className="text-xs" />
-            Certified
-          </button>
-        )}
+        <div className="flex gap-2 shrink-0">
+          {comp.certificateImage && (
+            <button
+              onClick={() => onOpenCertificate(comp.certificateImage!, comp.certificateDescription!, "Certificate Details")}
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium text-slate-300 hover:text-slate-200 bg-white/5 hover:bg-white/10 border border-slate-500/50 rounded-lg transition-colors whitespace-nowrap"
+            >
+              <FaCertificate className="text-xs" />
+              Certified
+            </button>
+          )}
+          {comp.posterImage && (
+            <button
+              onClick={() => onOpenCertificate(comp.posterImage!, "Poster Tugas Akhir", "Poster Details")}
+              className="inline-flex items-center justify-center px-3 py-1 text-xs font-medium text-slate-900 bg-gradient-to-r from-slate-200 to-slate-400 hover:from-white hover:to-slate-300 rounded-lg transition-all duration-300 shadow hover:shadow-md whitespace-nowrap"
+            >
+              View Poster
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Deskripsi */}
-      <p className="text-sm text-[var(--color-text-muted)] leading-relaxed flex-1 line-clamp-3">
-        {comp.description}
-      </p>
+      <div className="text-sm text-[var(--color-text-muted)] leading-relaxed flex-1">
+        {typeof comp.description === 'string' ? (
+          <p className="line-clamp-3">{comp.description}</p>
+        ) : (
+          comp.description
+        )}
+      </div>
 
       {/* Ikon + Tautan */}
       <div className="flex items-center justify-between text-xl text-white/90 border-t border-[var(--color-border)] pt-3">
