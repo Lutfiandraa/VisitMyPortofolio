@@ -1,457 +1,65 @@
 'use client';
 
 import React, { useState, useEffect } from "react";
-import { createPortal } from "react-dom";
-import Image from 'next/image';
-import {
-  SiDart, SiFlutter, SiJavascript, SiReact, SiVuedotjs,
-  SiAngular, SiTypescript, SiNextdotjs, SiGatsby, SiAstro, SiFastapi, SiSupabase
-} from "react-icons/si";
-import {
-  FaPaperPlane, FaInstagram, FaLinkedin, FaCertificate,
-  FaChevronLeft, FaChevronRight, FaTimes, FaGithub
-} from "react-icons/fa";
-import { FadeUp, FadeIn, SlideInLeft, StaggerContainer, StaggerItem, ParallaxSection } from '@/components/animations/MotionWrapper';
+import { FadeUp } from '@/components/animations/MotionWrapper';
 import SectionHeader from '@/components/SectionHeader';
 import ProjectCard from '@/components/ProjectCard';
-
+import ProjectSlider from '@/components/ProjectSlider';
+import CertificateModal, { type CertificateData } from '@/components/CertificateModal';
+import { competencies, thesisProject } from '@/data/projects';
 import { CompetencyItem } from '@/types';
 
-const competencies: CompetencyItem[] = [
-  {
-    title: "Pawon App",
-    description: "Develop Back-end Mobile Applications with Flutter, Dart & Supabase Integrated.",
-    icons: [
-      <SiFlutter key="flutter" style={{ color: "#02569B", fontSize: "1.5rem" }} />,
-      <SiDart key="dart" style={{ color: "#02569B", fontSize: "1.5rem" }} />,
-      <SiSupabase key="supabase" style={{ color: "#3ECF8E", fontSize: "1.5rem" }} />,
-    ],
-    images: ["/Iphone.jpg", "/Iphone2.jpg"],
-    link: ""
-  },
-  {
-    title: "Internship at Winnicode Garuda Teknologi",
-    description: "Jl. Asia Afrika No.158, Kb. Pisang, Kec. Sumur Bandung, Kota Bandung, Jawa Barat 40261",
-    icons: [
-      <SiReact key="react" style={{ color: "#61DAFB", fontSize: "1.5rem" }} />,
-      <SiJavascript key="js" style={{ color: "#E7F527", fontSize: "1.5rem" }} />,
-    ],
-    images: ["/HomeBerita.PNG", "/Homeberita2.PNG"],
-    link: "",
-    linkedin: "https://www.linkedin.com/company/winnicodegarudateknologi/posts/?feedView=all",
-    certificateImage: "/sertifikatmagang.png",
-    certificateDescription: "Fullstack Developer Winnicode Garuda Tech (Internship). · May 2025 - August 2025\n\nArchitectural Design and Implementation of a Web-Based News Portal System with Integrated News API Services."
-  },
-  {
-    title: "Deep Learning",
-    description: "Brebes Regency temperature forecasting with Long Short-Term Memory model & GUI Tkinter.",
-    icons: [
-      <Image
-        key="python"
-        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
-        alt="Python"
-        width={24}
-        height={24}
-        style={{ width: "24px", height: "24px" }}
-      />,
-      <img
-        key="tensorflow"
-        loading="lazy"
-        decoding="async"
-        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg"
-        alt="Tensorflow"
-        style={{ width: "24px", height: "24px" }}
-      />,
-      <img
-        key="keras"
-        loading="lazy"
-        decoding="async"
-        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/keras/keras-original.svg"
-        alt="Keras"
-        style={{ width: "24px", height: "24px" }}
-      />
-    ],
-    images: ["/suhu.png", "/architecturelstm.png"],
-    link: ""
-  },
-  {
-    title: "Gerobar",
-    description: "Digitalize Mid Micro Business Toasted Bread Gerobar.",
-    icons: [
-      <SiVuedotjs key="vue" style={{ color: "#3cb371", fontSize: "1.5rem" }} />,
-    ],
-    images: ["/Gerobar.png", "/banner.png"],
-    link: "https://gerobar-umkm.vercel.app/",
-    instagram: "https://www.instagram.com/gerobar_id/"
-  },
-  {
-    title: "Key-In",
-    description: "an Travelling web-based, Online Booking Destination website with framework Angular.js and Typescript library react for responsive ui",
-    icons: [
-      <SiAngular key="angular" style={{ color: "#DD0031", fontSize: "1.5rem" }} />,
-      <SiTypescript key="ts" style={{ color: "#3178C6", fontSize: "1.5rem" }} />,
-    ],
-    images: ["/LandingKeyin.png", "/manhattan.png"],
-    link: "https://keyin-pariwisata.vercel.app/"
-  },
-  {
-    title: "Software Testing on Education & Report System HSE",
-    description: "Design Implementation and Software Quality Assurance",
-    icons: [
-      <img
-        key="postman"
-        loading="lazy"
-        decoding="async"
-        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg"
-        alt="Postman"
-        style={{ width: "24px", height: "24px" }}
-      />,
-      <SiReact key="react" style={{ color: "#61DAFB", fontSize: "1.5rem" }} />,
-      <Image
-        key="jest"
-        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jest/jest-plain.svg"
-        alt="Jest"
-        width={24}
-        height={24}
-        style={{ width: "24px", height: "24px" }}
-      />,
-    ],
-    images: ["/dashboardk3.png", "/workplace-safety-priority.jpg"],
-    link: ""
-  },
-  {
-    title: "Cakranegara supported by Hacktiv8",
-    description: "Solve ur Business Equipment & Requirement with our AI Chatbot Integrated called 'Mas Cakra-bot'",
-    icons: [
-      <SiAstro key="astro" style={{ color: "#FF5D01", fontSize: "1.5rem" }} />,
-      <SiTypescript key="ts" style={{ color: "#3178C6", fontSize: "1.5rem" }} />,
-      <SiReact key="react" style={{ color: "#61DAFB", fontSize: "1.5rem" }} />,
-    ],
-    images: ["/excapillar.png", "/cakrabot.png"],
-    link: "https://cakranegara-equipment.vercel.app/",
-    certificateImage: "/Hacktiv8MajubarengAI.jpg",
-    certificateDescription: "Maju Bareng AI by Hacktiv8. ·2026\n\nSuccessfully completed the Maju Bareng AI program by Hacktiv8, focusing on integrating Google Gemini AI and Studio for innovative business solutions like the Mas Cakra-bot."
-  },
-  {
-    title: "YOLOv8",
-    description: "Computer Vision for Car Adaptive Collision Warning System with OpenCV and You Only Look Once (YOLO) ",
-    icons: [
-      <Image
-        key="python"
-        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
-        alt="Python"
-        width={24}
-        height={24}
-        style={{ width: "24px", height: "24px" }}
-      />,
-    ],
-    images: ["/defendercollision (compressed).mp4", "/workflow.png", "/Collision.png"],
-    link: "https://github.com/Lutfiandraa/CollisionWarning-YOLO",
-    category: "computer-vision",
-    hideVisitButton: true,
-  },
-  {
-    title: "Plotting Geothermal in Asia",
-    description: "Modelling international data Geothermal with Random Forest for Plot Geothermal in Asia",
-    icons: [
-      <img loading="lazy" decoding="async"
-        key="python"
-        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
-        alt="Python"
-        style={{ width: "24px", height: "24px" }}
-      />,
-      <img
-        key="keras"
-        loading="lazy"
-        decoding="async"
-        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/keras/keras-original.svg"
-        alt="Keras"
-        style={{ width: "24px", height: "24px" }}
-      />,
-    ],
-    images: ["/AsiaGeothermal.png"],
-    link: "",
-    category: "data-science",
-  },
-  {
-    title: "Naive RAG & LLM",
-    description: "AI Agent for Oil Rig Indicator Analytics using Retrieval-Augmented Generation & Langflow",
-    icons: [
-      <img
-        key="python"
-        loading="lazy"
-        decoding="async"
-        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
-        alt="Python"
-        style={{ width: "24px", height: "24px" }}
-      />,
-      <img
-        key="langflow"
-        loading="lazy"
-        decoding="async"
-        src="https://cdn.simpleicons.org/langflow/FFFFFF"
-        alt="Langflow"
-        style={{ width: "24px", height: "24px" }}
-      />,
-    ],
-    images: ["/AIAgentLLM.PNG"],
-    link: "#",
-    category: "data-science",
-    certificateImage: "/IBMCompleted.png",
-    certificateDescription: "IBM Skillbuild - AI Agent for Oil Rig Indicator Analytics using Retrieval-Augmented Generation & Langflow. · 2026\n\nImplementation of a Naive RAG & LLM system to create an AI Agent for advanced analytics in the Oil Rig industry."
-  },
-  {
-    title: "GeoSiaga",
-    description: "Fullstack Dashboard web-based with models Random Forest & XGBoost for predict floods in Jakarta",
-    icons: [
-      <img
-        key="docker"
-        loading="lazy"
-        decoding="async"
-        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg"
-        alt="Docker"
-        style={{ width: "24px", height: "24px" }}
-      />,
-      <SiTypescript key="ts" style={{ color: "#3178C6", fontSize: "1.5rem" }} />,
-      <Image
-        key="python"
-        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
-        alt="Python"
-        width={24}
-        height={24}
-        style={{ width: "24px", height: "24px" }}
-      />,
-      <SiFastapi key="fastapi" style={{ color: "#009688", fontSize: "1.5rem" }} />
-    ],
-    images: ["/GeoSiagaMap.PNG", "/DashboardGeo.PNG"],
-    link: "",
-    category: "data-science"
-  },
-];
-
-function ThesisDescription() {
-  const [isExpanded, setIsExpanded] = useState(false);
-
-  return (
-    <span>
-      This research demonstrates that the architectural differences between LSTM and Informer influence how both models learn the volatile price movement patterns of NIKL.JK stock.
-      {!isExpanded ? (
-        <>
-          <span className="text-[var(--color-text-muted)]">... </span>
-          <button 
-            onClick={(e) => { e.stopPropagation(); setIsExpanded(true); }} 
-            className="text-brand-400 font-semibold hover:underline cursor-pointer"
-          >
-            See more
-          </button>
-        </>
-      ) : (
-        <>
-          {" "}The memory gate mechanism in LSTM consistently yields predictions close to actual values across all evaluation metrics, whereas Informer remains capable of capturing long-term trend directions albeit with varying levels of precision. Furthermore, Taguchi optimization confirms that the effectiveness of hyperparameter tuning depends on the distinct architectural characteristics of each model.
-          <button 
-            onClick={(e) => { e.stopPropagation(); setIsExpanded(false); }} 
-            className="ml-1 text-brand-400 font-semibold hover:underline cursor-pointer inline-block"
-          >
-            See less
-          </button>
-        </>
-      )}
-    </span>
+const isDataScienceOrVisionProject = (project: CompetencyItem) =>
+  project.category === "data-science" ||
+  project.category === "computer-vision" ||
+  /deep learning|lstm|informer|prediction|python|data scientist|llm|nlp|computer vision|yolo|collision/i.test(
+    `${project.title} ${project.description}`
   );
-}
-
-const thesisProject: CompetencyItem = {
-  title: "Comparison Performance of Long Short-Term Memory & Informer (Transformer-based) for Stock Prediction",
-  description: <ThesisDescription />,
-  icons: [
-    <Image
-      key="python"
-      src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
-      alt="Python"
-      width={24}
-      height={24}
-      style={{ width: "24px", height: "24px" }}
-    />,
-  ],
-  images: ["/StockPredDashboard.PNG"],
-  posterImage: "/PosterTALutfiandra.png",
-  link: "",
-};
 
 export default function ProjectSection() {
-  const [activeCertificate, setActiveCertificate] = useState<{ image: string; description: string; title?: string } | null>(null);
+  const [activeCertificate, setActiveCertificate] = useState<CertificateData | null>(null);
   const [isMounted, setIsMounted] = useState(false);
-  const webSliderRef = React.useRef<HTMLDivElement>(null);
-  const dsSliderRef = React.useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
-  const isDataScienceOrVisionProject = (project: CompetencyItem) =>
-    project.category === "data-science" ||
-    project.category === "computer-vision" ||
-    /deep learning|lstm|informer|prediction|python|data scientist|llm|nlp|computer vision|yolo|collision/i.test(
-      `${project.title} ${project.description}`
-    );
-
   const webProjects = competencies.filter((p) => !isDataScienceOrVisionProject(p));
   const dataScienceProjects = competencies.filter((p) => isDataScienceOrVisionProject(p));
 
-  const CARD_WIDTH = 392; // 360px card + 32px gap
-
-  const handleScroll = (ref: React.RefObject<HTMLDivElement | null>, direction: "left" | "right") => {
-    if (!ref.current) return;
-    const { scrollLeft, scrollWidth, clientWidth } = ref.current;
-    
-    // Use a large tolerance (half a card width) to detect if we are at the ends.
-    // This handles smooth scrolling delays and fast consecutive clicks.
-    const maxScroll = scrollWidth - clientWidth;
-    const isAtEnd = scrollLeft >= maxScroll - (CARD_WIDTH / 2);
-    const isAtStart = scrollLeft <= (CARD_WIDTH / 2);
-
-    if (direction === "right") {
-      if (isAtEnd) {
-        ref.current.scrollTo({ left: 0, behavior: "smooth" });
-      } else {
-        ref.current.scrollBy({ left: CARD_WIDTH, behavior: "smooth" });
-      }
-    } else {
-      if (isAtStart) {
-        ref.current.scrollTo({ left: maxScroll, behavior: "smooth" });
-      } else {
-        ref.current.scrollBy({ left: -CARD_WIDTH, behavior: "smooth" });
-      }
-    }
+  const handleOpenCertificate = (image: string, description: string, title?: string) => {
+    setActiveCertificate({ image, description, title });
   };
-
-  const scrollWebLeft  = () => handleScroll(webSliderRef, "left");
-  const scrollWebRight = () => handleScroll(webSliderRef, "right");
-  const scrollDsLeft   = () => handleScroll(dsSliderRef, "left");
-  const scrollDsRight  = () => handleScroll(dsSliderRef, "right");
 
   return (
     <section id="projects" className="section-padding animate-section-in bg-transparent">
       <div className="container-max">
 
+        {/* Section title */}
         <div className="text-center max-w-2xl mx-auto mb-12">
           <SectionHeader className="mb-4">
             <span className="text-gradient">Project</span>
           </SectionHeader>
         </div>
 
-        <div className="mb-16">
-          <FadeUp delay={0.1}>
-            <div className="mb-6">
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border text-sm md:text-base bg-white/20 text-white border-white/40 shadow-[0_0_18px_rgba(255,255,255,0.22)]">
-                <span className="w-2 h-2 rounded-full bg-yellow-300 animate-pulse-yellow" />
-                Web Development
-              </span>
-            </div>
-          </FadeUp>
+        {/* Web Development slider */}
+        <ProjectSlider
+          label="Web Development"
+          dotClass="bg-yellow-300 animate-pulse-yellow"
+          projects={webProjects}
+          onOpenCertificate={handleOpenCertificate}
+          wrapperClassName="mb-16"
+        />
 
-          <div className="relative">
-            <button
-              type="button"
-              onClick={scrollWebLeft}
-              aria-label="Web projects scroll left"
-              className="flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-5 z-10 bg-black/40 hover:bg-black/60 text-white p-2 rounded-full transition-opacity items-center justify-center"
-            >
-              <FaChevronLeft size={14} />
-            </button>
-            <button
-              type="button"
-              onClick={scrollWebRight}
-              aria-label="Web projects scroll right"
-              className="flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-5 z-10 bg-black/40 hover:bg-black/60 text-white p-2 rounded-full transition-opacity items-center justify-center"
-            >
-              <FaChevronRight size={14} />
-            </button>
+        {/* Data Transformation slider */}
+        <ProjectSlider
+          label="Data Transformation"
+          dotClass="bg-green-400 animate-pulse-green"
+          projects={dataScienceProjects}
+          onOpenCertificate={handleOpenCertificate}
+        />
 
-            <div
-              ref={webSliderRef}
-              className="overflow-x-auto pb-4"
-              style={{
-                scrollSnapType: "x mandatory",
-                WebkitOverflowScrolling: "touch",
-                scrollbarWidth: "none",
-                msOverflowStyle: "none",
-              }}
-            >
-              <StaggerContainer className="flex flex-row gap-8 w-max">
-                {webProjects.map((comp, index) => (
-                  <StaggerItem
-                    key={comp.title}
-                    className="w-[360px] snap-start shrink-0"
-                  >
-                    <ProjectCard
-                      comp={comp}
-                      index={index}
-                      onOpenCertificate={(image, description, title) => setActiveCertificate({ image, description, title })}
-                    />
-                  </StaggerItem>
-                ))}
-              </StaggerContainer>
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <FadeUp delay={0.1}>
-            <div className="mb-6">
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border text-sm md:text-base bg-white/20 text-white border-white/40 shadow-[0_0_18px_rgba(255,255,255,0.22)]">
-                <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse-green" />
-                Data Transformation
-              </span>
-            </div>
-          </FadeUp>
-
-          <div className="relative">
-            <button
-              type="button"
-              onClick={scrollDsLeft}
-              aria-label="Data science projects scroll left"
-              className="flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-5 z-10 bg-black/40 hover:bg-black/60 text-white p-2 rounded-full transition-opacity items-center justify-center"
-            >
-              <FaChevronLeft size={14} />
-            </button>
-            <button
-              type="button"
-              onClick={scrollDsRight}
-              aria-label="Data science projects scroll right"
-              className="flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-5 z-10 bg-black/40 hover:bg-black/60 text-white p-2 rounded-full transition-opacity items-center justify-center"
-            >
-              <FaChevronRight size={14} />
-            </button>
-
-            <div
-              ref={dsSliderRef}
-              className="overflow-x-auto pb-4"
-              style={{
-                scrollSnapType: "x mandatory",
-                WebkitOverflowScrolling: "touch",
-                scrollbarWidth: "none",
-                msOverflowStyle: "none",
-              }}
-            >
-              <StaggerContainer className="flex flex-row gap-8 w-max">
-                {dataScienceProjects.map((comp, index) => (
-                  <StaggerItem
-                    key={comp.title}
-                    className="w-[360px] snap-start shrink-0"
-                  >
-                    <ProjectCard
-                      comp={comp}
-                      index={index}
-                      onOpenCertificate={(image, description, title) => setActiveCertificate({ image, description, title })}
-                    />
-                  </StaggerItem>
-                ))}
-              </StaggerContainer>
-            </div>
-          </div>
-        </div>
-
+        {/* Final-Year Thesis */}
         <div className="mt-16">
           <FadeUp delay={0.1}>
             <div className="mb-6">
@@ -469,7 +77,7 @@ export default function ProjectSection() {
                   comp={thesisProject}
                   index={0}
                   containImage={true}
-                  onOpenCertificate={(image, description, title) => setActiveCertificate({ image, description, title })}
+                  onOpenCertificate={handleOpenCertificate}
                 />
               </div>
             </FadeUp>
@@ -478,91 +86,12 @@ export default function ProjectSection() {
 
       </div>
 
-      {isMounted && activeCertificate && createPortal(
-        <div
-          className="fixed inset-0 z-[100] w-screen h-screen flex items-center justify-center bg-black/80 backdrop-blur-sm transition-opacity duration-300 select-none cursor-auto"
-          onClick={() => setActiveCertificate(null)}
-        >
-          {activeCertificate.title === "Poster Details" ? (
-            <div className="relative w-full h-full flex items-center justify-center p-4 md:p-12 animate-page-in" onClick={(e) => e.stopPropagation()}>
-              <button
-                onClick={() => setActiveCertificate(null)}
-                className="absolute top-4 right-4 md:top-8 md:right-8 p-3 bg-black/60 hover:bg-black/90 border border-white/20 text-white rounded-full transition-colors z-[110] hover:scale-105 flex items-center justify-center cursor-pointer shadow-xl"
-              >
-                <FaTimes size={20} />
-              </button>
-              <Image
-                src={activeCertificate.image}
-                alt="Poster"
-                width={1200}
-                height={1600}
-                className="max-w-full max-h-full object-contain rounded-xl shadow-2xl"
-                onError={(e) => {
-                  (e.target as HTMLImageElement).style.display = 'none';
-                }}
-              />
-            </div>
-          ) : (
-            <div
-              className="relative max-w-2xl w-full bg-black/90 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden shadow-2xl animate-page-in transform flex flex-col justify-center m-4 max-h-[95vh]"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setActiveCertificate(null);
-                }}
-                className="absolute top-4 right-4 p-2 bg-black/60 hover:bg-black/80 text-white rounded-full transition-colors z-[110] hover:scale-105 flex items-center justify-center cursor-pointer"
-              >
-                <FaTimes size={16} />
-              </button>
-
-              <div className="p-1 overflow-hidden flex justify-center items-center bg-black/50">
-                <Image
-                  src={activeCertificate.image}
-                  alt={activeCertificate.title || "Certificate"}
-                  width={800}
-                  height={1000}
-                  className="max-w-full max-h-[75vh] object-contain rounded-t-xl opacity-100"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).style.display = 'none';
-                  }}
-                />
-              </div>
-
-              <div className="p-5 bg-gradient-to-b from-transparent to-slate-900/50 overflow-y-auto">
-                <h4 className="text-lg font-bold bg-gradient-to-r from-slate-300 via-white to-slate-400 bg-clip-text text-transparent mb-2">
-                  {activeCertificate.title || "Certificate Details"}
-                </h4>
-                <p className="text-slate-300 text-[13px] whitespace-pre-wrap leading-relaxed">
-                  {activeCertificate.description}
-                </p>
-              </div>
-            </div>
-          )}
-        </div>,
-        document.body
-      )}
+      {/* Certificate / Poster modal */}
+      <CertificateModal
+        activeCertificate={activeCertificate}
+        onClose={() => setActiveCertificate(null)}
+        isMounted={isMounted}
+      />
     </section>
-  );
-}
-
-function CategoryButton({ category, label, activeCategory, setActiveCategory }: { category: string, label: string, activeCategory: string, setActiveCategory: (c: string) => void }) {
-  return (
-    <button
-      type="button"
-      onClick={() => setActiveCategory(category)}
-      className={`inline-flex items-center gap-2 px-4 py-2 rounded-full border text-sm md:text-base transition-all ${activeCategory === category
-        ? "bg-white/20 text-white border-white/40 shadow-[0_0_18px_rgba(255,255,255,0.22)]"
-        : "bg-transparent text-white/70 border-white/20 hover:bg-white/5"
-        }`}
-    >
-      <span className={`w-2 h-2 rounded-full ${
-        category === 'data-science' ? 'bg-green-400 animate-pulse-green' :
-        category === 'computer-vision' ? 'bg-red-400 animate-pulse-red' :
-        'bg-yellow-300 animate-pulse-yellow'
-      }`} />
-      {label}
-    </button>
   );
 }

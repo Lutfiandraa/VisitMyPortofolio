@@ -6,12 +6,21 @@ export interface ChatMessage {
 }
 
 export const BOT_REPLIES: Record<string, string> = {
-  rude: "Well, you’re kinda rude and have no manners.",
+  rude: "Well, you're kinda rude and have no manners.",
   collaborate: "Sure! here's my instagram @lutfiandrra",
-  default: "Thank you for reaching out to Lutfiandra Pohan. I am F.R.I.D.A.Y, Lutfiandra's assistant. If you do not receive a response within the expected time, please contact Lutfiandra directly at\n@lutfiandrra",
+  default:
+    "Thank you for reaching out to Lutfiandra Pohan. I am F.R.I.D.A.Y, Lutfiandra's assistant. If you do not receive a response within the expected time, please contact Lutfiandra directly at\n@lutfiandrra",
   woy: "Yes? What can i help u today maam//sir",
   greeting: "Yes?",
 };
+
+const RUDE_WORDS = ["anjing", "babi", "tai", "bangsat"];
+const CONTACT_WORDS = ["collaborate", "collab", "let's talk", "where to chat?", "contact person", "business"];
+const WOY_WORDS = ["woy", "woi"];
+const GREETING_WORDS = [
+  "halo lutfi", "halo kak lutfi", "hi lutfi", "kak lutfi",
+  "lutfi", "woy lutfi", "upi", "kak", "bang", "mas", "om",
+];
 
 export function useChatbot() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -31,20 +40,15 @@ export function useChatbot() {
 
     const lowerText = trimmed.toLowerCase();
 
-    const rudeWords = ["anjing", "babi", "tai", "bangsat"];
-    const contactWords = ["collaborate", "collab", "let's talk", "where to chat?", "contact person", "business"];
-    const woyWords = ["woy", "woi"];
-    const greetingWords = ["halo lutfi", "halo kak lutfi", "hi lutfi", "kak lutfi", "lutfi", "woy lutfi", "upi", "kak", "bang", "mas", "om"];
-
     let botText = BOT_REPLIES.default;
 
-    if (rudeWords.some((word) => lowerText.includes(word))) {
+    if (RUDE_WORDS.some((word) => lowerText.includes(word))) {
       botText = BOT_REPLIES.rude;
-    } else if (contactWords.some((word) => lowerText.includes(word))) {
+    } else if (CONTACT_WORDS.some((word) => lowerText.includes(word))) {
       botText = BOT_REPLIES.collaborate;
-    } else if (greetingWords.some((word) => lowerText.includes(word))) {
+    } else if (GREETING_WORDS.some((word) => lowerText.includes(word))) {
       botText = BOT_REPLIES.greeting;
-    } else if (woyWords.some((word) => lowerText.includes(word))) {
+    } else if (WOY_WORDS.some((word) => lowerText.includes(word))) {
       botText = BOT_REPLIES.woy;
     }
 
@@ -67,6 +71,6 @@ export function useChatbot() {
     isTyping,
     chatEndRef,
     sendMessage,
-    clearMessages
+    clearMessages,
   };
 }

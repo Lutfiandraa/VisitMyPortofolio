@@ -1,12 +1,10 @@
 import React from 'react';
 
-// ── Navigation ─────────────────────────────────────────────────────────────
 export interface NavLink {
   label: string;
   href: string;
 }
 
-// ── Projects ───────────────────────────────────────────────────────────────
 export interface CompetencyItem {
   title: string;
   description: string | React.ReactNode;
@@ -22,14 +20,12 @@ export interface CompetencyItem {
   hideVisitButton?: boolean;
 }
 
-// ── Skills / Competencies ──────────────────────────────────────────────────
 export interface SkillItem {
   name: string;
   icon: React.ReactNode;
   color: string;
 }
 
-// ── Contact Form ───────────────────────────────────────────────────────────
 export interface ContactFormData {
   name: string;
   email: string;
@@ -37,7 +33,6 @@ export interface ContactFormData {
   message: string;
 }
 
-// ── Social Links ───────────────────────────────────────────────────────────
 export interface SocialLink {
   platform: string;
   url: string;
