@@ -111,7 +111,7 @@ export const competencies: CompetencyItem[] = [
     instagram: "https://www.instagram.com/gerobar_id/",
   },
   {
-    title: "Key-In",
+    title: "Bermalam Tour",
     description:
       "an Travelling web-based, Online Booking Destination website with framework Angular.js and Typescript library react for responsive ui",
     icons: [

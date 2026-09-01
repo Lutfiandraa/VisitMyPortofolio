@@ -8,6 +8,7 @@ import ProjectSlider from '@/components/ProjectSlider';
 import CertificateModal, { type CertificateData } from '@/components/CertificateModal';
 import { competencies, thesisProject } from '@/data/projects';
 import { CompetencyItem } from '@/types';
+import { ZoomIn, ZoomOut, ArrowUp, ArrowDown, ArrowLeft, ArrowRight } from "lucide-react";
 
 const isDataScienceOrVisionProject = (project: CompetencyItem) =>
   project.category === "data-science" ||
@@ -19,6 +20,8 @@ const isDataScienceOrVisionProject = (project: CompetencyItem) =>
 export default function ProjectSection() {
   const [activeCertificate, setActiveCertificate] = useState<CertificateData | null>(null);
   const [isMounted, setIsMounted] = useState(false);
+  const [posterZoom, setPosterZoom] = useState(1);
+  const [posterPan, setPosterPan] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     setIsMounted(true);
@@ -72,13 +75,71 @@ export default function ProjectSection() {
 
           <div className="relative">
             <FadeUp delay={0.2}>
-              <div className="w-[400px]">
-                <ProjectCard
-                  comp={thesisProject}
-                  index={0}
-                  containImage={true}
-                  onOpenCertificate={handleOpenCertificate}
-                />
+              <div className="w-full max-w-[500px] rounded-2xl border border-white/10 bg-white/5 p-2 md:p-4 shadow-xl backdrop-blur-md transition-all hover:border-white/20 hover:bg-white/10 relative">
+                <div className="absolute top-6 right-6 z-10 flex flex-col items-end gap-2">
+                  <div className="flex gap-2">
+                    <button 
+                      onClick={() => { setPosterZoom(1); setPosterPan({ x: 0, y: 0 }); }}
+                      className="p-1.5 bg-black/60 text-white rounded-md hover:bg-black/80 backdrop-blur-sm shadow-md text-xs font-semibold px-2 flex items-center h-[30px]"
+                    >
+                      Reset
+                    </button>
+                    <button 
+                      onClick={() => setPosterZoom(prev => Math.max(1, prev - 0.25))}
+                      className="p-1.5 bg-black/60 text-white rounded-md hover:bg-black/80 backdrop-blur-sm shadow-md h-[30px] w-[30px] flex items-center justify-center"
+                    >
+                      <ZoomOut size={16} />
+                    </button>
+                    <button 
+                      onClick={() => setPosterZoom(prev => Math.min(4, prev + 0.25))}
+                      className="p-1.5 bg-black/60 text-white rounded-md hover:bg-black/80 backdrop-blur-sm shadow-md h-[30px] w-[30px] flex items-center justify-center"
+                    >
+                      <ZoomIn size={16} />
+                    </button>
+                  </div>
+                  
+                  {posterZoom > 1 && (
+                    <div className="flex flex-col items-center gap-1 bg-black/60 p-2 rounded-md backdrop-blur-sm shadow-md">
+                      <button 
+                        onClick={() => setPosterPan(prev => ({ ...prev, y: prev.y + 30 }))}
+                        className="p-1 hover:bg-white/20 rounded-md text-white"
+                      >
+                        <ArrowUp size={16} />
+                      </button>
+                      <div className="flex gap-4">
+                        <button 
+                          onClick={() => setPosterPan(prev => ({ ...prev, x: prev.x + 30 }))}
+                          className="p-1 hover:bg-white/20 rounded-md text-white"
+                        >
+                          <ArrowLeft size={16} />
+                        </button>
+                        <button 
+                          onClick={() => setPosterPan(prev => ({ ...prev, x: prev.x - 30 }))}
+                          className="p-1 hover:bg-white/20 rounded-md text-white"
+                        >
+                          <ArrowRight size={16} />
+                        </button>
+                      </div>
+                      <button 
+                        onClick={() => setPosterPan(prev => ({ ...prev, y: prev.y - 30 }))}
+                        className="p-1 hover:bg-white/20 rounded-md text-white"
+                      >
+                        <ArrowDown size={16} />
+                      </button>
+                    </div>
+                  )}
+                </div>
+                <div className="w-full h-auto overflow-hidden rounded-xl">
+                  <img
+                    src="/PosterTALutfiandra.png"
+                    alt="Poster Tugas Akhir Lutfiandra"
+                    className="w-full h-auto object-contain transition-transform duration-300"
+                    style={{ 
+                      transform: `translate(${posterPan.x}px, ${posterPan.y}px) scale(${posterZoom})`, 
+                      transformOrigin: 'center center' 
+                    }}
+                  />
+                </div>
               </div>
             </FadeUp>
           </div>
