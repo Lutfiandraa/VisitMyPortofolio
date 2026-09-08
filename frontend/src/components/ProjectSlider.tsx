@@ -98,11 +98,12 @@ export default function ProjectSlider({
         >
           <StaggerContainer className="flex flex-row gap-8 w-max">
             {projects.map((comp, index) => (
-              <StaggerItem key={comp.title} className="w-[360px] snap-start shrink-0">
+              <StaggerItem key={comp.title} className={`${comp.wide ? 'w-[520px]' : 'w-[360px]'} snap-start shrink-0`}>
                 <ProjectCard
                   comp={comp}
                   index={index}
                   onOpenCertificate={onOpenCertificate}
+                  containImage={comp.wide || comp.containImage}
                 />
               </StaggerItem>
             ))}

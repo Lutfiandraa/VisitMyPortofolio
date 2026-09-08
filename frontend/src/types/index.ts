@@ -18,6 +18,8 @@ export interface CompetencyItem {
   posterImage?: string;
   category?: string;
   hideVisitButton?: boolean;
+  wide?: boolean;
+  containImage?: boolean;
 }
 
 export interface SkillItem {

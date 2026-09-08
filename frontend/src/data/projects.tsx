@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import {
   SiDart, SiFlutter, SiJavascript, SiReact, SiVuedotjs,
-  SiAngular, SiTypescript, SiAstro, SiFastapi, SiSupabase,
+  SiAngular, SiTypescript, SiAstro, SiFastapi, SiSupabase, SiNextdotjs,
 } from "react-icons/si";
 
 import { CompetencyItem } from '@/types';
@@ -69,9 +69,18 @@ export const competencies: CompetencyItem[] = [
       "Fullstack Developer Winnicode Garuda Tech (Internship). · May 2025 - August 2025\n\nArchitectural Design and Implementation of a Web-Based News Portal System with Integrated News API Services.",
   },
   {
-    title: "Deep Learning",
-    description: "Brebes Regency temperature forecasting with Long Short-Term Memory model & GUI Tkinter.",
+    title: "GeoSiaga",
+    description: "Fullstack Dashboard web-based with models Random Forest & XGBoost for predict floods in Jakarta",
     icons: [
+      <img
+        key="docker"
+        loading="lazy"
+        decoding="async"
+        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg"
+        alt="Docker"
+        style={{ width: "24px", height: "24px" }}
+      />,
+      <SiTypescript key="ts" style={{ color: "#3178C6", fontSize: "1.5rem" }} />,
       <Image
         key="python"
         src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
@@ -80,25 +89,12 @@ export const competencies: CompetencyItem[] = [
         height={24}
         style={{ width: "24px", height: "24px" }}
       />,
-      <img
-        key="tensorflow"
-        loading="lazy"
-        decoding="async"
-        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg"
-        alt="Tensorflow"
-        style={{ width: "24px", height: "24px" }}
-      />,
-      <img
-        key="keras"
-        loading="lazy"
-        decoding="async"
-        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/keras/keras-original.svg"
-        alt="Keras"
-        style={{ width: "24px", height: "24px" }}
-      />,
+      <SiFastapi key="fastapi" style={{ color: "#009688", fontSize: "1.5rem" }} />,
     ],
-    images: ["/suhu.png", "/architecturelstm.png"],
+    images: ["/GeoSiagaMap.PNG", "/DashboardGeo.PNG"],
     link: "",
+    category: "data-science",
+    wide: true,
   },
   {
     title: "Gerobar",
@@ -118,7 +114,7 @@ export const competencies: CompetencyItem[] = [
       <SiAngular key="angular" style={{ color: "#DD0031", fontSize: "1.5rem" }} />,
       <SiTypescript key="ts" style={{ color: "#3178C6", fontSize: "1.5rem" }} />,
     ],
-    images: ["/LandingKeyin.png", "/manhattan.png"],
+    images: ["/LandingpageBermalam.png", "/manhattan.png"],
     link: "https://keyin-pariwisata.vercel.app/",
   },
   {
@@ -180,31 +176,6 @@ export const competencies: CompetencyItem[] = [
     hideVisitButton: true,
   },
   {
-    title: "Plotting Geothermal in Asia",
-    description: "Modelling international data Geothermal with Random Forest for Plot Geothermal in Asia",
-    icons: [
-      <img
-        loading="lazy"
-        decoding="async"
-        key="python"
-        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
-        alt="Python"
-        style={{ width: "24px", height: "24px" }}
-      />,
-      <img
-        key="keras"
-        loading="lazy"
-        decoding="async"
-        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/keras/keras-original.svg"
-        alt="Keras"
-        style={{ width: "24px", height: "24px" }}
-      />,
-    ],
-    images: ["/AsiaGeothermal.png"],
-    link: "",
-    category: "data-science",
-  },
-  {
     title: "Naive RAG & LLM",
     description: "AI Agent for Oil Rig Indicator Analytics using Retrieval-Augmented Generation & Langflow",
     icons: [
@@ -233,18 +204,11 @@ export const competencies: CompetencyItem[] = [
       "IBM Skillbuild - AI Agent for Oil Rig Indicator Analytics using Retrieval-Augmented Generation & Langflow. · 2026\n\nImplementation of a Naive RAG & LLM system to create an AI Agent for advanced analytics in the Oil Rig industry.",
   },
   {
-    title: "GeoSiaga",
-    description: "Fullstack Dashboard web-based with models Random Forest & XGBoost for predict floods in Jakarta",
+    title: "Magnitude Prediction",
+    description: "Indonesian Earthquake causes by Eruption Prediction 2008-2024",
     icons: [
-      <img
-        key="docker"
-        loading="lazy"
-        decoding="async"
-        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg"
-        alt="Docker"
-        style={{ width: "24px", height: "24px" }}
-      />,
-      <SiTypescript key="ts" style={{ color: "#3178C6", fontSize: "1.5rem" }} />,
+      <SiReact key="react" style={{ color: "#61DAFB", fontSize: "1.5rem" }} />,
+      <SiNextdotjs key="nextjs" style={{ color: "#FFFFFF", fontSize: "1.5rem" }} />,
       <Image
         key="python"
         src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
@@ -253,11 +217,68 @@ export const competencies: CompetencyItem[] = [
         height={24}
         style={{ width: "24px", height: "24px" }}
       />,
-      <SiFastapi key="fastapi" style={{ color: "#009688", fontSize: "1.5rem" }} />,
     ],
-    images: ["/GeoSiagaMap.PNG", "/DashboardGeo.PNG"],
+    images: ["/DashboardMagnitude.PNG", "/PrediksiManual.PNG"],
     link: "",
     category: "data-science",
+    containImage: true,
+  },
+  {
+    title: "Plotting Geothermal in Asia",
+    description: "Modelling international data Geothermal with Random Forest for Plot Geothermal in Asia",
+    icons: [
+      <img
+        loading="lazy"
+        decoding="async"
+        key="python"
+        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+        alt="Python"
+        style={{ width: "24px", height: "24px" }}
+      />,
+      <img
+        key="keras"
+        loading="lazy"
+        decoding="async"
+        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/keras/keras-original.svg"
+        alt="Keras"
+        style={{ width: "24px", height: "24px" }}
+      />,
+    ],
+    images: ["/AsiaGeothermal.png"],
+    link: "",
+    category: "data-science",
+  },
+  {
+    title: "Deep Learning",
+    description: "Brebes Regency temperature forecasting with Long Short-Term Memory model & GUI Tkinter.",
+    icons: [
+      <Image
+        key="python"
+        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+        alt="Python"
+        width={24}
+        height={24}
+        style={{ width: "24px", height: "24px" }}
+      />,
+      <img
+        key="tensorflow"
+        loading="lazy"
+        decoding="async"
+        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg"
+        alt="Tensorflow"
+        style={{ width: "24px", height: "24px" }}
+      />,
+      <img
+        key="keras"
+        loading="lazy"
+        decoding="async"
+        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/keras/keras-original.svg"
+        alt="Keras"
+        style={{ width: "24px", height: "24px" }}
+      />,
+    ],
+    images: ["/suhu.png", "/architecturelstm.png"],
+    link: "",
   },
 ];
 

@@ -24,15 +24,15 @@ export default function ProjectCard({ comp, index, onOpenCertificate, containIma
   };
 
   return (
-    <div className="card p-6 group flex flex-col gap-4 animate-card-in transform transition-all duration-300 hover:border-brand-500/50 hover:scale-[1.02] rounded-xl h-full">
+    <div className={`card p-6 group flex flex-col gap-4 animate-card-in transform transition-all duration-300 hover:border-brand-500/50 hover:scale-[1.02] rounded-xl h-full`}>
       {/* Slider Gambar / Placeholder */}
-      <div className="relative mb-2 overflow-hidden rounded-xl bg-black/20 h-48">
+      <div className={`relative mb-2 overflow-hidden rounded-xl ${containImage ? 'bg-black/40 h-52' : 'bg-black/20 h-48'}`}>
         {hasImages ? (
           <>
             {comp.images![current].endsWith('.mp4') ? (
               <video
                 src={comp.images![current]}
-                className={`h-full w-full opacity-80 ${containImage ? 'object-contain' : 'object-cover'}`}
+                className={`h-full w-full opacity-80 ${containImage ? 'object-cover object-top' : 'object-cover'}`}
                 autoPlay
                 loop
                 muted
@@ -42,7 +42,7 @@ export default function ProjectCard({ comp, index, onOpenCertificate, containIma
               <img loading="lazy" decoding="async"
                 src={comp.images![current]}
                 alt={comp.title}
-                className={`h-full w-full opacity-80 ${containImage ? 'object-contain' : 'object-cover'}`}
+                className={`h-full w-full opacity-80 ${containImage ? 'object-cover object-top' : 'object-cover'}`}
                 onError={(e) => {
                   (e.target as HTMLImageElement).style.display = 'none';
                 }}
