@@ -6,7 +6,8 @@ import { FadeUp, StaggerContainer, StaggerItem } from '@/components/animations/M
 import ProjectCard from '@/components/ProjectCard';
 import { CompetencyItem } from '@/types';
 
-const CARD_WIDTH = 392; // 360px card + 32px gap
+const CARD_WIDTH_MOBILE = 296; // 264px card + 32px gap
+const CARD_WIDTH_DESKTOP = 392; // 360px card + 32px gap
 
 interface ProjectSliderProps {
   /** Text shown in the badge label */
@@ -33,6 +34,8 @@ export default function ProjectSlider({
   const handleScroll = (direction: 'left' | 'right') => {
     if (!sliderRef.current) return;
     const { scrollLeft, scrollWidth, clientWidth } = sliderRef.current;
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+    const CARD_WIDTH = isMobile ? CARD_WIDTH_MOBILE : CARD_WIDTH_DESKTOP;
 
     // Use a large tolerance (half a card width) to detect if we are at the ends.
     // This handles smooth scrolling delays and fast consecutive clicks.
@@ -96,9 +99,9 @@ export default function ProjectSlider({
             msOverflowStyle: 'none',
           }}
         >
-          <StaggerContainer className="flex flex-row gap-8 w-max">
+          <StaggerContainer className="flex flex-row gap-4 md:gap-8 w-max">
             {projects.map((comp, index) => (
-              <StaggerItem key={comp.title} className={`${comp.wide ? 'w-[520px]' : 'w-[360px]'} snap-start shrink-0`}>
+              <StaggerItem key={comp.title} className={`${comp.wide ? 'w-[400px] md:w-[520px]' : 'w-[264px] md:w-[360px]'} snap-start shrink-0`}>
                 <ProjectCard
                   comp={comp}
                   index={index}

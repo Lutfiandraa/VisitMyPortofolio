@@ -75,7 +75,7 @@ export default function ProjectSection() {
 
           <div className="relative">
             <FadeUp delay={0.2}>
-              <div className="w-full max-w-[500px] rounded-2xl border border-white/10 bg-white/5 p-2 md:p-4 shadow-xl backdrop-blur-md transition-all hover:border-white/20 hover:bg-white/10 relative">
+              <div className="w-full max-w-[280px] md:max-w-[500px] rounded-2xl border border-white/10 bg-white/5 p-2 md:p-4 shadow-xl backdrop-blur-md transition-all hover:border-white/20 hover:bg-white/10 relative">
                 <div className="absolute top-6 right-6 z-10 flex flex-col items-end gap-2">
                   <div className="flex gap-2">
                     <button 

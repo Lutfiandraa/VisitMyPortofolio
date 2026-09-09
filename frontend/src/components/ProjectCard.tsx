@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaChevronLeft, FaChevronRight, FaCertificate, FaLinkedin, FaInstagram, FaGithub, FaPaperPlane, FaImage } from "react-icons/fa";
 import { CompetencyItem } from "@/types";
 
@@ -11,8 +11,17 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ comp, index, onOpenCertificate, containImage }: ProjectCardProps) {
   const [current, setCurrent] = useState(0);
+  const [expanded, setExpanded] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const images = comp.images;
   const hasImages = images && images.length > 0;
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
 
   const nextImage = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -24,9 +33,9 @@ export default function ProjectCard({ comp, index, onOpenCertificate, containIma
   };
 
   return (
-    <div className={`card p-6 group flex flex-col gap-4 animate-card-in transform transition-all duration-300 hover:border-brand-500/50 hover:scale-[1.02] rounded-xl h-full`}>
+    <div className={`card p-4 md:p-6 group flex flex-col gap-3 md:gap-4 animate-card-in transform transition-all duration-300 hover:border-brand-500/50 hover:scale-[1.02] rounded-xl h-full`}>
       {/* Slider Gambar / Placeholder */}
-      <div className={`relative mb-2 overflow-hidden rounded-xl ${containImage ? 'bg-black/40 h-52' : 'bg-black/20 h-48'}`}>
+      <div className={`relative mb-1 md:mb-2 overflow-hidden rounded-xl ${containImage ? 'bg-black/40 h-36 md:h-52' : 'bg-black/20 h-32 md:h-48'}`}>
         {hasImages ? (
           <>
             {comp.images![current].endsWith('.mp4') ? (
@@ -77,7 +86,7 @@ export default function ProjectCard({ comp, index, onOpenCertificate, containIma
 
       {/* Judul + Certified */}
       <div className="flex items-center justify-between">
-        <h3 className="text-lg font-bold bg-gradient-to-r from-slate-300 via-slate-100 to-slate-400 bg-clip-text text-transparent">
+        <h3 className="text-base md:text-lg font-bold bg-gradient-to-r from-slate-300 via-slate-100 to-slate-400 bg-clip-text text-transparent">
           {comp.title.includes("Hacktiv8") ? (
             <>
               {comp.title.split("Hacktiv8")[0]}
@@ -120,7 +129,33 @@ export default function ProjectCard({ comp, index, onOpenCertificate, containIma
       {/* Deskripsi */}
       <div className="text-sm text-[var(--color-text-muted)] leading-relaxed flex-1">
         {typeof comp.description === 'string' ? (
-          <p className="line-clamp-3">{comp.description}</p>
+          isMobile && !expanded && comp.description.length > 100 ? (
+            <div>
+              <p className="line-clamp-2">
+                {comp.description}
+              </p>
+              <button
+                onClick={(e) => { e.stopPropagation(); setExpanded(true); }}
+                className="mt-1 text-xs font-medium text-slate-400 hover:text-white transition-colors duration-200"
+              >
+                ...See More
+              </button>
+            </div>
+          ) : isMobile && expanded ? (
+            <div>
+              <p>{comp.description}</p>
+              {comp.description.length > 100 && (
+                <button
+                  onClick={(e) => { e.stopPropagation(); setExpanded(false); }}
+                  className="mt-1 text-xs font-medium text-slate-400 hover:text-white transition-colors duration-200"
+                >
+                  See Less
+                </button>
+              )}
+            </div>
+          ) : (
+            <p>{comp.description}</p>
+          )
         ) : (
           comp.description
         )}
