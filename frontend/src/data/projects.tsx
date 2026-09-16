@@ -157,7 +157,7 @@ export const competencies: CompetencyItem[] = [
       "Maju Bareng AI by Hacktiv8. ·2026\n\nSuccessfully completed the Maju Bareng AI program by Hacktiv8, focusing on integrating Google Gemini AI and Studio for innovative business solutions like the Mas Cakra-bot.",
   },
   {
-    title: "YOLOv8",
+    title: "OpenCV",
     description:
       "Computer Vision for Car Adaptive Collision Warning System with OpenCV and You Only Look Once (YOLO) ",
     icons: [
@@ -170,7 +170,7 @@ export const competencies: CompetencyItem[] = [
         style={{ width: "24px", height: "24px" }}
       />,
     ],
-    images: ["/defendercollision (compressed).mp4", "/workflow.png", "/Collision.png"],
+    images: ["/defendercollision (compressed).mp4", "/Collision.png"],
     link: "https://github.com/Lutfiandraa/CollisionWarning-YOLO",
     category: "computer-vision",
     hideVisitButton: true,
