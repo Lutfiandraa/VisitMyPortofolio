@@ -127,7 +127,7 @@ export default function ProjectCard({ comp, index, onOpenCertificate, containIma
       </div>
 
       {/* Deskripsi */}
-      <div className="text-sm text-[var(--color-text-muted)] leading-relaxed flex-1">
+      <div className="text-sm leading-relaxed flex-1 text-white">
         {typeof comp.description === 'string' ? (
           isMobile && !expanded && comp.description.length > 100 ? (
             <div>
@@ -162,7 +162,7 @@ export default function ProjectCard({ comp, index, onOpenCertificate, containIma
       </div>
 
       {/* Ikon + Tautan */}
-      <div className="flex items-center justify-between text-xl text-white/90 border-t border-[var(--color-border)] pt-3">
+      <div className="relative flex items-center justify-between text-xl text-white/90 border-t border-[var(--color-border)] pt-3">
         <div className="flex space-x-3 items-center" suppressHydrationWarning>
           {comp.icons.map((icon, i) => (
             <span key={i} className="flex items-center justify-center" suppressHydrationWarning>
@@ -211,6 +211,17 @@ export default function ProjectCard({ comp, index, onOpenCertificate, containIma
             </a>
           )}
         </div>
+
+        {comp.logoImage && (
+          <img
+            src={comp.logoImage}
+            alt="Logo"
+            loading="lazy"
+            decoding="async"
+            className="absolute right-0 top-1/2 -translate-y-1/2 mt-1.5 object-contain"
+            style={{ width: "72px", height: "72px" }}
+          />
+        )}
       </div>
     </div>
   );

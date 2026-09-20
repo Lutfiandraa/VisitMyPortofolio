@@ -81,7 +81,7 @@ export default function AboutSection() {
                   <span className="text-gradient">great things</span>
               </SectionHeader>
               <FadeUp delay={0.15}>
-                <p className="text-[var(--color-text-muted)] leading-relaxed">
+                <p className="leading-relaxed" style={{ color: '#f5f5f0', textShadow: '0 0 7px rgba(255,255,255,0.7), 0 0 20px rgba(255,255,255,0.4), 0 0 40px rgba(255,255,255,0.2)' }}>
                   I&apos;m a Fullstack Developer and AI Engineer Enthusiast
                   focused on building scalable, high-performance systems.
                   I integrate data into applications to deliver more intelligent and efficient solutions.
@@ -93,7 +93,7 @@ export default function AboutSection() {
 
           <div className="space-y-6">
             <FadeUp delay={0.15}>
-              <p className="text-sm font-semibold uppercase tracking-widest text-brand-400">
+              <p className="text-sm font-semibold uppercase tracking-widest" style={{ color: '#f5f5f0', textShadow: '0 0 7px rgba(255,255,255,0.7), 0 0 20px rgba(255,255,255,0.4), 0 0 40px rgba(255,255,255,0.2)' }}>
                 Capability
               </p>
             </FadeUp>

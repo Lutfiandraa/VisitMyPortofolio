@@ -20,6 +20,7 @@ export interface CompetencyItem {
   hideVisitButton?: boolean;
   wide?: boolean;
   containImage?: boolean;
+  logoImage?: string;
 }
 
 export interface SkillItem {

@@ -36,7 +36,7 @@ module.exports = {
         'page-in':      'pageIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards',
         'section-in':   'sectionIn 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards',
         'card-in':      'cardIn 0.4s ease-out forwards',
-        'pulse-green':  'pulseGreen 3s ease-in-out infinite',
+        'pulse-green':  'pulseGreen 1s ease-in-out infinite',
         'pulse-yellow': 'pulseYellow 2s ease-in-out infinite',
         'pulse-red':    'pulseRed 2s ease-in-out infinite',
       },

@@ -15,7 +15,7 @@ export default function HeroSection() {
         <div className="container-max section-padding relative z-10 text-center">
 
           <FadeIn delay={0.1}>
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-sm font-medium text-brand-400 mb-8">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 text-sm font-medium mb-8" style={{ color: '#f5f5f0', textShadow: '0 0 7px rgba(255,255,255,0.7), 0 0 20px rgba(255,255,255,0.4), 0 0 40px rgba(255,255,255,0.2)' }}>
               <span className="w-2 h-2 rounded-full bg-emerald-300 animate-pulse-green" />
               Available for any opportunities
             </div>
@@ -26,7 +26,7 @@ export default function HeroSection() {
           </h1>
 
           <FadeUp delay={0}>
-            <p className="section-subtitle mx-auto mb-10">
+            <p className="section-subtitle mx-auto mb-10" style={{ color: '#f5f5f0', textShadow: '0 0 7px rgba(255,255,255,0.7), 0 0 20px rgba(255,255,255,0.4), 0 0 40px rgba(255,255,255,0.2)' }}>
               Fullstack Developer & AI Engineer Enthusiast.
             </p>
           </FadeUp>

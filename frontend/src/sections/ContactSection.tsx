@@ -14,7 +14,7 @@ export default function ContactSection() {
             Get in <span className="text-gradient">Touch</span>
           </SectionHeader>
           <FadeUp delay={0.15}>
-            <p className="section-subtitle mx-auto">
+            <p className="section-subtitle mx-auto" style={{ color: '#f5f5f0', textShadow: '0 0 7px rgba(255,255,255,0.7), 0 0 20px rgba(255,255,255,0.4), 0 0 40px rgba(255,255,255,0.2)' }}>
               Any Business? or Project Colaboration? you can direct to my LinkedIn or Instagram profile&apos;s!
             </p>
           </FadeUp>

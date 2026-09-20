@@ -60,6 +60,14 @@ export const competencies: CompetencyItem[] = [
     icons: [
       <SiReact key="react" style={{ color: "#61DAFB", fontSize: "1.5rem" }} />,
       <SiJavascript key="js" style={{ color: "#E7F527", fontSize: "1.5rem" }} />,
+      <img
+        key="postgresql"
+        loading="lazy"
+        decoding="async"
+        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg"
+        alt="PostgreSQL"
+        style={{ width: "24px", height: "24px" }}
+      />,
     ],
     images: ["/HomeBerita.PNG", "/Homeberita2.PNG"],
     link: "",
@@ -97,27 +105,6 @@ export const competencies: CompetencyItem[] = [
     wide: true,
   },
   {
-    title: "Gerobar",
-    description: "Digitalize Mid Micro Business Toasted Bread Gerobar.",
-    icons: [
-      <SiVuedotjs key="vue" style={{ color: "#3cb371", fontSize: "1.5rem" }} />,
-    ],
-    images: ["/Gerobar.png", "/banner.png"],
-    link: "https://gerobar-umkm.vercel.app/",
-    instagram: "https://www.instagram.com/gerobar_id/",
-  },
-  {
-    title: "Bermalam Tour",
-    description:
-      "an Travelling web-based, Online Booking Destination website with framework Angular.js and Typescript library react for responsive ui",
-    icons: [
-      <SiAngular key="angular" style={{ color: "#DD0031", fontSize: "1.5rem" }} />,
-      <SiTypescript key="ts" style={{ color: "#3178C6", fontSize: "1.5rem" }} />,
-    ],
-    images: ["/LandingpageBermalam.png", "/manhattan.png"],
-    link: "https://keyin-pariwisata.vercel.app/",
-  },
-  {
     title: "Software Testing on Education & Report System HSE",
     description: "Design Implementation and Software Quality Assurance",
     icons: [
@@ -138,9 +125,39 @@ export const competencies: CompetencyItem[] = [
         height={24}
         style={{ width: "24px", height: "24px" }}
       />,
+      <img
+        key="postgresql"
+        loading="lazy"
+        decoding="async"
+        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg"
+        alt="PostgreSQL"
+        style={{ width: "24px", height: "24px" }}
+      />,
     ],
     images: ["/dashboardk3.png", "/workplace-safety-priority.jpg"],
     link: "",
+    logoImage: "/LOGO_UEU_BY_ASU-06.png",
+  },
+  {
+    title: "Bermalam Tour",
+    description:
+      "an Travelling web-based, Online Booking Destination website with framework Angular.js and Typescript library react for responsive ui",
+    icons: [
+      <SiAngular key="angular" style={{ color: "#DD0031", fontSize: "1.5rem" }} />,
+      <SiTypescript key="ts" style={{ color: "#3178C6", fontSize: "1.5rem" }} />,
+    ],
+    images: ["/LandingpageBermalam.png", "/manhattan.png"],
+    link: "https://keyin-pariwisata.vercel.app/",
+  },
+  {
+    title: "Gerobar",
+    description: "Digitalize Mid Micro Business Toasted Bread Gerobar.",
+    icons: [
+      <SiVuedotjs key="vue" style={{ color: "#3cb371", fontSize: "1.5rem" }} />,
+    ],
+    images: ["/Gerobar.png", "/banner.png"],
+    link: "https://gerobar-umkm.vercel.app/",
+    instagram: "https://www.instagram.com/gerobar_id/",
   },
   {
     title: "Cakranegara supported by Hacktiv8",
