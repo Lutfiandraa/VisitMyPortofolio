@@ -5,7 +5,7 @@ const allowedDomains = [
   "vercel.app",
   "portal-berita-px6z.vercel.app",
   "gerobar-umkm.vercel.app",
-  "keyin-pariwisata.vercel.app",
+  "bermalam-tour.vercel.app",
   "royalmerchant.vercel.app",
   "sistem-kesehatan-dan-kesalamatan-ke.vercel.app",
   "karta-jati.vercel.app",

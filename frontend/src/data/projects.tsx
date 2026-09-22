@@ -147,7 +147,7 @@ export const competencies: CompetencyItem[] = [
       <SiTypescript key="ts" style={{ color: "#3178C6", fontSize: "1.5rem" }} />,
     ],
     images: ["/LandingpageBermalam.png", "/manhattan.png"],
-    link: "https://keyin-pariwisata.vercel.app/",
+    link: "https://bermalam-tour.vercel.app/",
   },
   {
     title: "Gerobar",
