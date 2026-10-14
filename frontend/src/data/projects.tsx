@@ -105,6 +105,23 @@ export const competencies: CompetencyItem[] = [
     wide: true,
   },
   {
+    title: "YOLO11n for Counting & Recognize Palm Tree",
+    description: "YOLO11n detects and counts oil palm crowns in drone imagery, reaching 82.6% precision, 75.3% recall, and 80.8% mAP50.",
+    icons: [
+      <Image
+        key="python"
+        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+        alt="Python"
+        width={24}
+        height={24}
+        style={{ width: "24px", height: "24px" }}
+      />,
+    ],
+    images: ["/lastcitra1.png", "/lastcitra2.png"],
+    link: "",
+    category: "data-science",
+  },
+  {
     title: "Software Testing on Education & Report System HSE",
     description: "Design Implementation and Software Quality Assurance",
     icons: [
