@@ -80,13 +80,32 @@ export default function AboutSection() {
                   Passionate about building{' '}
                   <span className="text-gradient">great things</span>
               </SectionHeader>
-              <FadeUp delay={0.15}>
-                <p className="leading-relaxed" style={{ color: '#f5f5f0', textShadow: '0 0 7px rgba(255,255,255,0.7), 0 0 20px rgba(255,255,255,0.4), 0 0 40px rgba(255,255,255,0.2)' }}>
-                  I&apos;m a Fullstack Developer and AI Engineer Enthusiast
-                  focused on building scalable, high-performance systems.
-                  I integrate data into applications to deliver more intelligent and efficient solutions.
-                  I continuously expand my knowledge in Data and Intelligence.
-                </p>
+              
+              {/* Profile Picture and Description Side by Side */}
+              <FadeUp delay={0.1}>
+                <div className="flex flex-row items-start gap-4 md:gap-6">
+                  {/* Profile Picture - aligned with first letter P and last letter T */}
+                  <div className="w-24 h-24 sm:w-32 sm:h-32 md:w-48 md:h-48 lg:w-56 lg:h-56 flex-shrink-0 relative" style={{ marginTop: '-6px', marginLeft: '-24px' }}>
+                    {/* Neon light effect - broken white with low saturation */}
+                    <div className="absolute inset-[-15px] bg-gradient-to-r from-gray-200/15 via-slate-100/20 to-gray-300/15 rounded-full blur-2xl opacity-50" />
+                    <div className="absolute inset-[-10px] bg-gradient-to-br from-slate-200/10 via-gray-100/15 to-stone-200/10 rounded-full blur-xl opacity-60" />
+                    <div className="absolute inset-[-5px] bg-white/5 rounded-full blur-lg opacity-40" />
+                    
+                    <img
+                      src="/Profilephoto.png"
+                      alt="Lutfiandra Profile"
+                      className="w-full h-full object-contain relative z-10"
+                    />
+                  </div>
+                  
+                  {/* Description Text - justified with normal word spacing */}
+                  <p className="leading-relaxed flex-1 text-xs sm:text-sm md:text-base text-justify" style={{ color: '#f5f5f0', textShadow: '0 0 7px rgba(255,255,255,0.7), 0 0 20px rgba(255,255,255,0.4), 0 0 40px rgba(255,255,255,0.2)', wordSpacing: 'normal', textAlignLast: 'left' }}>
+                    I&apos;m a Fullstack Developer and AI Engineer Enthusiast
+                    focused on building scalable, high-performance systems.
+                    I integrate data into applications to deliver more intelligent and efficient solutions.
+                    I continuously expand my knowledge in Data and Artificial Intelligence.
+                  </p>
+                </div>
               </FadeUp>
             </div>
           </SlideInLeft>

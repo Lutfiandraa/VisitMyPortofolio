@@ -6,7 +6,7 @@ import '@fontsource/cousine/700.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import PageTransition from '@/components/animations/PageTransition';
-import BeamsTheme from '@/components/background/BeamsTheme';
+import BeamsClient from '@/components/background/BeamsClient';
 import FloatingSocials from '@/components/FloatingSocials';
 import '@/styles/globals.css';
 import { cn } from "@/lib/utils";
@@ -41,10 +41,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="relative min-h-[100dvh] flex flex-col text-[var(--color-text)] antialiased bg-black">
         {/* Background layer */}
         <div style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
-          <BeamsTheme
+          <BeamsClient
             beamWidth={3}
             beamHeight={30}
-            beamNumber={20}
+            beamNumber={10}
             lightColor="#ffffff"
             speed={2}
             noiseIntensity={1.75}

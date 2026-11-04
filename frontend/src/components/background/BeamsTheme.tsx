@@ -78,11 +78,37 @@ function extendMaterial<T extends THREE.Material = THREE.Material>(
   return mat;
 }
 
-const CanvasWrapper: FC<{ children: ReactNode }> = ({ children }) => (
-  <Canvas dpr={[1, 2]} frameloop="always" className="beams-container">
-    {children}
-  </Canvas>
-);
+const CanvasWrapper: FC<{ children: ReactNode }> = ({ children }) => {
+  const handleCreated = ({ gl }: { gl: THREE.WebGLRenderer }) => {
+    // Prevent WebGL context loss dari blocking permanen
+    const canvas = gl.domElement;
+    
+    canvas.addEventListener('webglcontextlost', (e) => {
+      e.preventDefault();
+      console.warn('WebGL context lost, attempting to restore...');
+    }, false);
+    
+    canvas.addEventListener('webglcontextrestored', () => {
+      console.log('WebGL context restored');
+    }, false);
+  };
+
+  return (
+    <Canvas 
+      dpr={[1, 1.5]}
+      frameloop="always" 
+      className="beams-container"
+      gl={{ 
+        antialias: false, 
+        powerPreference: "high-performance",
+        alpha: true 
+      }}
+      onCreated={handleCreated}
+    >
+      {children}
+    </Canvas>
+  );
+};
 
 const hexToNormalizedRGB = (hex: string): [number, number, number] => {
   const clean = hex.replace('#', '');
@@ -183,7 +209,7 @@ interface BeamsProps {
 const BeamsTheme: FC<BeamsProps> = ({
   beamWidth = 2,
   beamHeight = 15,
-  beamNumber = 12,
+  beamNumber = 6,
   lightColor = '#ffffff',
   speed = 2,
   noiseIntensity = 1.75,

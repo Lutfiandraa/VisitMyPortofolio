@@ -196,3 +196,13 @@ body {
 .animate-twinkle {
   animation: twinkle linear infinite;
 }
+
+
+/* Fallback untuk WebGL tidak tersedia */
+.beams-fallback {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(30, 30, 50, 0.8) 0%, rgba(0, 0, 0, 1) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
